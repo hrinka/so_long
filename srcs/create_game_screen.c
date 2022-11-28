@@ -19,10 +19,10 @@ int	draw_game_screen(t_mlx_vars *mlx)
 	void	*img_ptr;
 
 	col = 0;
-	while (col < mlx->map_ptr->size_col)
+	while (col < mlx->map->size_col)
 	{
 		row = 0;
-		while (row < mlx->map_ptr->size_row)
+		while (row < mlx->map->size_row)
 		{
 			img_ptr = get_img_ptr(mlx, row, col);
 			put_img(mlx, img_ptr, row, col);
@@ -33,58 +33,66 @@ int	draw_game_screen(t_mlx_vars *mlx)
 	return (0);
 }
 
-int	can_player_move(t_map_info map, t_player player)
+int	check_to_can_move_next_pos(t_mlx_vars *mlx, int dy, int dx)
 {
-	const int	ny = player.next_y;
-	const int	nx = player.next_x;
+	const int	next_y = mlx->player->pos_y + dy;
+	const int	next_x = mlx->player->pos_x + dx;
+	char		next_pos;
 
-	if (ny < 0 || map.size_col < ny)
+	if (next_y < 0 || mlx->map->size_col < next_y)
 		return (FAIL);
-	if (nx < 0 || map.size_row < nx)
+	if (next_x < 0 || mlx->map->size_row < next_x)
 		return (FAIL);
-	if (map.map_arr[ny][nx] == CHR_MAP_WALL)
+	if (mlx->map->map_arr[next_y][next_x] == CHR_WALL)
 		return (FAIL);
-	if (map.map_arr[ny][nx] == CHR_MAP_GOAL && !player.can_exit)
+	if (mlx->map->map_arr[next_y][next_x] == CHR_GOAL && !mlx->player->can_exit)
+		return (FAIL);
+	next_pos = mlx->map->map_arr[mlx->player->next_y][mlx->player->next_x];
+	if (next_pos == CHR_GOAL && !mlx->player->can_exit)
 		return (FAIL);
 	return (PASS);
 }
 
-static void	redraw_move_player(t_mlx_vars *mlx)
+static void	move_player_and_redraw(t_mlx_vars *mlx)
 {
-	const int	pos_x = mlx->player_ptr->pos_x;
-	const int	pos_y = mlx->player_ptr->pos_y;
-	const int	next_x = mlx->player_ptr->next_x;
-	const int	next_y = mlx->player_ptr->next_y;
+	const int	pos_x = mlx->player->pos_x;
+	const int	pos_y = mlx->player->pos_y;
+	const int	next_x = mlx->player->next_x;
+	const int	next_y = mlx->player->next_y;
 
 	if (pos_x < next_x)
-		mlx->player_ptr->is_facing_right = true;
+		mlx->player->is_facing_right = true;
 	else if (pos_x > next_x)
-		mlx->player_ptr->is_facing_right = false;
+		mlx->player->is_facing_right = false;
 	put_img(mlx, get_player_img(*mlx), next_x, next_y);
 	put_img(mlx, get_empty_img(*mlx, pos_x, pos_y), pos_x, pos_y);
+	mlx->map->map_arr[next_y][next_x] = CHR_PLAYER;
+	mlx->map->map_arr[pos_y][pos_x] = CHR_EMPTY;
+	mlx->player->pos_x = next_x;
+	mlx->player->pos_y = next_y;
 }
 
-void	move_pos_and_redraw(t_mlx_vars *mlx, t_map_info *map, t_player *player)
+void	move_and_judge_finish(t_mlx_vars *mlx, int dy, int dx)
 {
-	const char	next_pos = map->map_arr[player->next_y][player->next_x];
+	char		next_pos;
 
-	if (next_pos == CHR_MAP_GOAL && !player->can_exit)
+	if (check_to_can_move_next_pos(mlx, dy, dx) == FAIL)
 		return ;
-	player->cnt_step++;
-	if (player->cnt_step >= INT_MAX)
-		error_exit("Step counter will be overflow");
-	if (next_pos == CHR_MAP_GOAL && player->can_exit)
+	mlx->player->next_y = mlx->player->pos_y + dy;
+	mlx->player->next_x = mlx->player->pos_x + dx;
+	next_pos = mlx->map->map_arr[mlx->player->next_y][mlx->player->next_x];
+	mlx->player->cnt_step++;
+	if (mlx->player->cnt_step >= INT_MAX)
+		error_exit("Step counter will be overflow.");
+	if (next_pos == CHR_GOAL && mlx->player->can_exit)
 		mlx->is_game_end = true;
-	if (next_pos == CHR_MAP_ITEM)
+	if (next_pos == CHR_ITEM)
 	{
-		player->cnt_item++;
-		player->flg_get_item = true;
-		if (player->cnt_item == map->cnt_item)
-			player->can_exit = true;
+		mlx->player->cnt_item++;
+		mlx->player->flg_get_item = true;
+		if (mlx->player->cnt_item == mlx->map->cnt_item)
+			mlx->player->can_exit = true;
 	}
-	redraw_move_player(mlx);
-	map->map_arr[player->next_y][player->next_x] = CHR_MAP_PLAYER;
-	map->map_arr[player->pos_y][player->pos_x] = CHR_MAP_EMPTY;
-	player->pos_x = player->next_x;
-	player->pos_y = player->next_y;
+	move_player_and_redraw(mlx);
+	print_step_or_finish_to_stdout(mlx);
 }

@@ -26,14 +26,14 @@ static void	init_player(t_player *player, t_map_info map)
 
 void	init_mlx_ptr(t_mlx_vars *mlx, t_map_info *m, t_map_img *i, t_player *p)
 {
-	mlx->mlx_ptr = mlx_init();
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, \
+	mlx->mlx = mlx_init();
+	mlx->win = mlx_new_window(mlx->mlx, \
 	(int)m->size_row * IMAGE_SIZE, \
 	(int)m->size_col * IMAGE_SIZE, \
 	"so_long");
-	mlx->map_ptr = m;
-	mlx->img_ptr = i;
-	mlx->player_ptr = p;
+	mlx->map = m;
+	mlx->img = i;
+	mlx->player = p;
 	init_map_img(*mlx, i);
 	init_player(p, *m);
 	mlx->is_game_end = false;

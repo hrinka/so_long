@@ -18,43 +18,43 @@ void	*xpm_to_img_ptr(t_mlx_vars mlx, char *filepath)
 	int		height;
 	void	*ret_img_ptr;
 
-	ret_img_ptr = mlx_xpm_file_to_image(mlx.mlx_ptr, \
+	ret_img_ptr = mlx_xpm_file_to_image(mlx.mlx, \
 	filepath, &width, &height);
 	return (ret_img_ptr);
 }
 
 void	put_img(t_mlx_vars *mlx, void *img_ptr, int row, int col)
 {
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, \
+	mlx_put_image_to_window(mlx->mlx, mlx->win, \
 	img_ptr, row * IMAGE_SIZE, col * IMAGE_SIZE);
 }
 
 int	destroy_img_ptr(t_mlx_vars *mlx)
 {
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->player_right);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->player_left);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->goal);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->wall);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->item1);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->item2);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->empty1);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->empty2);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->empty3);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->empty4);
+	mlx_destroy_image(mlx->mlx, mlx->img->player_right);
+	mlx_destroy_image(mlx->mlx, mlx->img->player_left);
+	mlx_destroy_image(mlx->mlx, mlx->img->goal);
+	mlx_destroy_image(mlx->mlx, mlx->img->wall);
+	mlx_destroy_image(mlx->mlx, mlx->img->item1);
+	mlx_destroy_image(mlx->mlx, mlx->img->item2);
+	mlx_destroy_image(mlx->mlx, mlx->img->empty1);
+	mlx_destroy_image(mlx->mlx, mlx->img->empty2);
+	mlx_destroy_image(mlx->mlx, mlx->img->empty3);
+	mlx_destroy_image(mlx->mlx, mlx->img->empty4);
 	return (0);
 }
 
 int	mlx_destroys(t_mlx_vars *mlx)
 {
 	destroy_img_ptr(mlx);
-	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
-	mlx_destroy_display(mlx->mlx_ptr);
-	free(mlx->mlx_ptr);
+	mlx_destroy_window(mlx->mlx, mlx->win);
+	mlx_destroy_display(mlx->mlx);
+	free(mlx->mlx);
 	return (0);
 }
 
 int	close_window(t_mlx_vars *mlx)
 {
-	mlx_loop_end(mlx->mlx_ptr);
+	mlx_loop_end(mlx->mlx);
 	return (0);
 }

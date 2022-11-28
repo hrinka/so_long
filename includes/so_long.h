@@ -30,16 +30,18 @@
 # define EVENT_KEY_PRESS	2
 # define EVENT_DESTROY		33
 
-# define CHR_MAP_WALL	'1'
-# define CHR_MAP_EMPTY	'0'
-# define CHR_MAP_ITEM	'C'
-# define CHR_MAP_PLAYER	'P'
-# define CHR_MAP_GOAL	'E'
+# define CHR_WALL	'1'
+# define CHR_EMPTY	'0'
+# define CHR_ITEM	'C'
+# define CHR_PLAYER	'P'
+# define CHR_GOAL	'E'
 
 # define PASS	1
 # define FAIL	0
 
 # define IMAGE_SIZE 30
+
+# define IS_SPACE "\t\n\v\f\r "
 
 typedef struct s_player
 {
@@ -83,22 +85,21 @@ typedef struct s_map_img
 
 typedef struct s_mlx_vars
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	t_player	*player_ptr;
-	t_map_info	*map_ptr;
-	t_map_img	*img_ptr;
+	void		*mlx;
+	void		*win;
+	t_player	*player;
+	t_map_info	*map;
+	t_map_img	*img;
 	bool		is_game_end;
 }				t_mlx_vars;
 
 // init
-void	init_mlx_ptr(t_mlx_vars *mlx, t_map_info *m, \
-t_map_img *i, t_player *p);
-void	init_mapinfo(t_map_info *info);
+void	init_mlx_ptr(t_mlx_vars *mlx, t_map_info *m, t_map_img *i, t_player *p);
+void	init_mapinfo(t_map_info *map);
 void	init_map_img(t_mlx_vars mlx, t_map_img *img);
 
 // read and create map
-int		read_and_valid_maps(char *path, t_map_info *info);
+int		read_and_valid_maps(char *path, t_map_info *map);
 
 // get img
 void	*get_player_img(t_mlx_vars mlx);
@@ -108,23 +109,23 @@ void	*get_img_ptr(t_mlx_vars *mlx, int row, int col);
 int		null_check_for_map_img(t_map_img *img);
 
 // create game screen
-void	move_pos_and_redraw(t_mlx_vars *mlx, t_map_info *map, t_player *player);
 int		draw_game_screen(t_mlx_vars *mlx);
-int		can_player_move(t_map_info map, t_player player);
+void	move_and_judge_finish(t_mlx_vars *mlx, int dy, int dx);
+int		check_to_can_move_next_pos(t_mlx_vars *mlx, int dy, int dx);
 
 // mlx keyhooks
 void	mlx_hooks(t_mlx_vars *mlx);
 
 // mlx utils
 void	*xpm_to_img_ptr(t_mlx_vars mlx, char *filepath);
-void	put_img(t_mlx_vars *mlx, void *img_ptr, int row, int col);
+void	put_img(t_mlx_vars *mlx, void *img, int row, int col);
 int		close_window(t_mlx_vars *mlx);
 int		mlx_destroys(t_mlx_vars *mlx);
 int		destroy_img_ptr(t_mlx_vars *mlx);
 
 // sl utils
-void	print_step_in_std(t_mlx_vars *mlx);
-int		free_map_arr(t_map_info *info, int ret_val);
+void	print_step_or_finish_to_stdout(t_mlx_vars *mlx);
+int		free_map_arr(t_map_info *map, int ret_val);
 int		error_exit(char *msg);
 size_t	ft_strlen_sl(const char *str);
 

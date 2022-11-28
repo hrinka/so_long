@@ -29,9 +29,8 @@ int	main(int argc, char *argv[])
 
 	errno = 0;
 	if (argc != 2)
-		return (error_exit(\
-		"[Invalid Arg] HINT:Input Cmd >$./so_long ./assets/map/<file>\n"));
-	filepath = ft_strtrim(argv[1], "\t\n\v\f\r ");
+		return (error_exit("[Invalid Arg] Cmd>$./so_long ./assets/map/<file>"));
+	filepath = ft_strtrim(argv[1], IS_SPACE);
 	if (!filepath)
 		return (error_exit("Fail to get file path"));
 	ft_printf("Read file: %s\n", filepath);
@@ -41,7 +40,7 @@ int	main(int argc, char *argv[])
 	ft_printf("[GAME START] There are %d items\n", map.cnt_item);
 	draw_game_screen(&mlx);
 	mlx_hooks(&mlx);
-	mlx_loop(mlx.mlx_ptr);
+	mlx_loop(mlx.mlx);
 	mlx_destroys(&mlx);
 	ft_printf("[Exit] Good Bye!\n");
 	return (0);

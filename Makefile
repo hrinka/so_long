@@ -38,13 +38,13 @@ LIBS 			= -lft -lftprintf -lgnl -lmlx -lX11 -lXext
 VPATH			= $(SRC_DIR)
 SRC_DIR			= ./srcs
 SRCS			= main.c \
+				  init.c \
 				  read_and_create_map.c \
 				  create_game_screen.c \
-				  sl_utils.c \
-				  mlx_utils.c \
-				  init.c \
-				  mlx_keyhooks.c \
 				  get_map_img.c
+				  mlx_keyhooks.c \
+				  mlx_utils.c \
+				  sl_utils.c \
 
 OBJ_DIR			= ./objs
 OBJS			= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
@@ -91,6 +91,6 @@ re:			fclean all
 
 norm:
 	@norminette --version
-	@norminette $(SRC_DIR) $(INCLUDE_DIR)
+	norminette $(SRC_DIR) $(INCLUDE_DIR)
 
 .PHONY:		all clean fclean re
