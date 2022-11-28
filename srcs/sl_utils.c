@@ -47,21 +47,17 @@ int	free_map_arr(t_map_info *map, int ret_val)
 	return (ret_val);
 }
 
-void	print_step_or_finish_to_stdout(t_mlx_vars *mlx)
+void	print_step_to_stdout(t_mlx_vars *mlx)
 {
+	const int	player_step = (int)mlx->player->cnt_step;
+	const int	player_item = (int)mlx->player->cnt_item;
+	const int	map_item = (int)mlx->map->cnt_item;
+
 	if (mlx->player->flg_get_item)
 	{
-		ft_printf(" Step:%d  Item:%d/%d\n", \
-		mlx->player->cnt_step, \
-		mlx->player->cnt_item, \
-		mlx->map->cnt_item);
+		ft_printf(" Step:%d  Item:%d/%d\n", player_step, player_item, map_item);
 		mlx->player->flg_get_item = false;
 	}
 	else
-		ft_printf(" Step:%d\n", mlx->player->cnt_step);
-	if (mlx->is_game_end)
-	{
-		ft_printf("### GAME CLEAR!!! :D ###\n");
-		close_window(mlx);
-	}
+		ft_printf(" Step:%d\n", player_step);
 }

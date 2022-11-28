@@ -125,7 +125,7 @@ int		mlx_destroys(t_mlx_vars *mlx);
 int		destroy_img_ptr(t_mlx_vars *mlx);
 
 // sl utils
-void	print_step_or_finish_to_stdout(t_mlx_vars *mlx);
+void	print_step_to_stdout(t_mlx_vars *mlx);
 int		free_map_arr(t_map_info *map, int ret_val);
 int		error_exit(char *msg);
 size_t	ft_strlen_sl(const char *str);

@@ -94,5 +94,7 @@ void	move_and_judge_finish(t_mlx_vars *mlx, int dy, int dx)
 			mlx->player->can_exit = true;
 	}
 	move_player_and_redraw(mlx);
-	print_step_or_finish_to_stdout(mlx);
+	print_step_to_stdout(mlx);
+	if (mlx->is_game_end)
+		close_window(mlx);
 }

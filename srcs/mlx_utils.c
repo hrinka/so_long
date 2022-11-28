@@ -55,6 +55,8 @@ int	mlx_destroys(t_mlx_vars *mlx)
 
 int	close_window(t_mlx_vars *mlx)
 {
+	if (mlx->is_game_end)
+		ft_printf("### GAME CLEAR!!! :D ###\n");
 	mlx_loop_end(mlx->mlx);
 	return (0);
 }
