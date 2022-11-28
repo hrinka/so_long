@@ -76,12 +76,13 @@ $(OBJ_DIR)/%.o: %.c
 
 clean:
 	rm -rf $(OBJ_DIR)
+	@make clean -C $(LIBFT_DIR)
 	@make clean -C $(LIBFTPRINTF_DIR)
 	@make clean -C $(LIBGNL_DIR)
 	@make clean -C $(MLX_DIR)
 
 fclean:		clean
-	rm -f $(NAME)
+	rm -rf $(NAME)
 	@make fclean -C $(LIBFT_DIR)
 	@make fclean -C $(LIBFTPRINTF_DIR)
 	@make fclean -C $(LIBGNL_DIR)
@@ -91,8 +92,5 @@ re:			fclean all
 norm:
 	@norminette --version
 	@norminette $(SRC_DIR) $(INCLUDE_DIR)
-
-#test:	all
-#	leaks -q -atExit -- $(NAME)
 
 .PHONY:		all clean fclean re

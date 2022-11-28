@@ -60,11 +60,11 @@ ssize_t	print_signed(int num, t_printf_info *info);
 ssize_t	print_hex(unsigned long u, t_printf_info *info, bool isupper);
 ssize_t	print_unsigned(unsigned long u, t_printf_info info);
 
-size_t	ft_strlen(const char *s);
+size_t	ft_strlen_printf(const char *s);
 size_t	minsize(size_t a, size_t b);
 size_t	maxsize(size_t a, size_t b);
 
-char	*ft_strchr(const char *s, int c);
+char	*ft_strchr_printf(const char *s, int c);
 void	get_flag(char *fmt, t_printf_info *info);
 
 #endif

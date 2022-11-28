@@ -17,7 +17,7 @@ int	ft_isdigit(int c)
 	return ('0' <= c && c <= '9');
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr_printf(const char *s, int c)
 {
 	size_t	i;
 
@@ -33,7 +33,7 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen_printf(const char *s)
 {
 	size_t	len;
 

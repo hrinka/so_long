@@ -56,10 +56,10 @@ static void	set_preclen_and_padlen(unsigned long u, t_printf_info *info)
 		info->num_preclen = (size_t)info->perc_siz - len;
 		len += info->num_preclen;
 	}
-	if ((size_t)info->width_siz >= (len + ft_strlen(info->num_head_chr)))
+	if ((size_t)info->width_siz >= (len + ft_strlen_printf(info->num_head_chr)))
 	{
 		if (info->num_head_chr)
-			len += ft_strlen(info->num_head_chr);
+			len += ft_strlen_printf(info->num_head_chr);
 		if (info->flag_zero_pad)
 			info->num_preclen = (size_t)info->width_siz - len;
 		else

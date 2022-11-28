@@ -16,7 +16,7 @@ void	get_flag(char *fmt, t_printf_info *info)
 {
 	const char		*flags = "-+ #0";
 
-	while (fmt[info->fmt_idx] && ft_strchr(flags, fmt[info->fmt_idx]) != NULL)
+	while (fmt[info->fmt_idx] && ft_strchr_printf(flags, fmt[info->fmt_idx]) != NULL)
 	{
 		if (fmt[info->fmt_idx] == '-')
 			info->flag_left = true;

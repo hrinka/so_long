@@ -43,7 +43,7 @@ ssize_t	print_s(char *str, t_printf_info info)
 	ret_bytes = 0;
 	if (!str)
 		str = "(null)";
-	strlen = ft_strlen(str);
+	strlen = ft_strlen_printf(str);
 	if (info.prec_dot)
 		strlen = minsize(strlen, info.perc_siz);
 	printsize = maxsize(strlen, info.width_siz);
