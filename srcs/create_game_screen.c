@@ -83,7 +83,7 @@ void	move_and_judge_finish(t_mlx_vars *mlx, int dy, int dx)
 	next_pos = mlx->map->map_arr[mlx->player->next_y][mlx->player->next_x];
 	mlx->player->cnt_step++;
 	if (mlx->player->cnt_step >= INT_MAX)
-		error_exit("Step counter will be overflow.");
+		error_exit("Step counter reach the upper limit.");
 	if (next_pos == CHR_GOAL && mlx->player->can_exit)
 		mlx->is_game_end = true;
 	if (next_pos == CHR_ITEM)

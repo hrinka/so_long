@@ -27,6 +27,11 @@ size_t	ft_strlen_sl(const char *str)
 int	error_exit(char *msg)
 {
 	ft_printf("Error\n%s\n", msg);
+	if (errno != 0)
+	{
+		ft_printf("errno:");
+		strerror(errno);
+	}
 	exit(EXIT_FAILURE);
 }
 

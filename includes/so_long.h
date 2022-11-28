@@ -14,6 +14,7 @@
 # define SO_LONG_H
 
 # include <stdbool.h>
+# include <string.h>
 # include <stdlib.h>
 # include <errno.h>
 # include "./../minilibx-linux/mlx.h"
@@ -49,8 +50,8 @@ typedef struct s_player
 	int		pos_y;
 	int		next_x;
 	int		next_y;
-	int		cnt_step;
-	int		cnt_item;
+	size_t	cnt_step;
+	size_t	cnt_item;
 	bool	can_exit;
 	bool	is_facing_right;
 	bool	flg_get_item;

@@ -18,7 +18,6 @@ static void	destructor(void)
 	system("leaks -q so_long");
 }
 */
-
 int	main(int argc, char *argv[])
 {
 	t_mlx_vars	mlx;
