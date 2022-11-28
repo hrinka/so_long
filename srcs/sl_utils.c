@@ -26,7 +26,7 @@ size_t	ft_strlen_sl(const char *str)
 
 int	error_exit(char *msg)
 {
-	ft_printf("[Error] %s\n", msg);
+	ft_printf("Error\n%s\n", msg);
 	exit(EXIT_FAILURE);
 }
 
@@ -40,18 +40,6 @@ int	free_map_arr(t_map_info *info, int ret_val)
 			free(info->map_arr[col++]);
 	free(info->map_arr);
 	return (ret_val);
-}
-
-int	get_map_kinds(void **arr)
-{
-	int	i;
-
-	if (!arr)
-		return (0);
-	i = 0;
-	while (arr[i])
-		i++;
-	return (i);
 }
 
 void	print_step_in_std(t_mlx_vars *mlx)

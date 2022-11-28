@@ -14,24 +14,25 @@
 
 static int	valid_map(t_map_info *info)
 {
-	size_t	col;
+	size_t			col;
+	const size_t	size_row = info->size_row;
+	const size_t	size_col = info->size_col;
 
-	if (info->size_row < 2 || 66 < info->size_row || \
-	info->size_col < 2 || 36 < info->size_col)
+	if (size_row < 2 || 66 < size_row || size_col < 2 || 36 < size_col)
 		return (FAIL);
-	if (info->size_row == info->size_col)
+	if (size_row == size_col)
 		return (FAIL);
 	col = 0;
-	while (col < info->size_col)
+	while (col < size_col)
 	{
-		if ((col == 0 || col == info->size_col - 1) && \
-		cnt_chr_in_str(info->chr_wall, info->map_arr[col]) != info->size_row)
+		if ((col == 0 || col + 1 == size_col) && \
+		cnt_chr_in_str(CHR_MAP_WALL, info->map_arr[col]) != size_row)
 			return (FAIL);
-		if (info->map_arr[col][0] != info->chr_wall)
+		if (info->map_arr[col][0] != CHR_MAP_WALL)
 			return (FAIL);
-		if (info->map_arr[col][info->size_row - 1] != info->chr_wall)
+		if (info->map_arr[col][size_row - 1] != CHR_MAP_WALL)
 			return (FAIL);
-		if (ft_strlen_sl(info->map_arr[col]) != info->size_row)
+		if (ft_strlen_sl(info->map_arr[col]) != size_row)
 			return (FAIL);
 		col++;
 	}
@@ -70,16 +71,16 @@ static void	count_elems(const char *line, t_map_info *info)
 	i = 0;
 	while (line[i] != '\0')
 	{
-		if (line[i] == info->chr_item)
+		if (line[i] == CHR_MAP_ITEM)
 			info->cnt_item++;
-		else if (line[i] == info->chr_player)
+		else if (line[i] == CHR_MAP_PLAYER)
 		{
 			info->cnt_start++;
-			info->sx = i;
+			info->start_x = i;
 		}
-		else if (line[i] == info->chr_exit)
+		else if (line[i] == CHR_MAP_GOAL)
 			info->cnt_exit++;
-		else if (line[i] != info->chr_wall && line[i] != info->chr_empty)
+		else if (line[i] != CHR_MAP_WALL && line[i] != CHR_MAP_EMPTY)
 			info->cnt_others++;
 		i++;
 	}
@@ -87,7 +88,7 @@ static void	count_elems(const char *line, t_map_info *info)
 		info->size_row = i;
 }
 
-static int	get_map_params(const char *path, t_map_info *info)
+static int	get_params_frm_mapfile(const char *path, t_map_info *info)
 {
 	int		fd;
 	char	*line;
@@ -99,8 +100,8 @@ static int	get_map_params(const char *path, t_map_info *info)
 		if (!line)
 			break ;
 		count_elems(line, info);
-		if (info->sy == 0 && info->cnt_start)
-			info->sy = info->size_col;
+		if (info->start_y == 0 && info->cnt_start)
+			info->start_y = info->size_col;
 		info->size_col++;
 		free(line);
 	}
@@ -114,11 +115,11 @@ static int	get_map_params(const char *path, t_map_info *info)
 int	read_and_valid_maps(char *path, t_map_info *info)
 {
 	init_mapinfo(info);
-	if (get_map_params(path, info) == FAIL)
+	if (get_params_frm_mapfile(path, info) == FAIL)
 		return (FAIL);
 	if (info->cnt_start != 1 || info->cnt_exit != 1)
 		return (FAIL);
-	if (info->cnt_item == 0 || info->cnt_others > 0)
+	if (info->cnt_item == 0 || info->cnt_others > 1)
 		return (FAIL);
 	if (errno != 0 || create_map_arr(path, info) == FAIL)
 		return (free_map_arr(info, FAIL));

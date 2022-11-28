@@ -19,48 +19,48 @@ void	*get_player_img(t_mlx_vars mlx)
 	return (mlx.img_ptr->player_left);
 }
 
-void	*get_empty_img(t_mlx_vars mlx)
+void	*get_empty_img(t_mlx_vars mlx, int row, int col)
 {
-	return (mlx.img_ptr->empties[rand() % get_map_kinds(mlx.img_ptr->empties)]);
+	if ((row + col) % 2 == 0)
+		return (mlx.img_ptr->empty1);
+	else if ((row + col) % 7 == 0)
+		return (mlx.img_ptr->empty3);
+	else if ((row + col) % 3 == 0)
+		return (mlx.img_ptr->empty4);
+	return (mlx.img_ptr->empty2);
 }
 
-void	*get_item_img(t_mlx_vars mlx)
+void	*get_item_img(t_mlx_vars mlx, int row, int col)
 {
-	return (mlx.img_ptr->items[rand() % get_map_kinds(mlx.img_ptr->items)]);
+	if ((row + col) % 2 == 0)
+		return (mlx.img_ptr->item1);
+	return (mlx.img_ptr->item2);
 }
 
 void	*get_img_ptr(t_mlx_vars *mlx, int row, int col)
 {
-	if (mlx->map_ptr->map_arr[col][row] == mlx->map_ptr->chr_wall)
+	if (mlx->map_ptr->map_arr[col][row] == CHR_MAP_WALL)
 		return (mlx->img_ptr->wall);
-	if (mlx->map_ptr->map_arr[col][row] == mlx->map_ptr->chr_empty)
-		return (get_empty_img(*mlx));
-	if (mlx->map_ptr->map_arr[col][row] == mlx->map_ptr->chr_item)
-		return (get_item_img(*mlx));
-	if (mlx->map_ptr->map_arr[col][row] == mlx->map_ptr->chr_player)
+	if (mlx->map_ptr->map_arr[col][row] == CHR_MAP_EMPTY)
+		return (get_empty_img(*mlx, row, col));
+	if (mlx->map_ptr->map_arr[col][row] == CHR_MAP_ITEM)
+		return (get_item_img(*mlx, row, col));
+	if (mlx->map_ptr->map_arr[col][row] == CHR_MAP_PLAYER)
 		return (get_player_img(*mlx));
-	if (mlx->map_ptr->map_arr[col][row] == mlx->map_ptr->chr_exit)
+	if (mlx->map_ptr->map_arr[col][row] == CHR_MAP_GOAL)
 		return (mlx->img_ptr->goal);
-	error_exit("Fail to get img_ptr");
+	error_exit("Can't find img_ptr");
 }
 
-int	valid_map_img(t_map_img *img)
+int	null_check_for_map_img(t_map_img *img)
 {
-	size_t	i;
-
 	if (!img->player_right || !img->player_left)
 		return (FAIL);
 	if (!img->goal || !img->wall)
 		return (FAIL);
-	if (!img->empties || !img->items)
+	if (!img->empty1 || !img->empty2 || !img->empty3 || !img->empty4)
 		return (FAIL);
-	i = 0;
-	while (img->empties[i])
-		if (!img->empties[i++])
-			return (FAIL);
-	i = 0;
-	while (img->items[i])
-		if (!img->items[i++])
-			return (FAIL);
+	if (!img->item1 || !img->item2)
+		return (FAIL);
 	return (PASS);
 }

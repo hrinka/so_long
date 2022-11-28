@@ -30,11 +30,11 @@
 # define EVENT_KEY_PRESS	2
 # define EVENT_DESTROY		33
 
-# define MAP_WALL	'1'
-# define MAP_EMPTY	'0'
-# define MAP_ITEM	'C'
-# define MAP_PLAYER	'P'
-# define MAP_GOAL	'E'
+# define CHR_MAP_WALL	'1'
+# define CHR_MAP_EMPTY	'0'
+# define CHR_MAP_ITEM	'C'
+# define CHR_MAP_PLAYER	'P'
+# define CHR_MAP_GOAL	'E'
 
 # define PASS	1
 # define FAIL	0
@@ -57,19 +57,14 @@ typedef struct s_player
 typedef struct s_map_info
 {
 	char	**map_arr;
-	char	chr_wall;
-	char	chr_empty;
-	char	chr_item;
-	char	chr_player;
-	char	chr_exit;
-	int		cnt_item;
-	int		cnt_start;
-	int		cnt_exit;
-	int		cnt_others;
+	size_t	cnt_item;
+	size_t	cnt_start;
+	size_t	cnt_exit;
+	size_t	cnt_others;
 	size_t	size_col;
 	size_t	size_row;
-	size_t	sx;
-	size_t	sy;
+	size_t	start_x;
+	size_t	start_y;
 }			t_map_info;
 
 typedef struct s_map_img
@@ -78,8 +73,12 @@ typedef struct s_map_img
 	void	*player_left;
 	void	*goal;
 	void	*wall;
-	void	**empties;
-	void	**items;
+	void	*empty1;
+	void	*empty2;
+	void	*empty3;
+	void	*empty4;
+	void	*item1;
+	void	*item2;
 }			t_map_img;
 
 typedef struct s_mlx_vars
@@ -103,10 +102,10 @@ int		read_and_valid_maps(char *path, t_map_info *info);
 
 // get img
 void	*get_player_img(t_mlx_vars mlx);
-void	*get_empty_img(t_mlx_vars mlx);
-void	*get_item_img(t_mlx_vars mlx);
+void	*get_empty_img(t_mlx_vars mlx, int row, int col);
+void	*get_item_img(t_mlx_vars mlx, int row, int col);
 void	*get_img_ptr(t_mlx_vars *mlx, int row, int col);
-int		valid_map_img(t_map_img *img);
+int		null_check_for_map_img(t_map_img *img);
 
 // create game screen
 void	move_pos_and_redraw(t_mlx_vars *mlx, t_map_info *map, t_player *player);
@@ -117,7 +116,7 @@ int		can_player_move(t_map_info map, t_player player);
 void	mlx_hooks(t_mlx_vars *mlx);
 
 // mlx utils
-void	*file_to_img(t_mlx_vars mlx, char *filepath);
+void	*xpm_to_img_ptr(t_mlx_vars mlx, char *filepath);
 void	put_img(t_mlx_vars *mlx, void *img_ptr, int row, int col);
 int		close_window(t_mlx_vars *mlx);
 int		mlx_destroys(t_mlx_vars *mlx);
@@ -127,7 +126,6 @@ int		destroy_img_ptr(t_mlx_vars *mlx);
 void	print_step_in_std(t_mlx_vars *mlx);
 int		free_map_arr(t_map_info *info, int ret_val);
 int		error_exit(char *msg);
-int		get_map_kinds(void **arr);
 size_t	ft_strlen_sl(const char *str);
 
 #endif

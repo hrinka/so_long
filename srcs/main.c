@@ -11,12 +11,13 @@
 /* ************************************************************************** */
 
 #include "./../includes/so_long.h"
-
+/*
 __attribute__((destructor))
 static void	destructor(void)
 {
 	system("leaks -q so_long");
 }
+*/
 
 int	main(int argc, char *argv[])
 {
@@ -29,10 +30,11 @@ int	main(int argc, char *argv[])
 	errno = 0;
 	if (argc != 2)
 		return (error_exit(\
-		"[Invalid Arg.]HINT:Input Cmd >$./so_long ./assets/map/<file>\n"));
+		"[Invalid Arg] HINT:Input Cmd >$./so_long ./assets/map/<file>\n"));
 	filepath = ft_strtrim(argv[1], "\t\n\v\f\r ");
 	if (!filepath)
 		return (error_exit("Fail to get file path"));
+	ft_printf("Read file: %s\n", filepath);
 	if (read_and_valid_maps(filepath, &map) == FAIL)
 		return (error_exit("Invalid Map"));
 	init_mlx_ptr(&mlx, &map, &img, &player);

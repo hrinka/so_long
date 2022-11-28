@@ -14,8 +14,8 @@
 
 static void	init_player(t_player *player, t_map_info map)
 {
-	player->pos_x = (int)map.sx;
-	player->pos_y = (int)map.sy;
+	player->pos_x = (int)map.start_x;
+	player->pos_y = (int)map.start_y;
 	player->next_x = player->pos_x;
 	player->next_y = player->pos_y;
 	player->cnt_step = 0;
@@ -42,11 +42,6 @@ void	init_mlx_ptr(t_mlx_vars *mlx, t_map_info *m, t_map_img *i, t_player *p)
 void	init_mapinfo(t_map_info *info)
 {
 	info->map_arr = NULL;
-	info->chr_wall = MAP_WALL;
-	info->chr_empty = MAP_EMPTY;
-	info->chr_item = MAP_ITEM;
-	info->chr_player = MAP_PLAYER;
-	info->chr_exit = MAP_GOAL;
 	info->cnt_item = 0;
 	info->cnt_start = 0;
 	info->cnt_exit = 0;
@@ -57,25 +52,16 @@ void	init_mapinfo(t_map_info *info)
 
 void	init_map_img(t_mlx_vars mlx, t_map_img *img)
 {
-	img->player_right = file_to_img(mlx, "./assets/img/cow_r1.xpm");
-	img->player_left = file_to_img(mlx, "./assets/img/cow_l1.xpm");
-	img->goal = file_to_img(mlx, "./assets/img/goal.xpm");
-	img->wall = file_to_img(mlx, "./assets/img/wall1.xpm");
-	img->items = (void **)malloc(sizeof(void *) * 3);
-	if (!img->items)
-		error_exit("Fail to get item img_ptr");
-	img->items[0] = file_to_img(mlx, "./assets/img/item1.xpm");
-	img->items[1] = file_to_img(mlx, "./assets/img/item2.xpm");
-	img->items[2] = NULL;
-	img->empties = (void **)malloc(sizeof(void *) * 6);
-	if (!img->empties)
-		error_exit("Fail to get empty img_ptr");
-	img->empties[0] = file_to_img(mlx, "./assets/img/grass1.xpm");
-	img->empties[1] = file_to_img(mlx, "./assets/img/grass2.xpm");
-	img->empties[2] = file_to_img(mlx, "./assets/img/grass3.xpm");
-	img->empties[3] = file_to_img(mlx, "./assets/img/grass4.xpm");
-	img->empties[4] = file_to_img(mlx, "./assets/img/grass5.xpm");
-	img->empties[5] = NULL;
-	if (valid_map_img(img) == FAIL)
-		error_exit("Fail to get empty img_ptr");
+	img->player_right = xpm_to_img_ptr(mlx, "./assets/img/cow_r1.xpm");
+	img->player_left = xpm_to_img_ptr(mlx, "./assets/img/cow_l1.xpm");
+	img->goal = xpm_to_img_ptr(mlx, "./assets/img/goal.xpm");
+	img->wall = xpm_to_img_ptr(mlx, "./assets/img/wall.xpm");
+	img->item1 = xpm_to_img_ptr(mlx, "./assets/img/item1.xpm");
+	img->item2 = xpm_to_img_ptr(mlx, "./assets/img/item2.xpm");
+	img->empty1 = xpm_to_img_ptr(mlx, "./assets/img/grass1.xpm");
+	img->empty2 = xpm_to_img_ptr(mlx, "./assets/img/grass2.xpm");
+	img->empty3 = xpm_to_img_ptr(mlx, "./assets/img/grass3.xpm");
+	img->empty4 = xpm_to_img_ptr(mlx, "./assets/img/grass4.xpm");
+	if (null_check_for_map_img(img) == FAIL)
+		error_exit("Img_ptr is NULL");
 }

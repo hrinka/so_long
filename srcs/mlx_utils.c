@@ -12,7 +12,7 @@
 
 #include "./../includes/so_long.h"
 
-void	*file_to_img(t_mlx_vars mlx, char *filepath)
+void	*xpm_to_img_ptr(t_mlx_vars mlx, char *filepath)
 {
 	int		width;
 	int		height;
@@ -31,20 +31,16 @@ void	put_img(t_mlx_vars *mlx, void *img_ptr, int row, int col)
 
 int	destroy_img_ptr(t_mlx_vars *mlx)
 {
-	size_t	i;
-
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->player_right);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->player_left);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->goal);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->wall);
-	i = 0;
-	while (mlx->img_ptr->empties[i])
-		mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->empties[i++]);
-	free(mlx->img_ptr->empties);
-	i = 0;
-	while (mlx->img_ptr->items[i])
-		mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->items[i++]);
-	free(mlx->img_ptr->items);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->item1);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->item2);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->empty1);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->empty2);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->empty3);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img_ptr->empty4);
 	return (0);
 }
 
