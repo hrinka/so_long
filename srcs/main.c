@@ -11,14 +11,13 @@
 /* ************************************************************************** */
 
 #include "./../includes/so_long.h"
-
+/*
 __attribute__((destructor))
 static void	destructor(void)
 {
 	system("leaks -q so_long");
 }
-
-
+*/
 static void	init_map_img(t_mlx_vars mlx, t_img *img)
 {
 	img->player_right = xpm_to_img_ptr(mlx, "./assets/img/cow_r1.xpm");
