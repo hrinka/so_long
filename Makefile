@@ -40,11 +40,13 @@ SRC_DIR			= ./srcs
 SRCS			= main.c \
 				  read_and_create_map.c \
 				  valid_map.c \
+				  bfs.c \
+				  create_grid_for_bfs.c \
 				  create_game_screen.c \
 				  sl_utils.c \
 				  mlx_utils.c \
 				  mlx_keyhooks.c \
-				  get_map_img.c
+				  get_map_img.c \
 
 OBJ_DIR			= ./objs
 OBJS			= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))

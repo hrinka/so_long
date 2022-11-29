@@ -14,34 +14,34 @@
 
 int	draw_game_screen(t_mlx_vars *mlx)
 {
-	int		row;
-	int		col;
+	int		y;
+	int		x;
 	void	*img_ptr;
 
-	col = 0;
-	while (col < mlx->map->size_col)
+	y = 0;
+	while (y < mlx->map->size_y)
 	{
-		row = 0;
-		while (row < mlx->map->size_row)
+		x = 0;
+		while (x < mlx->map->size_x)
 		{
-			img_ptr = get_img_ptr(mlx, row, col);
-			put_img(mlx, img_ptr, row, col);
-			row++;
+			img_ptr = get_img_ptr(mlx, y, x);
+			put_img(mlx, img_ptr, y, x);
+			x++;
 		}
-		col++;
+		y++;
 	}
 	return (0);
 }
 
 int	check_to_can_move_next_pos(t_mlx_vars *mlx, int dy, int dx)
 {
-	const int	next_y = mlx->player->pos_y + dy;
-	const int	next_x = mlx->player->pos_x + dx;
+	const int	next_y = (int)mlx->player->pos_y + dy;
+	const int	next_x = (int)mlx->player->pos_x + dx;
 	char		next_pos;
 
-	if (next_y < 0 || mlx->map->size_col < next_y)
+	if (next_y < 0 || mlx->map->size_y < next_y)
 		return (FAIL);
-	if (next_x < 0 || mlx->map->size_row < next_x)
+	if (next_x < 0 || mlx->map->size_x < next_x)
 		return (FAIL);
 	if (mlx->map->map_arr[next_y][next_x] == CHR_WALL)
 		return (FAIL);
@@ -55,10 +55,10 @@ int	check_to_can_move_next_pos(t_mlx_vars *mlx, int dy, int dx)
 
 static void	move_player_and_redraw(t_mlx_vars *mlx)
 {
-	const int	pos_x = mlx->player->pos_x;
-	const int	pos_y = mlx->player->pos_y;
-	const int	next_x = mlx->player->next_x;
-	const int	next_y = mlx->player->next_y;
+	const int	pos_x = (int)mlx->player->pos_x;
+	const int	pos_y = (int)mlx->player->pos_y;
+	const int	next_x = (int)mlx->player->next_x;
+	const int	next_y = (int)mlx->player->next_y;
 
 	if (pos_x < next_x)
 		mlx->player->is_facing_right = true;
@@ -74,12 +74,12 @@ static void	move_player_and_redraw(t_mlx_vars *mlx)
 
 void	move_and_judge_finish(t_mlx_vars *mlx, int dy, int dx)
 {
-	char		next_pos;
+	char	next_pos;
 
 	if (check_to_can_move_next_pos(mlx, dy, dx) == FAIL)
 		return ;
-	mlx->player->next_y = mlx->player->pos_y + dy;
-	mlx->player->next_x = mlx->player->pos_x + dx;
+	mlx->player->next_y = (int)mlx->player->pos_y + dy;
+	mlx->player->next_x = (int)mlx->player->pos_x + dx;
 	next_pos = mlx->map->map_arr[mlx->player->next_y][mlx->player->next_x];
 	mlx->player->cnt_step++;
 	if (mlx->player->cnt_step >= INT_MAX)

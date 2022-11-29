@@ -37,10 +37,10 @@ static void	init_map_img(t_mlx_vars mlx, t_img *img)
 
 static void	init_player(t_player *player, t_map_param map)
 {
-	player->pos_x = (int)map.start_x;
-	player->pos_y = (int)map.start_y;
-	player->next_x = player->pos_x;
-	player->next_y = player->pos_y;
+	player->pos_x = map.start_x;
+	player->pos_y = map.start_y;
+	player->next_x = (int)player->pos_x;
+	player->next_y = (int)player->pos_y;
 	player->cnt_step = 0;
 	player->cnt_item = 0;
 	player->can_exit = false;
@@ -50,8 +50,8 @@ static void	init_player(t_player *player, t_map_param map)
 
 static void	init_mlx_ptr(t_mlx_vars *mlx, t_map_param *m, t_img *i, t_player *p)
 {
-	const int	size_x = (int)m->size_row * IMAGE_SIZE;
-	const int	size_y = (int)m->size_col * IMAGE_SIZE;
+	const int	size_x = (int)m->size_x * IMAGE_SIZE;
+	const int	size_y = (int)m->size_y * IMAGE_SIZE;
 
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, size_x, size_y, "./so_long");
@@ -81,8 +81,8 @@ int	main(int argc, char *argv[])
 	if (read_and_valid_map(filepath, &map) == FAIL)
 		return (error_exit("Invalid Map"));
 	init_mlx_ptr(&mlx, &map, &img, &player);
-	ft_printf("[GAME START] There are %d items\n", map.cnt_item);
 	draw_game_screen(&mlx);
+	ft_printf("[GAME START] There are %d items\n", map.cnt_item);
 	mlx_hooks(&mlx);
 	mlx_loop(mlx.mlx);
 	mlx_destroys(&mlx);

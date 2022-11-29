@@ -19,7 +19,7 @@ void	*get_player_img(t_mlx_vars mlx)
 	return (mlx.img->player_left);
 }
 
-void	*get_empty_img(t_mlx_vars mlx, int y, int x)
+void	*get_empty_img(t_mlx_vars mlx, size_t y, size_t x)
 {
 	if ((y + x) % 2 == 0)
 		return (mlx.img->empty1);
@@ -30,21 +30,21 @@ void	*get_empty_img(t_mlx_vars mlx, int y, int x)
 	return (mlx.img->empty2);
 }
 
-void	*get_item_img(t_mlx_vars mlx, int y, int x)
+void	*get_item_img(t_mlx_vars mlx, size_t y, size_t x)
 {
 	if ((y + x) % 2 == 0)
 		return (mlx.img->item1);
 	return (mlx.img->item2);
 }
 
-void	*get_img_ptr(t_mlx_vars *mlx, int y, int x)
+void	*get_img_ptr(t_mlx_vars *mlx, size_t y, size_t x)
 {
 	if (mlx->map->map_arr[y][x] == CHR_WALL)
 		return (mlx->img->wall);
 	if (mlx->map->map_arr[y][x] == CHR_EMPTY)
-		return (get_empty_img(*mlx, x, y));
+		return (get_empty_img(*mlx, y, x));
 	if (mlx->map->map_arr[y][x] == CHR_ITEM)
-		return (get_item_img(*mlx, x, y));
+		return (get_item_img(*mlx, y, x));
 	if (mlx->map->map_arr[y][x] == CHR_PLAYER)
 		return (get_player_img(*mlx));
 	if (mlx->map->map_arr[y][x] == CHR_GOAL)

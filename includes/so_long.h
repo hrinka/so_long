@@ -40,14 +40,17 @@
 # define PASS	1
 # define FAIL	0
 
+# define MAP_MIN 2
+# define MAP_MAX 66
+
 # define IMAGE_SIZE 30
 
 # define IS_SPACE "\t\n\v\f\r "
 
 typedef struct s_player
 {
-	int		pos_x;
-	int		pos_y;
+	size_t	pos_x;
+	size_t	pos_y;
 	int		next_x;
 	int		next_y;
 	size_t	cnt_step;
@@ -64,8 +67,8 @@ typedef struct s_map_param
 	size_t	cnt_start;
 	size_t	cnt_exit;
 	size_t	cnt_others;
-	size_t	size_col;
-	size_t	size_row;
+	size_t	size_x;
+	size_t	size_y;
 	size_t	start_x;
 	size_t	start_y;
 }			t_map_param;
@@ -96,8 +99,8 @@ typedef struct s_mlx_vars
 
 typedef struct s_queue
 {
-	int				nx;
-	int				ny;
+	int				x;
+	int				y;
 	struct s_queue	*next;
 }					t_queue;
 
@@ -107,11 +110,22 @@ int		read_and_valid_map(char *path, t_map_param *map);
 // map valid
 int		valid_map(t_map_param *map);
 
+// bfs
+void	bfs(int **visited, t_map_param map);
+/*
+void	print_grid(int **grid, int y, int x, char *str);
+void	print_map(char **grid, int y, int x, char *str);
+*/
+
+// create grid for bfs
+int		**create_visited(char **map_arr, size_t y, size_t x);
+void	free_grid(int **grid, size_t y);
+
 // get img
 void	*get_player_img(t_mlx_vars mlx);
-void	*get_empty_img(t_mlx_vars mlx, int y, int x);
-void	*get_item_img(t_mlx_vars mlx, int y, int x);
-void	*get_img_ptr(t_mlx_vars *mlx, int y, int x);
+void	*get_empty_img(t_mlx_vars mlx, size_t y, size_t x);
+void	*get_item_img(t_mlx_vars mlx, size_t y, size_t x);
+void	*get_img_ptr(t_mlx_vars *mlx, size_t y, size_t x);
 int		null_check_for_map_img(t_img *img);
 
 // create game screen
@@ -124,13 +138,15 @@ void	mlx_hooks(t_mlx_vars *mlx);
 
 // mlx utils
 void	*xpm_to_img_ptr(t_mlx_vars mlx, char *filepath);
-void	put_img(t_mlx_vars *mlx, void *img, int y, int x);
+void	put_img(t_mlx_vars *mlx, void *img, size_t y, size_t x);
 int		close_window(t_mlx_vars *mlx);
 int		mlx_destroys(t_mlx_vars *mlx);
 
 // sl utils
 void	print_step_to_stdout(t_mlx_vars *mlx);
 int		free_map_arr(t_map_param *map, int ret_val);
+void	free_grid(int **grid, size_t y);
 int		error_exit(char *msg);
+void	error_print(char *msg);
 
 #endif

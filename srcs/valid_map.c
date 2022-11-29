@@ -12,68 +12,93 @@
 
 #include "./../includes/so_long.h"
 
-static	int **create_grid(int row, int col)
+static int	check_elems(t_map_param map, int **visited, int i, int j)
 {
-	int		**grid;
-	size_t	i;
+	int			k;
+	int			path_to_goal;
+	const int	d[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
-	grid = (int **)ft_calloc(row, sizeof(int *));
-	if (!grid)
+	if (map.map_arr[i][j] == CHR_ITEM && visited[i][j] != 1)
 		return (FAIL);
-	i = 0;
-	while (i < row)
+	if (map.map_arr[i][j] == CHR_GOAL)
 	{
-		grid[i] = (int *)ft_calloc(col, sizeof(int));
-		if (!grid[i])
+		k = 0;
+		path_to_goal = 0;
+		while (k < 4)
 		{
-			i = 0;
-			while (i < col)
-				free(grid[i++]);
-			free(grid);
-			return (NULL);
+			if ((0 < i + d[i][0]) && (i + d[i][0] < map.size_y - 1) && \
+					(0 < j + d[i][1]) && (j + d[i][1] < map.size_x - 1) && \
+					visited[i + d[i][0]][j + d[i][1]] == 1)
+				path_to_goal++;
+			k++;
+		}
+		if (path_to_goal == 0)
+			return (FAIL);
+	}
+	return (PASS);
+}
+
+static int	check_path(t_map_param map, int **visited)
+{
+	int			i;
+	int			j;
+
+	i = 0;
+	while (i < map.size_y)
+	{
+		j = 0;
+		while (j < map.size_x)
+		{
+			if (check_elems(map, visited, i, j) == FAIL)
+				return (FAIL);
+			j++;
 		}
 		i++;
 	}
-	return (grid);
+	return (PASS);
 }
 
-static int	valid_path(char **map_arr, int row, int col)
+static int	valid_path(t_map_param map)
 {
-	int		**grid;
-	size_t	i;
-	size_t	j;
+	int		**visited;
+	int		ret_val;
 
-	grid = create_grid(row, col);
-	bfs();
-	check();
-	return (PASS);
+	visited = create_visited(map.map_arr, (int)map.size_y, (int)map.size_x);
+	if (!visited)
+		return (FAIL);
+	bfs(visited, map);
+	ret_val = check_path(map, visited);
+	if (ret_val == FAIL)
+		error_print("No valid path in this map.");
+	free_grid(visited, map.size_y);
+	return (ret_val);
 }
 
 int	valid_map(t_map_param *map)
 {
-	size_t			row;
-	const size_t	size_row = map->size_row;
-	const size_t	size_col = map->size_col;
+	size_t			y;
+	const size_t	size_y = map->size_y;
+	const size_t	size_x = map->size_x;
 
-	if (size_row < 2 || 66 < size_row || size_col < 2 || 36 < size_col)
+	if (size_y < MAP_MIN || MAP_MAX < size_y)
 		return (FAIL);
-	if (size_row == size_col)
+	if (size_x < MAP_MIN || MAP_MAX < size_x || size_y == size_x)
 		return (FAIL);
-	row = 0;
-	while (row < size_col)
+	y = 0;
+	while (y < size_y)
 	{
-		if ((row == 0 || row + 1 == size_col) && \
-		cnt_chr_in_str(CHR_WALL, map->map_arr[row]) != size_row)
+		if (ft_strlen_ns(map->map_arr[y]) != size_x)
 			return (FAIL);
-		if (map->map_arr[row][0] != CHR_WALL)
+		if ((y == 0 || y == size_y - 1) && \
+		cnt_chr_in_str(CHR_WALL, map->map_arr[y]) != size_x)
 			return (FAIL);
-		if (map->map_arr[row][size_row - 1] != CHR_WALL)
+		if (map->map_arr[y][0] != CHR_WALL)
 			return (FAIL);
-		if (ft_strlen_ns(map->map_arr[row]) != size_row)
+		if (map->map_arr[y][size_x - 1] != CHR_WALL)
 			return (FAIL);
-		row++;
+		y++;
 	}
-	if (valid_path(map->map_arr, (int)map->size_row, (int)map->size_col) == FAIL)
+	if (valid_path(*map) == FAIL)
 		return (FAIL);
 	return (PASS);
 }

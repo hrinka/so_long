@@ -20,14 +20,21 @@ int	error_exit(char *msg)
 	exit(EXIT_FAILURE);
 }
 
+void	error_print(char *msg)
+{
+	ft_printf("Error\n%s\n", msg);
+	if (errno != 0)
+		ft_printf(" ** strerror : %s", strerror(errno));
+}
+
 int	free_map_arr(t_map_param *map, int ret_val)
 {
-	size_t	row;
+	size_t	y;
 
-	row = 0;
+	y = 0;
 	if (map->map_arr)
-		while (row < map->size_col)
-			free(map->map_arr[row++]);
+		while (y < map->size_y)
+			free(map->map_arr[y++]);
 	free(map->map_arr);
 	return (ret_val);
 }

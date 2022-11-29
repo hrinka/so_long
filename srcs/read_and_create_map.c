@@ -18,7 +18,7 @@ static int	create_map_arr(char *path, t_map_param *map)
 	char	*line;
 	size_t	row;
 
-	map->map_arr = (char **)malloc(sizeof(char *) * (map->size_col + 1));
+	map->map_arr = (char **)malloc(sizeof(char *) * (map->size_x + 1));
 	if (!map->map_arr)
 		return (FAIL);
 	fd = open(path, O_RDONLY);
@@ -57,16 +57,15 @@ static void	count_line_elems(const char *line, t_map_param *map)
 			map->cnt_others++;
 		i++;
 	}
-	if (map->size_row == 0)
-		map->size_row = i;
+	if (map->size_x == 0)
+		map->size_x = i;
 }
 
 static int	read_mapfile_and_get_param(const char *path, t_map_param *map)
 {
-	int		fd;
-	char	*line;
+	const int	fd = open(path, O_RDONLY);
+	char		*line;
 
-	fd = open(path, O_RDONLY);
 	while (true)
 	{
 		line = get_next_line(fd, false);
@@ -74,8 +73,8 @@ static int	read_mapfile_and_get_param(const char *path, t_map_param *map)
 			break ;
 		count_line_elems(line, map);
 		if (map->start_y == 0 && map->cnt_start)
-			map->start_y = map->size_col;
-		map->size_col++;
+			map->start_y = map->size_y;
+		map->size_y++;
 		free(line);
 	}
 	free(line);
@@ -92,8 +91,8 @@ static void	init_map_param(t_map_param *map)
 	map->cnt_start = 0;
 	map->cnt_exit = 0;
 	map->cnt_others = 0;
-	map->size_col = 0;
-	map->size_row = 0;
+	map->size_x = 0;
+	map->size_y = 0;
 	map->start_x = 0;
 	map->start_y = 0;
 }

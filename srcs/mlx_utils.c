@@ -23,10 +23,10 @@ void	*xpm_to_img_ptr(t_mlx_vars mlx, char *filepath)
 	return (ret_img_ptr);
 }
 
-void	put_img(t_mlx_vars *mlx, void *img_ptr, int y, int x)
+void	put_img(t_mlx_vars *mlx, void *img_ptr, size_t y, size_t x)
 {
 	mlx_put_image_to_window(mlx->mlx, mlx->win, \
-	img_ptr, x * IMAGE_SIZE, y * IMAGE_SIZE);
+	img_ptr, (int)x * IMAGE_SIZE, (int)y * IMAGE_SIZE);
 }
 
 static int	destroy_img_ptr(t_mlx_vars *mlx)
