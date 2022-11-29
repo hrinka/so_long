@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/26 19:10:20 by takira            #+#    #+#             */
-/*   Updated: 2022/11/26 19:10:21 by takira           ###   ########.fr       */
+/*   Created: 2022/11/29 17:25:29 by takira            #+#    #+#             */
+/*   Updated: 2022/11/29 17:25:29 by takira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include <stdbool.h>
 # include <string.h>
 # include <stdlib.h>
 # include <errno.h>
-# include "./../minilibx-linux/mlx.h"
-# include "./../lib/libft/libft.h"
-# include "./../lib/libftprintf/ft_printf.h"
-# include "./../lib/gnl/get_next_line.h"
+# include "../minilibx-linux/mlx.h"
+# include "../../lib/libft/libft.h"
+# include "../../lib/libftprintf/ft_printf.h"
+# include "../../lib/gnl/get_next_line.h"
 
 # define KEY_ESC	0xff1b
 # define KEY_LEFT	0xff51

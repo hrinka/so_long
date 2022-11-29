@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_valid.c                                        :+:      :+:    :+:   */
+/*   map_valid_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 08:22:37 by takira            #+#    #+#             */
-/*   Updated: 2022/11/29 08:22:38 by takira           ###   ########.fr       */
+/*   Created: 2022/11/29 17:26:14 by takira            #+#    #+#             */
+/*   Updated: 2022/11/29 17:26:14 by takira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/so_long.h"
+#include "./includes/so_long_bonus.h"
 
 static int	check_elems(t_map_param map, int **visited, int i, int j)
 {

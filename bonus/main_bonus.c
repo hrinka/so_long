@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 22:04:17 by takira            #+#    #+#             */
-/*   Updated: 2022/11/21 22:04:19 by takira           ###   ########.fr       */
+/*   Created: 2022/11/29 17:26:14 by takira            #+#    #+#             */
+/*   Updated: 2022/11/29 17:26:14 by takira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/so_long.h"
-/*
+#include "./includes/so_long_bonus.h"
+
 __attribute__((destructor))
 static void	destructor(void)
 {
 	system("leaks -q so_long");
 }
-*/
+
 static void	init_map_img(t_mlx_vars mlx, t_img *img)
 {
 	img->player_right = xpm_to_img_ptr(mlx, "./assets/img/cow_r1.xpm");

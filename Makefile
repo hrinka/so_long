@@ -10,11 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= so_long
-
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror
 #CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -fsanitize=undefined
+
+# MONDATORY
+NAME	= so_long
 
 INCLUDE_DIR		= ./includes
 HEADERS			= so_long.h
@@ -35,7 +36,7 @@ INCLUDES		= -I $(INCLUDE_DIR) -I $(LIBFT_DIR) -I $(LIBFTPRINTF_DIR) -I $(LIBGNL_
 LIBS_DIR 		= -L $(LIBFT_DIR) -L $(LIBFTPRINTF_DIR) -L $(LIBGNL_DIR) -L $(MLX_DIR) -L $(X11_DIR)/lib -L $(X11_DIR)
 LIBS 			= -lft -lftprintf -lgnl -lmlx -lX11 -lXext
 
-VPATH			= $(SRC_DIR)
+VPATH			= $(SRC_DIR):$(INCLUDE_DIR):$(BONUS_SRC_DIR):$(BONUS_INCLUDE_DIR)
 SRC_DIR			= ./srcs
 SRCS			= main.c \
 				  read_and_create_map.c \
@@ -48,13 +49,35 @@ SRCS			= main.c \
 				  mlx_keyhooks.c \
 				  get_map_img.c \
 
+
+# BONUS
+BONUS_NAME		= so_long_bonus
+
+BONUS_INCLUDES	= -I $(BONUS_INCLUDE_DIR) -I $(LIBFT_DIR) -I $(LIBFTPRINTF_DIR) -I $(LIBGNL_DIR) -I $(MLX_DIR) -I $(X11_DIR)/include
+
 OBJ_DIR			= ./objs
 OBJS			= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
-#BONUS_SRC_DIR	= ./bonus
-#BONUS_SRCS		=
-#BONUS_OBJS		= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
+BONUS_INCLUDE_DIR	= ./bonus/includes
+BONUS_HEADERS		= so_long_bonus.h
 
+BONUS_SRC_DIR	= ./bonus
+BONUS_SRCS		= main_bonus.c \
+				  read_and_create_map_bonus.c \
+				  valid_map_bonus.c \
+				  bfs_bonus.c \
+				  create_grid_for_bfs_bonus.c \
+				  create_game_screen_bonus.c \
+				  sl_utils_bonus.c \
+				  mlx_utils_bonus.c \
+				  mlx_keyhooks_bonus.c \
+				  get_map_img_bonus.c \
+
+BONUS_OBJ_DIR	= ./bonus/objs
+BONUS_OBJS		= $(addprefix $(BONUS_OBJ_DIR)/, $(BONUS_SRCS:%.c=%.o))
+
+
+# OS Check
 UNAME := $(shell uname)
 ifeq ($(UNAME), Darwin)
 	LIBS_DIR 	+= -L /usr/X11R6/lib
@@ -63,6 +86,8 @@ else
 	LIBS 		+= -lmlx_Linux
 endif
 
+
+# RULES
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
@@ -84,15 +109,41 @@ clean:
 	@make clean -C $(MLX_DIR)
 
 fclean:		clean
-	rm -rf $(NAME)
+	rm -f $(NAME)
 	@make fclean -C $(LIBFT_DIR)
 	@make fclean -C $(LIBFTPRINTF_DIR)
 	@make fclean -C $(LIBGNL_DIR)
 
 re:			fclean all
 
+bonus:	$(BONUS_NAME)
+
+$(BONUS_NAME):	$(BONUS_OBJS)
+	@make -C $(LIBFT_DIR)
+	@make -C $(LIBFTPRINTF_DIR)
+	@make -C $(LIBGNL_DIR)
+	@make -C $(MLX_DIR)
+	$(CC) $(CFLAGS) $^ $(LIBS_DIR) $(LIBS) -o $@
+
+$(BONUS_OBJ_DIR)/%.o: %.c
+	@mkdir -p $$(dirname $@)
+	$(CC) $(BONUS_INCLUDE) -c $< -o $@
+
+bonus_clean:
+	rm -rf $(BONUS_OBJ_DIR)
+	@make clean -C $(LIBFT_DIR)
+	@make clean -C $(LIBFTPRINTF_DIR)
+	@make clean -C $(LIBGNL_DIR)
+	@make clean -C $(MLX_DIR)
+
+bonus_fclean:	bonus_clean
+	rm -f $(BONUS_NAME)
+	@make fclean -C $(LIBFT_DIR)
+	@make fclean -C $(LIBFTPRINTF_DIR)
+	@make fclean -C $(LIBGNL_DIR)
+
 norm:
 	@norminette --version
 	norminette $(SRC_DIR) $(INCLUDE_DIR)
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean re bonus
