@@ -82,7 +82,7 @@ int	main(int argc, char *argv[])
 	init_mlx_ptr(&mlx, &map, &img, &player);
 	draw_game_screen(&mlx);
 	ft_printf("[GAME START] There are %d items\n", map.cnt_item);
-	mlx_hooks(&mlx);
+	mlx_key_hooks(&mlx);
 	mlx_loop(mlx.mlx);
 	mlx_destroys(&mlx);
 	free(filepath);

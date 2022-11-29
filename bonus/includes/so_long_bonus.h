@@ -17,10 +17,10 @@
 # include <string.h>
 # include <stdlib.h>
 # include <errno.h>
-# include "../minilibx-linux/mlx.h"
-# include "../../lib/libft/libft.h"
-# include "../../lib/libftprintf/ft_printf.h"
-# include "../../lib/gnl/get_next_line.h"
+# include "./../../minilibx-linux/mlx.h"
+# include "./../../lib/libft/libft.h"
+# include "./../../lib/libftprintf/ft_printf.h"
+# include "./../../lib/gnl/get_next_line.h"
 
 # define KEY_ESC	0xff1b
 # define KEY_LEFT	0xff51
@@ -36,6 +36,25 @@
 # define CHR_ITEM	'C'
 # define CHR_PLAYER	'P'
 # define CHR_GOAL	'E'
+
+# define IMG_PLAYER_R1 "./assets/img/cow_r1.xpm"
+# define IMG_PLAYER_R2 "./assets/img/cow_r2.xpm"
+# define IMG_PLAYER_R3 "./assets/img/cow_r3.xpm"
+# define IMG_PLAYER_R4 "./assets/img/cow_r4.xpm"
+# define IMG_PLAYER_R5 "./assets/img/cow_r5.xpm"
+# define IMG_PLAYER_L1 "./assets/img/cow_l1.xpm"
+# define IMG_PLAYER_L2 "./assets/img/cow_l2.xpm"
+# define IMG_PLAYER_L3 "./assets/img/cow_l3.xpm"
+# define IMG_PLAYER_L4 "./assets/img/cow_l4.xpm"
+# define IMG_PLAYER_L5 "./assets/img/cow_l5.xpm"
+# define IMG_GOAL		"./assets/img/goal.xpm"
+# define IMG_WALL		"./assets/img/wall.xpm"
+# define IMG_ITEM_1		"./assets/img/item1.xpm"
+# define IMG_ITEM_2		"./assets/img/item2.xpm"
+# define IMG_EMPTY_1	"./assets/img/grass1.xpm"
+# define IMG_EMPTY_2	"./assets/img/grass2.xpm"
+# define IMG_EMPTY_3	"./assets/img/grass3.xpm"
+# define IMG_EMPTY_4	"./assets/img/grass4.xpm"
 
 # define PASS	1
 # define FAIL	0
@@ -75,8 +94,16 @@ typedef struct s_map_param
 
 typedef struct s_img
 {
-	void	*player_right;
-	void	*player_left;
+	void	*player_right1;
+	void	*player_right2;
+	void	*player_right3;
+	void	*player_right4;
+	void	*player_right5;
+	void	*player_left1;
+	void	*player_left2;
+	void	*player_left3;
+	void	*player_left4;
+	void	*player_left5;
 	void	*goal;
 	void	*wall;
 	void	*empty1;
@@ -85,6 +112,8 @@ typedef struct s_img
 	void	*empty4;
 	void	*item1;
 	void	*item2;
+	int		no_player_animetion;
+	int		no_ememy_animation;
 }			t_img;
 
 typedef struct s_mlx_vars
@@ -95,6 +124,8 @@ typedef struct s_mlx_vars
 	t_map_param	*map;
 	t_img		*img;
 	bool		is_game_end;
+	int			animation_cnt;
+	int			player_flame;
 }				t_mlx_vars;
 
 typedef struct s_queue
@@ -134,6 +165,9 @@ int		check_to_can_move_next_pos(t_mlx_vars *mlx, int dy, int dx);
 // mlx keyhooks
 void	mlx_hooks(t_mlx_vars *mlx);
 
+// mlx animation
+int		run_animation(t_mlx_vars *mlx);
+
 // mlx utils
 void	*xpm_to_img_ptr(t_mlx_vars mlx, char *filepath);
 void	put_img(t_mlx_vars *mlx, void *img, size_t y, size_t x);
@@ -144,5 +178,6 @@ int		mlx_destroys(t_mlx_vars *mlx);
 void	print_step_to_stdout(t_mlx_vars *mlx);
 int		free_map_arr(t_map_param *map, int ret_val);
 int		error_exit(char *msg);
+
 
 #endif

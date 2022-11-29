@@ -28,7 +28,7 @@ static int	key_hook(int keycode, t_mlx_vars *mlx)
 	return (0);
 }
 
-void	mlx_hooks(t_mlx_vars *mlx)
+void	mlx_key_hooks(t_mlx_vars *mlx)
 {
 	const int	mask_key_press = 1L << 0;
 	const int	mask_button_press = 1L << 17;

@@ -20,16 +20,24 @@ static void	destructor(void)
 
 static void	init_map_img(t_mlx_vars mlx, t_img *img)
 {
-	img->player_right = xpm_to_img_ptr(mlx, "./assets/img/cow_r1.xpm");
-	img->player_left = xpm_to_img_ptr(mlx, "./assets/img/cow_l1.xpm");
-	img->goal = xpm_to_img_ptr(mlx, "./assets/img/goal.xpm");
-	img->wall = xpm_to_img_ptr(mlx, "./assets/img/wall.xpm");
-	img->item1 = xpm_to_img_ptr(mlx, "./assets/img/item1.xpm");
-	img->item2 = xpm_to_img_ptr(mlx, "./assets/img/item2.xpm");
-	img->empty1 = xpm_to_img_ptr(mlx, "./assets/img/grass1.xpm");
-	img->empty2 = xpm_to_img_ptr(mlx, "./assets/img/grass2.xpm");
-	img->empty3 = xpm_to_img_ptr(mlx, "./assets/img/grass3.xpm");
-	img->empty4 = xpm_to_img_ptr(mlx, "./assets/img/grass4.xpm");
+	img->player_right1 = xpm_to_img_ptr(mlx, IMG_PLAYER_R1);
+	img->player_right2 = xpm_to_img_ptr(mlx, IMG_PLAYER_R2);
+	img->player_right3 = xpm_to_img_ptr(mlx, IMG_PLAYER_R3);
+	img->player_right4 = xpm_to_img_ptr(mlx, IMG_PLAYER_R4);
+	img->player_right5 = xpm_to_img_ptr(mlx, IMG_PLAYER_R5);
+	img->player_left1 = xpm_to_img_ptr(mlx, IMG_PLAYER_L1);
+	img->player_left2 = xpm_to_img_ptr(mlx, IMG_PLAYER_L2);
+	img->player_left3 = xpm_to_img_ptr(mlx, IMG_PLAYER_L3);
+	img->player_left4 = xpm_to_img_ptr(mlx, IMG_PLAYER_L4);
+	img->player_left5 = xpm_to_img_ptr(mlx, IMG_PLAYER_L5);
+	img->goal = xpm_to_img_ptr(mlx, IMG_GOAL);
+	img->wall = xpm_to_img_ptr(mlx, IMG_WALL);
+	img->item1 = xpm_to_img_ptr(mlx, IMG_ITEM_1);
+	img->item2 = xpm_to_img_ptr(mlx, IMG_ITEM_2);
+	img->empty1 = xpm_to_img_ptr(mlx, IMG_EMPTY_1);
+	img->empty2 = xpm_to_img_ptr(mlx, IMG_EMPTY_2);
+	img->empty3 = xpm_to_img_ptr(mlx, IMG_EMPTY_3);
+	img->empty4 = xpm_to_img_ptr(mlx, IMG_EMPTY_4);
 	if (null_check_for_map_img(img) == FAIL)
 		error_exit("Img_ptr is NULL.");
 }
@@ -60,6 +68,8 @@ static void	init_mlx_ptr(t_mlx_vars *mlx, t_map_param *m, t_img *i, t_player *p)
 	init_map_img(*mlx, i);
 	init_player(p, *m);
 	mlx->is_game_end = false;
+	mlx->animation_cnt = 0;
+	mlx->player_flame = 0;
 }
 
 int	main(int argc, char *argv[])

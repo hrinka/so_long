@@ -15,8 +15,8 @@
 void	*get_player_img(t_mlx_vars mlx)
 {
 	if (mlx.player->is_facing_right)
-		return (mlx.img->player_right);
-	return (mlx.img->player_left);
+		return (mlx.img->player_right1);
+	return (mlx.img->player_left1);
 }
 
 void	*get_empty_img(t_mlx_vars mlx, size_t y, size_t x)
@@ -54,7 +54,7 @@ void	*get_img_ptr(t_mlx_vars *mlx, size_t y, size_t x)
 
 int	null_check_for_map_img(t_img *img)
 {
-	if (!img->player_right || !img->player_left)
+	if (!img->player_right1 || !img->player_left1)
 		return (FAIL);
 	if (!img->goal || !img->wall)
 		return (FAIL);

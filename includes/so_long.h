@@ -132,7 +132,7 @@ void	move_and_judge_finish(t_mlx_vars *mlx, int dy, int dx);
 int		check_to_can_move_next_pos(t_mlx_vars *mlx, int dy, int dx);
 
 // mlx keyhooks
-void	mlx_hooks(t_mlx_vars *mlx);
+void	mlx_key_hooks(t_mlx_vars *mlx);
 
 // mlx utils
 void	*xpm_to_img_ptr(t_mlx_vars mlx, char *filepath);

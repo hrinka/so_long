@@ -36,4 +36,5 @@ void	mlx_hooks(t_mlx_vars *mlx)
 	mlx_hook(mlx->win, EVENT_KEY_PRESS, mask_key_press, key_hook, mlx);
 	mlx_hook(mlx->win, EVENT_DESTROY, mask_button_press, close_window, mlx);
 	mlx_expose_hook(mlx->win, draw_game_screen, mlx);
+	mlx_loop_hook(mlx->mlx, run_animation, mlx);
 }
