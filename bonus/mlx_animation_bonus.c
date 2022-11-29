@@ -43,7 +43,7 @@ int	run_animation(t_mlx_vars *mlx)
 	const size_t	x = mlx->player->pos_x;
 
 	mlx->animation_cnt++;
-	if (mlx->animation_cnt == 10000)
+	if (mlx->animation_cnt == 15000)
 	{
 		put_img(mlx, get_player_animation_img(*mlx, mlx->player_flame), y, x);
 		mlx->animation_cnt = 0;

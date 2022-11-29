@@ -179,5 +179,4 @@ void	print_step_to_stdout(t_mlx_vars *mlx);
 int		free_map_arr(t_map_param *map, int ret_val);
 int		error_exit(char *msg);
 
-
 #endif

@@ -145,6 +145,6 @@ bonus_fclean:	bonus_clean
 
 norm:
 	@norminette --version
-	norminette $(SRC_DIR) $(INCLUDE_DIR)
+	norminette $(SRC_DIR) $(INCLUDE_DIR) $(BONUS_SRC_DIR) $(BONUS_INCLUDE_DIR)
 
 .PHONY:		all clean fclean re bonus norm
