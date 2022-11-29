@@ -13,8 +13,8 @@
 NAME	= so_long
 
 CC		= cc
-#CFLAGS	= -Wall -Wextra -Werror
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -fsanitize=undefined
+CFLAGS	= -Wall -Wextra -Werror
+#CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -fsanitize=undefined
 
 INCLUDE_DIR		= ./includes
 HEADERS			= so_long.h
@@ -39,10 +39,10 @@ VPATH			= $(SRC_DIR)
 SRC_DIR			= ./srcs
 SRCS			= main.c \
 				  read_and_create_map.c \
+				  valid_map.c \
 				  create_game_screen.c \
 				  sl_utils.c \
 				  mlx_utils.c \
-				  init.c \
 				  mlx_keyhooks.c \
 				  get_map_img.c
 

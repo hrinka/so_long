@@ -6,7 +6,7 @@
 #    By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 19:18:14 by takira            #+#    #+#              #
-#    Updated: 2022/11/26 19:27:17 by takira           ###   ########.fr        #
+#    Updated: 2022/11/29 07:57:33 by takira           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,16 @@ CFLAGS		= -Wall -Wextra -Werror
 NAME		= libft.a
 
 SRCS		= ft_strlen.c \
+              	ft_strlen_ns.c \
 				ft_strlcpy.c \
               	ft_strchr.c \
               	ft_substr.c \
               	ft_strtrim.c \
+              	ft_bzero.c \
+              	ft_calloc.c \
+              	ft_mamset.c \
 
 OBJS		= $(SRCS:.c=.o)
-
 
 $(NAME):	$(OBJS)
 			ar rcs $(NAME) $(OBJS)

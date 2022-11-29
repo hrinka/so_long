@@ -1,13 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   ft_strlen_ns.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 15:35:31 by takira            #+#    #+#             */
-/*   Updated: 2022/11/28 15:35:33 by takira           ###   ########.fr       */
+/*   Created: 2022/11/29 07:56:06 by takira            #+#    #+#             */
+/*   Updated: 2022/11/29 07:56:08 by takira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/so_long.h"
+#include "libft.h"
+
+size_t	ft_strlen_ns(const char *s)
+{
+	size_t	len;
+
+	if (!s)
+		return (0);
+	len = 0;
+	while (s[len] != '\0')
+		len++;
+	return (len);
+}

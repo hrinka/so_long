@@ -12,37 +12,22 @@
 
 #include "./../includes/so_long.h"
 
-size_t	ft_strlen_sl(const char *str)
-{
-	size_t	len;
-
-	if (!str)
-		return (0);
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
-}
-
 int	error_exit(char *msg)
 {
 	ft_printf("Error\n%s\n", msg);
 	if (errno != 0)
-	{
-		ft_printf("errno:");
-		strerror(errno);
-	}
+		ft_printf(" ** strerror : %s", strerror(errno));
 	exit(EXIT_FAILURE);
 }
 
-int	free_map_arr(t_map_info *map, int ret_val)
+int	free_map_arr(t_map_param *map, int ret_val)
 {
-	size_t	col;
+	size_t	row;
 
-	col = 0;
+	row = 0;
 	if (map->map_arr)
-		while (col < map->size_col)
-			free(map->map_arr[col++]);
+		while (row < map->size_col)
+			free(map->map_arr[row++]);
 	free(map->map_arr);
 	return (ret_val);
 }

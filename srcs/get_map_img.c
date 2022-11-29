@@ -19,40 +19,40 @@ void	*get_player_img(t_mlx_vars mlx)
 	return (mlx.img->player_left);
 }
 
-void	*get_empty_img(t_mlx_vars mlx, int row, int col)
+void	*get_empty_img(t_mlx_vars mlx, int y, int x)
 {
-	if ((row + col) % 2 == 0)
+	if ((y + x) % 2 == 0)
 		return (mlx.img->empty1);
-	else if ((row + col) % 7 == 0)
+	else if ((y + x) % 7 == 0)
 		return (mlx.img->empty3);
-	else if ((row + col) % 3 == 0)
+	else if ((y + x) % 3 == 0)
 		return (mlx.img->empty4);
 	return (mlx.img->empty2);
 }
 
-void	*get_item_img(t_mlx_vars mlx, int row, int col)
+void	*get_item_img(t_mlx_vars mlx, int y, int x)
 {
-	if ((row + col) % 2 == 0)
+	if ((y + x) % 2 == 0)
 		return (mlx.img->item1);
 	return (mlx.img->item2);
 }
 
-void	*get_img_ptr(t_mlx_vars *mlx, int row, int col)
+void	*get_img_ptr(t_mlx_vars *mlx, int y, int x)
 {
-	if (mlx->map->map_arr[col][row] == CHR_WALL)
+	if (mlx->map->map_arr[y][x] == CHR_WALL)
 		return (mlx->img->wall);
-	if (mlx->map->map_arr[col][row] == CHR_EMPTY)
-		return (get_empty_img(*mlx, row, col));
-	if (mlx->map->map_arr[col][row] == CHR_ITEM)
-		return (get_item_img(*mlx, row, col));
-	if (mlx->map->map_arr[col][row] == CHR_PLAYER)
+	if (mlx->map->map_arr[y][x] == CHR_EMPTY)
+		return (get_empty_img(*mlx, x, y));
+	if (mlx->map->map_arr[y][x] == CHR_ITEM)
+		return (get_item_img(*mlx, x, y));
+	if (mlx->map->map_arr[y][x] == CHR_PLAYER)
 		return (get_player_img(*mlx));
-	if (mlx->map->map_arr[col][row] == CHR_GOAL)
+	if (mlx->map->map_arr[y][x] == CHR_GOAL)
 		return (mlx->img->goal);
-	error_exit("Can't find img_ptr");
+	error_exit("Can't find img_ptr.");
 }
 
-int	null_check_for_map_img(t_map_img *img)
+int	null_check_for_map_img(t_img *img)
 {
 	if (!img->player_right || !img->player_left)
 		return (FAIL);

@@ -23,13 +23,13 @@ void	*xpm_to_img_ptr(t_mlx_vars mlx, char *filepath)
 	return (ret_img_ptr);
 }
 
-void	put_img(t_mlx_vars *mlx, void *img_ptr, int row, int col)
+void	put_img(t_mlx_vars *mlx, void *img_ptr, int y, int x)
 {
 	mlx_put_image_to_window(mlx->mlx, mlx->win, \
-	img_ptr, row * IMAGE_SIZE, col * IMAGE_SIZE);
+	img_ptr, x * IMAGE_SIZE, y * IMAGE_SIZE);
 }
 
-int	destroy_img_ptr(t_mlx_vars *mlx)
+static int	destroy_img_ptr(t_mlx_vars *mlx)
 {
 	mlx_destroy_image(mlx->mlx, mlx->img->player_right);
 	mlx_destroy_image(mlx->mlx, mlx->img->player_left);
@@ -49,7 +49,6 @@ int	mlx_destroys(t_mlx_vars *mlx)
 	destroy_img_ptr(mlx);
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	mlx_destroy_display(mlx->mlx);
-	free(mlx->mlx);
 	return (0);
 }
 
