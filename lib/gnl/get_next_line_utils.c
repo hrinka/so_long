@@ -23,7 +23,7 @@ size_t	ft_strlen_gnl(const char *str)
 		len++;
 	return (len);
 }
-
+#include <stdio.h>
 size_t	cnt_chr_in_str(const char c, const char *str)
 {
 	size_t	i;
@@ -34,8 +34,11 @@ size_t	cnt_chr_in_str(const char c, const char *str)
 	i = 0;
 	cnt = 0;
 	while (str[i])
-		if (str[i++] == c)
+	{
+		if (str[i] == c)
 			cnt++;
+		i++;
+	}
 	return (cnt);
 }
 

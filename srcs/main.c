@@ -11,13 +11,13 @@
 /* ************************************************************************** */
 
 #include "./../includes/so_long.h"
-/*
+
 __attribute__((destructor))
 static void	destructor(void)
 {
 	system("leaks -q so_long");
 }
-*/
+
 
 static void	init_map_img(t_mlx_vars mlx, t_img *img)
 {
@@ -86,7 +86,7 @@ int	main(int argc, char *argv[])
 	mlx_hooks(&mlx);
 	mlx_loop(mlx.mlx);
 	mlx_destroys(&mlx);
-	ft_printf("[Exit] Good Bye!\n");
 	free(filepath);
+	ft_printf("[Exit] Good Bye!\n");
 	return (0);
 }

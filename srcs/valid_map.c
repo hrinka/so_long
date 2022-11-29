@@ -58,20 +58,17 @@ static int	check_path(t_map_param map, int **visited)
 	return (PASS);
 }
 
-static int	valid_path(t_map_param map)
+static void	valid_path(t_map_param map)
 {
 	int		**visited;
-	int		ret_val;
 
 	visited = create_visited(map.map_arr, (int)map.size_y, (int)map.size_x);
 	if (!visited)
-		return (FAIL);
+		error_exit("Fail to malloc in valid_path.");
 	bfs(visited, map);
-	ret_val = check_path(map, visited);
-	if (ret_val == FAIL)
+	if (check_path(map, visited) == FAIL)
 		error_exit("No valid path in this map.");
 	free_grid(visited, map.size_y);
-	return (ret_val);
 }
 
 int	valid_map(t_map_param *map)
@@ -89,16 +86,15 @@ int	valid_map(t_map_param *map)
 	{
 		if (ft_strlen_ns(map->map_arr[y]) != size_x)
 			return (FAIL);
-		if ((y == 0 || y == size_y - 1) && \
-		cnt_chr_in_str(CHR_WALL, map->map_arr[y]) != size_x)
-			return (FAIL);
+		if (y == 0 || y == size_y - 1)
+			if (cnt_chr_in_strl(CHR_WALL, map->map_arr[y], size_x) != size_x)
+				return (FAIL);
 		if (map->map_arr[y][0] != CHR_WALL)
 			return (FAIL);
 		if (map->map_arr[y][size_x - 1] != CHR_WALL)
 			return (FAIL);
 		y++;
 	}
-	if (valid_path(*map) == FAIL)
-		return (FAIL);
+	valid_path(*map);
 	return (PASS);
 }

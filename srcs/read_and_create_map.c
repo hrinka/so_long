@@ -107,8 +107,14 @@ int	read_and_valid_map(char *path, t_map_param *map)
 	if (map->cnt_item == 0 || map->cnt_others > 1)
 		return (FAIL);
 	if (errno != 0 || create_map_arr(path, map) == FAIL)
-		return (free_map_arr(map, EXIT_FAILURE));
+	{
+		free_map_arr(map, EXIT_FAILURE);
+		error_exit("Fail to create map arr.");
+	}
 	if (errno != 0 || valid_map(map) == FAIL)
-		return (free_map_arr(map, EXIT_FAILURE));
+	{
+		free_map_arr(map, EXIT_FAILURE);
+		error_exit("Invalid map.");
+	}
 	return (PASS);
 }

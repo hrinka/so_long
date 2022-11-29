@@ -49,6 +49,8 @@ int	mlx_destroys(t_mlx_vars *mlx)
 	destroy_img_ptr(mlx);
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	mlx_destroy_display(mlx->mlx);
+	free_map_arr(mlx->map, 0);
+	free(mlx->mlx);
 	return (0);
 }
 

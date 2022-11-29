@@ -12,18 +12,18 @@
 
 #include "./../includes/so_long.h"
 /*
-void	print_map(char **grid, int y, int x, char *str)
+void	print_map(t_map_param map, char *str)
 {
 	size_t	i;
 	size_t	j;
 
 	i = 0;
 	printf("%s\n", str);
-	while (i < y)
+	while (i < map.size_y)
 	{
 		j = 0;
-		while (j < x)
-			printf("%c ", grid[i][j++]);
+		while (j < map.size_x)
+			printf("%c ", map.map_arr[i][j++]);
 		printf("\n");
 		i++;
 	}

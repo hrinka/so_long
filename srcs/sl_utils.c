@@ -20,13 +20,6 @@ int	error_exit(char *msg)
 	exit(EXIT_FAILURE);
 }
 
-void	error_print(char *msg)
-{
-	ft_printf("Error\n%s\n", msg);
-	if (errno != 0)
-		ft_printf(" ** strerror : %s", strerror(errno));
-}
-
 int	free_map_arr(t_map_param *map, int ret_val)
 {
 	size_t	y;
@@ -52,4 +45,22 @@ void	print_step_to_stdout(t_mlx_vars *mlx)
 	}
 	else
 		ft_printf(" Step:%d\n", player_step);
+}
+
+size_t	cnt_chr_in_strl(char c, const char *str, size_t l)
+{
+	size_t	i;
+	size_t	cnt;
+
+	if (!str)
+		return (0);
+	i = 0;
+	cnt = 0;
+	while (i < l && str[i])
+	{
+		if (str[i] == c)
+			cnt++;
+		i++;
+	}
+	return (cnt);
 }
