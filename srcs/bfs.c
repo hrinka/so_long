@@ -47,7 +47,8 @@ void	print_grid(int **grid, int y, int x, char *str)
 	}
 	printf("\n\n");
 }
-
+*/
+/*
 static size_t que_cnt(t_queue *que)
 {
 	size_t	i;

@@ -112,10 +112,8 @@ int		valid_map(t_map_param *map);
 
 // bfs
 void	bfs(int **visited, t_map_param map);
-/*
-void	print_grid(int **grid, int y, int x, char *str);
-void	print_map(char **grid, int y, int x, char *str);
-*/
+//void	print_grid(int **grid, int y, int x, char *str);
+//void	print_map(char **grid, int y, int x, char *str);
 
 // create grid for bfs
 int		**create_visited(char **map_arr, size_t y, size_t x);

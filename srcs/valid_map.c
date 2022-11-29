@@ -20,15 +20,15 @@ static int	check_elems(t_map_param map, int **visited, int i, int j)
 
 	if (map.map_arr[i][j] == CHR_ITEM && visited[i][j] != 1)
 		return (FAIL);
+	path_to_goal = 0;
 	if (map.map_arr[i][j] == CHR_GOAL)
 	{
 		k = 0;
-		path_to_goal = 0;
 		while (k < 4)
 		{
-			if ((0 < i + d[i][0]) && (i + d[i][0] < map.size_y - 1) && \
-					(0 < j + d[i][1]) && (j + d[i][1] < map.size_x - 1) && \
-					visited[i + d[i][0]][j + d[i][1]] == 1)
+			if ((0 < i + d[k][0]) && (i + d[k][0] < map.size_y - 1) && \
+					(0 < j + d[k][1]) && (j + d[k][1] < map.size_x - 1) && \
+					visited[i + d[k][0]][j + d[k][1]] == 1)
 				path_to_goal++;
 			k++;
 		}
@@ -69,7 +69,7 @@ static int	valid_path(t_map_param map)
 	bfs(visited, map);
 	ret_val = check_path(map, visited);
 	if (ret_val == FAIL)
-		error_print("No valid path in this map.");
+		error_exit("No valid path in this map.");
 	free_grid(visited, map.size_y);
 	return (ret_val);
 }
