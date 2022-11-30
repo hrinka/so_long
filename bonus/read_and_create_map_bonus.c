@@ -51,6 +51,8 @@ static void	count_line_elems_b(const char *line, t_map_param *map)
 			map->cnt_start++;
 			map->start_x = i;
 		}
+		else if (line[i] == CHR_ENEMY)
+			map->cnt_enemy++;
 		else if (line[i] == CHR_GOAL)
 			map->cnt_exit++;
 		else if (line[i] != CHR_WALL && line[i] != CHR_EMPTY)
@@ -90,6 +92,7 @@ static void	init_map_param_b(t_map_param *map)
 	map->cnt_item = 0;
 	map->cnt_start = 0;
 	map->cnt_exit = 0;
+	map->cnt_enemy = 0;
 	map->cnt_others = 0;
 	map->size_x = 0;
 	map->size_y = 0;
@@ -104,11 +107,12 @@ int	read_and_valid_map_b(char *path, t_map_param *map)
 		error_exit_b("[Fail] Fail to read file.", NULL);
 	if (map->cnt_start != 1 || map->cnt_exit != 1)
 		error_exit_b("[Invalid map] Map must have 1 'P' and 'E'.", NULL);
-	if (map->cnt_item == 0)
-		error_exit_b("[Invalid map] Map must contain at least 1 'C'.", NULL);
+	if (map->cnt_item == 0 || map->cnt_enemy == 0)
+		error_exit_b(\
+		"[Invalid map] Map must contain at least 1 'C' and 'X'.", NULL);
 	if (map->cnt_others >= 1)
 		error_exit_b(\
-		"[Invalid map] Map has to be constructed by '0', '1', 'C', 'E', 'P'.", \
+		"[Invalid map] Map has to be constructed by '0, 1, C, E, P, X'.", \
 		NULL);
 	if (errno != 0 || create_map_arr_b(path, map) == FAIL)
 	{

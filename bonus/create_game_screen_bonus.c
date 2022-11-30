@@ -12,6 +12,17 @@
 
 #include "./includes/so_long_bonus.h"
 
+int	draw_step_counter(t_mlx_vars *mlx)
+{
+	char	*step;
+
+	step = convert_u_to_base(mlx->player->cnt_step, 10, 0);
+	if (!step)
+		error_exit_b("[Fail] Fail to malloc for reading step count.", mlx);
+	mlx_string_put(mlx->mlx, mlx->win, 10, 15, 0xFFFFFF, "Step:");
+	mlx_string_put(mlx->mlx, mlx->win, 50, 15, 0xFFFFFF, step);
+}
+
 int	draw_game_screen_b(t_mlx_vars *mlx)
 {
 	int		y;
@@ -63,9 +74,9 @@ static void	move_player_and_redraw_b(t_mlx_vars *mlx)
 	const int	next_y = (int)mlx->player->next_y;
 
 	if (pos_x < next_x)
-		mlx->player->is_facing_right = true;
+		mlx->player->is_player_facing_r = true;
 	else if (pos_x > next_x)
-		mlx->player->is_facing_right = false;
+		mlx->player->is_player_facing_r = false;
 	put_img_b(mlx, get_player_img_b(*mlx), next_y, next_x);
 	put_img_b(mlx, get_empty_img_b(*mlx, pos_y, pos_x), pos_y, pos_x);
 	mlx->map->map_arr[next_y][next_x] = CHR_PLAYER;
@@ -96,6 +107,7 @@ void	move_and_judge_finish_b(t_mlx_vars *mlx, int dy, int dx)
 			mlx->player->can_exit = true;
 	}
 	move_player_and_redraw_b(mlx);
+	draw_step_counter(mlx);
 	print_step_to_stdout_b(mlx);
 	if (mlx->is_game_end)
 		close_window_b(mlx);

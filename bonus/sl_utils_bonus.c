@@ -77,3 +77,67 @@ char	*valid_map_path_name_b(char *argv)
 	}
 	return (path);
 }
+
+char	*convert_u_to_base(unsigned long u, int base, int capitals)
+{
+	size_t			len;
+	unsigned long	num;
+	char			*ret_str;
+	const char		*hex_digit = "0123456789abcdef0123456789ABCDEF";
+
+	num = u;
+	len = 0;
+	if (u == 0)
+		len++;
+	while (num > 0)
+	{
+		num /= base;
+		len += 1;
+	}
+	ret_str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!ret_str)
+		return (NULL);
+	ret_str[len] = '\0';
+	while (len--)
+	{
+		ret_str[len] = hex_digit[u % base + capitals];
+		u /= base;
+	}
+	return (ret_str);
+}
+
+void	print_map_b(t_map_param map, char *str)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	ft_printf("\n%s\n", str);
+	while (i < map.size_y)
+	{
+		j = 0;
+		while (j < map.size_x)
+			printf("%c ", map.map_arr[i][j++]);
+		printf("\n");
+		i++;
+	}
+	ft_printf("\n");
+}
+
+//void	print_bfs_b(int **grid, t_map_param map, char *str)
+//{
+//	size_t	i;
+//	size_t	j;
+//
+//	i = 0;
+//	ft_printf("\n%s\n", str);
+//	while (i < map.size_y)
+//	{
+//		j = 0;
+//		while (j < map.size_x)
+//			printf("%d ", grid[i][j++]);
+//		printf("\n");
+//		i++;
+//	}
+//	ft_printf("\n\n");
+//}

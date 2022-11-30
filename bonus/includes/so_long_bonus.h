@@ -22,6 +22,10 @@
 # include "./../../lib/libftprintf/ft_printf.h"
 # include "./../../lib/gnl/get_next_line.h"
 
+# define CNT_PLAYER_IMG	5
+# define CNT_ITEM_IMG	3
+# define CNT_EMPTY_IMG	4
+# define CNT_ENEMY_IMG	7
 # define IMG_PLAYER_R1	"./bonus/img/player/cow_r1.xpm"
 # define IMG_PLAYER_R2	"./bonus/img/player/cow_r2.xpm"
 # define IMG_PLAYER_R3	"./bonus/img/player/cow_r3.xpm"
@@ -41,6 +45,20 @@
 # define IMG_EMPTY_2	"./bonus/img/empty/grass2.xpm"
 # define IMG_EMPTY_3	"./bonus/img/empty/grass3.xpm"
 # define IMG_EMPTY_4	"./bonus/img/empty/grass4.xpm"
+# define IMG_ENEMY_R1	"./bonus/img/enemy/slime_r1.xpm"
+# define IMG_ENEMY_R2	"./bonus/img/enemy/slime_r2.xpm"
+# define IMG_ENEMY_R3	"./bonus/img/enemy/slime_r3.xpm"
+# define IMG_ENEMY_R4	"./bonus/img/enemy/slime_r4.xpm"
+# define IMG_ENEMY_R5	"./bonus/img/enemy/slime_r5.xpm"
+# define IMG_ENEMY_R6	"./bonus/img/enemy/slime_r6.xpm"
+# define IMG_ENEMY_R7	"./bonus/img/enemy/slime_r7.xpm"
+# define IMG_ENEMY_L1	"./bonus/img/enemy/slime_l1.xpm"
+# define IMG_ENEMY_L2	"./bonus/img/enemy/slime_l2.xpm"
+# define IMG_ENEMY_L3	"./bonus/img/enemy/slime_l3.xpm"
+# define IMG_ENEMY_L4	"./bonus/img/enemy/slime_l4.xpm"
+# define IMG_ENEMY_L5	"./bonus/img/enemy/slime_l5.xpm"
+# define IMG_ENEMY_L6	"./bonus/img/enemy/slime_l6.xpm"
+# define IMG_ENEMY_L7	"./bonus/img/enemy/slime_l7.xpm"
 
 # define EVENT_KEY_PRESS	2
 # define EVENT_DESTROY		33
@@ -56,17 +74,25 @@
 # define CHR_ITEM	'C'
 # define CHR_PLAYER	'P'
 # define CHR_GOAL	'E'
+# define CHR_ENEMY	'X'
 
 # define PASS		1
 # define FAIL		0
 
 # define MAP_MIN	2
 # define MAP_MAX	66
-
 # define IMAGE_SIZE 30
+# define Y_OFFSET	20
 
 # define SPACES		"\t\n\v\f\r "
 # define EXTENSION	".ber"
+
+typedef struct s_enemy
+{
+	int		pos_x;
+	int		pos_y;
+	int		flame;
+}			t_enemy;
 
 typedef struct s_player
 {
@@ -77,8 +103,11 @@ typedef struct s_player
 	size_t	cnt_step;
 	size_t	cnt_item;
 	bool	can_exit;
-	bool	is_facing_right;
+	bool	is_player_facing_r;
+	bool	is_enemy_facing_r;
 	bool	flg_get_item;
+	bool	is_game_over;
+	t_enemy	*enemy;
 }			t_player;
 
 typedef struct s_map_param
@@ -87,6 +116,7 @@ typedef struct s_map_param
 	size_t	cnt_item;
 	size_t	cnt_start;
 	size_t	cnt_exit;
+	size_t	cnt_enemy;
 	size_t	cnt_others;
 	size_t	size_x;
 	size_t	size_y;
@@ -96,39 +126,12 @@ typedef struct s_map_param
 
 typedef struct s_img //TODO: 配列化, mandatory 簡略化
 {
-	void	*player_right1;
-	void	*player_right2;
-	void	*player_right3;
-	void	*player_right4;
-	void	*player_right5;
-	void	*player_left1;
-	void	*player_left2;
-	void	*player_left3;
-	void	*player_left4;
-	void	*player_left5;
 	void	*goal;
 	void	*wall;
-	void	*empty1;
-	void	*empty2;
-	void	*empty3;
-	void	*empty4;
-	void	*item1;
-	void	*item2;
-	void	*item3;
-	void	*enemy_right1;
-	void	*enemy_right2;
-	void	*enemy_right3;
-	void	*enemy_right4;
-	void	*enemy_right5;
-	void	*enemy_right6;
-	void	*enemy_right7;
-	void	*enemy_left1;
-	void	*enemy_left2;
-	void	*enemy_left3;
-	void	*enemy_left4;
-	void	*enemy_left5;
-	void	*enemy_left6;
-	void	*enemy_left7;
+	void	**players;
+	void	**enemies;
+	void	**empties;
+	void	**items;
 }			t_img;
 
 typedef struct s_mlx_vars
@@ -139,7 +142,9 @@ typedef struct s_mlx_vars
 	t_map_param	*map;
 	t_img		*img;
 	bool		is_game_end;
-	int			animation_cnt;
+	size_t		player_animation_cnt;
+	size_t		enemy_animation_cnt;
+	int			enemy_move_no;
 	int			player_flame;
 }				t_mlx_vars;
 
@@ -158,12 +163,17 @@ int		valid_map_b(t_map_param *map);
 
 // bfs
 void	bfs_b(int **visited, t_map_param map);
-//void	print_bfs_b(int **grid, int y, int x, char *str);
-//void	print_map_b(t_map_param map, char *str);
 
 // create grid for bfs
 int		**create_visited_b(char **map_arr, size_t y, size_t x);
 void	free_grid_b(int **grid, size_t y);
+
+// init map img
+int		init_map_img_b(t_mlx_vars mlx, t_img *img);
+
+// mlx img utils
+void	destroy_img_ptr_b(t_mlx_vars *mlx);
+void	free_alloc_img_b(t_img *img);
 
 // get img
 void	*get_player_img_b(t_mlx_vars mlx);
@@ -181,7 +191,9 @@ int		check_to_can_move_next_pos_b(t_mlx_vars *mlx, int dy, int dx);
 void	mlx_hooks_b(t_mlx_vars *mlx);
 
 // mlx animation
-int		run_animation_b(t_mlx_vars *mlx);
+int		player_animation_b(t_mlx_vars *mlx);
+int		enemy_animation_b(t_mlx_vars *mlx);
+int		animation_b(t_mlx_vars *mlx);
 
 // mlx utils
 void	*xpm_to_img_ptr_b(t_mlx_vars mlx, char *filepath);
@@ -194,5 +206,7 @@ void	print_step_to_stdout_b(t_mlx_vars *mlx);
 int		free_map_arr_b(t_map_param *map, int ret_val);
 int		error_exit_b(char *msg, t_mlx_vars *mlx);
 char	*valid_map_path_name_b(char *argv);
-
+char	*convert_u_to_base(unsigned long u, int base, int capitals);
+void	print_bfs_b(int **grid, int y, int x, char *str);
+void	print_map_b(t_map_param map, char *str);
 #endif

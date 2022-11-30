@@ -12,43 +12,70 @@
 
 #include "./includes/so_long_bonus.h"
 
-static void	*get_player_animation_img_b(t_mlx_vars mlx, size_t move_cnt)
+static void	*get_player_animation_img_b(t_mlx_vars mlx, size_t flame)
 {
-	if (mlx.player->is_facing_right)
-	{
-		if (move_cnt % 5 == 0)
-			return (mlx.img->player_right1);
-		else if (move_cnt % 5 == 1)
-			return (mlx.img->player_right2);
-		else if (move_cnt % 5 == 2)
-			return (mlx.img->player_right3);
-		else if (move_cnt % 5 == 3)
-			return (mlx.img->player_right4);
-		return (mlx.img->player_right5);
-	}
-	if (move_cnt % 5 == 0)
-		return (mlx.img->player_left1);
-	else if (move_cnt % 5 == 1)
-		return (mlx.img->player_left2);
-	else if (move_cnt % 5 == 2)
-		return (mlx.img->player_left3);
-	else if (move_cnt % 5 == 3)
-		return (mlx.img->player_left4);
-	return (mlx.img->player_left5);
+	if (mlx.player->is_player_facing_r)
+		return (mlx.img->players[flame]);
+	return (mlx.img->players[flame + CNT_PLAYER_IMG]);
 }
 
-int	run_animation_b(t_mlx_vars *mlx)
+static void	*get_enemy_animation_img_b(t_mlx_vars mlx, size_t flame)
+{
+	if (mlx.player->is_enemy_facing_r)
+		return (mlx.img->enemies[flame]);
+	return (mlx.img->enemies[flame + CNT_ENEMY_IMG]);
+}
+
+int animation_b(t_mlx_vars *mlx)
+{
+	const int	player_flame = 15000;
+	const int	enemy_flame = 4000;
+
+	mlx->player_animation_cnt++;
+	mlx->enemy_animation_cnt++;
+	if (mlx->player_animation_cnt == player_flame)
+		player_animation_b(mlx);
+	if (mlx->enemy_animation_cnt == enemy_flame)
+		enemy_animation_b(mlx);
+	return (0);
+}
+
+int	player_animation_b(t_mlx_vars *mlx)
 {
 	const size_t	y = mlx->player->pos_y;
 	const size_t	x = mlx->player->pos_x;
 
-	mlx->animation_cnt++;
-	if (mlx->animation_cnt == 15000)
+	put_img_b(mlx, get_player_animation_img_b(\
+	*mlx, mlx->player_flame % CNT_PLAYER_IMG), y, x);
+	mlx->player_flame++;
+	mlx->player_flame %= CNT_PLAYER_IMG;
+	mlx->player_animation_cnt = 0;
+	return (0);
+}
+
+int	enemy_animation_b(t_mlx_vars *mlx)
+{
+	int	enemy_no;
+	int y;
+	int x;
+	int flame;
+
+	enemy_no = 0;
+	while (enemy_no < mlx->map->cnt_enemy)
 	{
-		put_img_b(mlx, get_player_animation_img_b(\
-		*mlx, mlx->player_flame), y, x);
-		mlx->animation_cnt = 0;
-		mlx->player_flame++;
+		if (enemy_no % 2 == mlx->enemy_move_no)
+		{
+			y = mlx->player->enemy[enemy_no].pos_y;
+			x = mlx->player->enemy[enemy_no].pos_x;
+			printf("no:%d, (y, x)=(%d, %d)\n",enemy_no, y, x);
+			flame = mlx->player->enemy[enemy_no].flame % CNT_ENEMY_IMG;
+			put_img_b(mlx, get_enemy_animation_img_b(*mlx, flame), y, x);
+			mlx->player->enemy[enemy_no].flame++;
+			mlx->player->enemy[enemy_no].flame %= CNT_EMPTY_IMG;
+		}
+		enemy_no++;
 	}
+	mlx->enemy_animation_cnt = 0;
+	mlx->enemy_move_no = (mlx->enemy_move_no + 1) % 2;
 	return (0);
 }

@@ -76,6 +76,9 @@ BONUS_SRCS		= main_bonus.c \
 				  mlx_hooks_bonus.c \
 				  mlx_animation_bonus.c \
 				  get_map_img_bonus.c \
+				  init_map_img_bonus.c \
+				  mlx_img_utils_bonus.c \
+				  init_map_img_bonus.c \
 
 BONUS_OBJ_DIR	= ./bonus/objs
 BONUS_OBJS		= $(addprefix $(BONUS_OBJ_DIR)/, $(BONUS_SRCS:%.c=%.o))
@@ -145,6 +148,8 @@ bonus_fclean:	bonus_clean
 	@make fclean -C $(LIBFT_DIR)
 	@make fclean -C $(LIBFTPRINTF_DIR)
 	@make fclean -C $(LIBGNL_DIR)
+
+bonus_re:		bonus_fclean bonus
 
 test:
 	make all WITH_TEST=1

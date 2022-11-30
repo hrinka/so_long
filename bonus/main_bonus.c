@@ -18,33 +18,7 @@ static void	destructor(void)
 	system("leaks -q so_long_bonus");
 }
 
-static int	init_map_img_b(t_mlx_vars mlx, t_img *img)
-{
-	img->player_right1 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_R1);
-	img->player_right2 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_R2);
-	img->player_right3 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_R3);
-	img->player_right4 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_R4);
-	img->player_right5 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_R5);
-	img->player_left1 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_L1);
-	img->player_left2 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_L2);
-	img->player_left3 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_L3);
-	img->player_left4 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_L4);
-	img->player_left5 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_L5);
-	img->goal = xpm_to_img_ptr_b(mlx, IMG_GOAL);
-	img->wall = xpm_to_img_ptr_b(mlx, IMG_WALL);
-	img->item1 = xpm_to_img_ptr_b(mlx, IMG_ITEM_1);
-	img->item2 = xpm_to_img_ptr_b(mlx, IMG_ITEM_2);
-	img->item3 = xpm_to_img_ptr_b(mlx, IMG_ITEM_3);
-	img->empty1 = xpm_to_img_ptr_b(mlx, IMG_EMPTY_1);
-	img->empty2 = xpm_to_img_ptr_b(mlx, IMG_EMPTY_2);
-	img->empty3 = xpm_to_img_ptr_b(mlx, IMG_EMPTY_3);
-	img->empty4 = xpm_to_img_ptr_b(mlx, IMG_EMPTY_4);
-	if (null_check_for_map_img_b(img) == FAIL)
-		return (FAIL);
-	return (PASS);
-}
-
-static void	init_player_b(t_player *player, t_map_param map)
+static void	init_t_player_b(t_player *player, t_map_param map)
 {
 	player->pos_x = map.start_x;
 	player->pos_y = map.start_y;
@@ -53,14 +27,46 @@ static void	init_player_b(t_player *player, t_map_param map)
 	player->cnt_step = 0;
 	player->cnt_item = 0;
 	player->can_exit = false;
-	player->is_facing_right = true;
+	player->is_player_facing_r = true;
+	player->is_enemy_facing_r = true;
 	player->flg_get_item = false;
+}
+
+int	get_enemy_coordinate(t_player *player, t_map_param *map)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	player->enemy = (t_enemy *)ft_calloc(sizeof(t_enemy), map->cnt_enemy + 1);
+	if (!player->enemy)
+		return (FAIL);
+	i = 0;
+	k = 0;
+	while (i < map->size_y)
+	{
+		j = 0;
+		while (j < map->size_x)
+		{
+			if (map->map_arr[i][j] == CHR_ENEMY)
+			{
+				player->enemy[k].pos_y = i;
+				player->enemy[k].pos_x = j;
+				player->enemy[k].flame = 0;
+				printf("get no:%d, (y, x)=(%d, %d)\n", k, i, j);
+				k++;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (PASS);
 }
 
 static void	init_mlx_ptr_b(t_mlx_vars *x, t_map_param *m, t_img *i, t_player *p)
 {
 	const int	size_x = (int)m->size_x * IMAGE_SIZE;
-	const int	size_y = (int)m->size_y * IMAGE_SIZE;
+	const int	size_y = (int)m->size_y * IMAGE_SIZE + Y_OFFSET;
 
 	x->mlx = mlx_init();
 	if (!x->mlx)
@@ -73,10 +79,14 @@ static void	init_mlx_ptr_b(t_mlx_vars *x, t_map_param *m, t_img *i, t_player *p)
 	x->player = p;
 	if (init_map_img_b(*x, i) == FAIL)
 		error_exit_b("[Fail] Fail to get map img.", NULL);
-	init_player_b(p, *m);
+	init_t_player_b(p, *m);
 	x->is_game_end = false;
-	x->animation_cnt = 0;
+	x->player_animation_cnt = 0;
+	x->enemy_animation_cnt = 0;
 	x->player_flame = 0;
+	x->enemy_move_no = 0;
+	if (get_enemy_coordinate(p, m) == FAIL)
+		error_exit_b("[Fail] Fail to get enemy's info.", NULL);
 }
 
 int	main(int argc, char *argv[])

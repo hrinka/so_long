@@ -26,31 +26,7 @@ void	*xpm_to_img_ptr_b(t_mlx_vars mlx, char *filepath)
 void	put_img_b(t_mlx_vars *mlx, void *img_ptr, size_t y, size_t x)
 {
 	mlx_put_image_to_window(mlx->mlx, mlx->win, \
-	img_ptr, (int)x * IMAGE_SIZE, (int)y * IMAGE_SIZE);
-}
-
-static int	destroy_img_ptr_b(t_mlx_vars *mlx)
-{
-	mlx_destroy_image(mlx->mlx, mlx->img->player_right1);
-	mlx_destroy_image(mlx->mlx, mlx->img->player_right2);
-	mlx_destroy_image(mlx->mlx, mlx->img->player_right3);
-	mlx_destroy_image(mlx->mlx, mlx->img->player_right4);
-	mlx_destroy_image(mlx->mlx, mlx->img->player_right5);
-	mlx_destroy_image(mlx->mlx, mlx->img->player_left1);
-	mlx_destroy_image(mlx->mlx, mlx->img->player_left2);
-	mlx_destroy_image(mlx->mlx, mlx->img->player_left3);
-	mlx_destroy_image(mlx->mlx, mlx->img->player_left4);
-	mlx_destroy_image(mlx->mlx, mlx->img->player_left5);
-	mlx_destroy_image(mlx->mlx, mlx->img->goal);
-	mlx_destroy_image(mlx->mlx, mlx->img->wall);
-	mlx_destroy_image(mlx->mlx, mlx->img->item1);
-	mlx_destroy_image(mlx->mlx, mlx->img->item2);
-	mlx_destroy_image(mlx->mlx, mlx->img->item3);
-	mlx_destroy_image(mlx->mlx, mlx->img->empty1);
-	mlx_destroy_image(mlx->mlx, mlx->img->empty2);
-	mlx_destroy_image(mlx->mlx, mlx->img->empty3);
-	mlx_destroy_image(mlx->mlx, mlx->img->empty4);
-	return (0);
+	img_ptr, (int)x * IMAGE_SIZE, (int)y * IMAGE_SIZE + Y_OFFSET);
 }
 
 int	destroy_mlx_and_map_b(t_mlx_vars *mlx)
@@ -62,6 +38,8 @@ int	destroy_mlx_and_map_b(t_mlx_vars *mlx)
 	if (mlx->mlx)
 		mlx_destroy_display(mlx->mlx);
 	free_map_arr_b(mlx->map, 0);
+	free_alloc_img_b(mlx->img);
+	free(mlx->player->enemy);
 	free(mlx->mlx);
 	return (0);
 }
