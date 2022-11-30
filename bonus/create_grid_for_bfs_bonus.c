@@ -62,7 +62,7 @@ int	**create_bfs_grid_b(char **map_arr, size_t y, size_t x, bool for_enemy)
 			if (map_arr[i][j] == CHR_WALL || map_arr[i][j] == CHR_GOAL)
 				bfs_grid[i][j] = -1;
 			if (for_enemy)
-				if (map_arr[i][j] == CHR_ITEM || map_arr[i][j] == CHR_ENEMY)
+				if (map_arr[i][j] == CHR_ITEM)
 					bfs_grid[i][j] = -1;
 			j++;
 		}

@@ -14,7 +14,7 @@
 
 static int	init_player_img_b(t_mlx_vars mlx, t_img *img)
 {
-	img->players = (void **)ft_calloc(sizeof(void *), CNT_PLAYER_IMG * 2 + 1);
+	img->players = (void **)ft_calloc(sizeof(void *), CNT_PLAYER_FLM * 2 + 1);
 	if (!img->players)
 		return (FAIL);
 	img->players[0] = xpm_to_img_ptr_b(mlx, IMG_PLAYER_R1);
@@ -33,7 +33,7 @@ static int	init_player_img_b(t_mlx_vars mlx, t_img *img)
 
 static int	init_enemy_img_b(t_mlx_vars mlx, t_img *img)
 {
-	img->enemies = (void **)ft_calloc(sizeof(void *), CNT_ENEMY_IMG * 2 + 1);
+	img->enemies = (void **)ft_calloc(sizeof(void *), CNT_ENEMY_FLM * 2 + 1);
 	if (!img->enemies)
 		return (FAIL);
 	img->enemies[0] = xpm_to_img_ptr_b(mlx, IMG_ENEMY_R1);
@@ -56,8 +56,8 @@ static int	init_enemy_img_b(t_mlx_vars mlx, t_img *img)
 
 static int	init_empties_and_items_img_b(t_mlx_vars mlx, t_img *img)
 {
-	img->empties = (void **)ft_calloc(sizeof(void *), CNT_EMPTY_IMG + 1);
-	img->items = (void **)ft_calloc(sizeof(void *), CNT_ITEM_IMG + 1);
+	img->empties = (void **)ft_calloc(sizeof(void *), CNT_EMPTY + 1);
+	img->items = (void **)ft_calloc(sizeof(void *), CNT_ITEM + 1);
 	if (!img->empties || !img->items)
 		return (FAIL);
 	img->items[0] = xpm_to_img_ptr_b(mlx, IMG_ITEM_1);
@@ -78,19 +78,19 @@ int	null_check_for_map_img_b(t_img *img)
 
 	i = 0;
 	if (img->players)
-		while (i < CNT_PLAYER_IMG * 2)
+		while (i < CNT_PLAYER_FLM * 2)
 			if (!img->players[i++])
 				return (FAIL);
 	if (img->enemies)
-		while (i < CNT_ENEMY_IMG * 2)
+		while (i < CNT_ENEMY_FLM * 2)
 			if (!img->enemies[i++])
 				return (FAIL);
 	if (img->empties)
-		while (i < CNT_EMPTY_IMG)
+		while (i < CNT_EMPTY)
 			if (!img->empties[i++])
 				return (FAIL);
 	if (img->items)
-		while (i < CNT_ITEM_IMG)
+		while (i < CNT_ITEM)
 			if (!img->items[i++])
 				return (FAIL);
 	if (!img->wall || !img->goal)
@@ -111,43 +111,3 @@ int	init_map_img_b(t_mlx_vars mlx, t_img *img)
 	}
 	return (PASS);
 }
-
-//int	init_map_img_b(t_mlx_vars mlx, t_img *img)
-//{
-//	img->player_right1 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_R1);
-//	img->player_right2 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_R2);
-//	img->player_right3 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_R3);
-//	img->player_right4 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_R4);
-//	img->player_right5 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_R5);
-//	img->player_left1 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_L1);
-//	img->player_left2 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_L2);
-//	img->player_left3 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_L3);
-//	img->player_left4 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_L4);
-//	img->player_left5 = xpm_to_img_ptr_b(mlx, IMG_PLAYER_L5);
-//	img->enemy_right1 = xpm_to_img_ptr_b(mlx, IMG_ENEMY_R1);
-//	img->enemy_right2 = xpm_to_img_ptr_b(mlx, IMG_ENEMY_R2);
-//	img->enemy_right3 = xpm_to_img_ptr_b(mlx, IMG_ENEMY_R3);
-//	img->enemy_right4 = xpm_to_img_ptr_b(mlx, IMG_ENEMY_R4);
-//	img->enemy_right5 = xpm_to_img_ptr_b(mlx, IMG_ENEMY_R5);
-//	img->enemy_right6 = xpm_to_img_ptr_b(mlx, IMG_ENEMY_R6);
-//	img->enemy_right7 = xpm_to_img_ptr_b(mlx, IMG_ENEMY_R7);
-//	img->enemy_left1 = xpm_to_img_ptr_b(mlx, IMG_ENEMY_L1);
-//	img->enemy_left2 = xpm_to_img_ptr_b(mlx, IMG_ENEMY_L2);
-//	img->enemy_left3 = xpm_to_img_ptr_b(mlx, IMG_ENEMY_L3);
-//	img->enemy_left4 = xpm_to_img_ptr_b(mlx, IMG_ENEMY_L4);
-//	img->enemy_left5 = xpm_to_img_ptr_b(mlx, IMG_ENEMY_L5);
-//	img->enemy_left6 = xpm_to_img_ptr_b(mlx, IMG_ENEMY_L6);
-//	img->enemy_left7 = xpm_to_img_ptr_b(mlx, IMG_ENEMY_L7);
-//	img->goal = xpm_to_img_ptr_b(mlx, IMG_GOAL);
-//	img->wall = xpm_to_img_ptr_b(mlx, IMG_WALL);
-//	img->item1 = xpm_to_img_ptr_b(mlx, IMG_ITEM_1);
-//	img->item2 = xpm_to_img_ptr_b(mlx, IMG_ITEM_2);
-//	img->item3 = xpm_to_img_ptr_b(mlx, IMG_ITEM_3);
-//	img->empty1 = xpm_to_img_ptr_b(mlx, IMG_EMPTY_1);
-//	img->empty2 = xpm_to_img_ptr_b(mlx, IMG_EMPTY_2);
-//	img->empty3 = xpm_to_img_ptr_b(mlx, IMG_EMPTY_3);
-//	img->empty4 = xpm_to_img_ptr_b(mlx, IMG_EMPTY_4);
-//	if (null_check_for_map_img_b(img) == FAIL)
-//		return (FAIL);
-//	return (PASS);
-//}

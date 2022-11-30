@@ -79,12 +79,12 @@ static void	move_player_and_redraw_b(t_mlx_vars *mlx)
 		mlx->player->is_player_facing_r = false;
 	put_img_b(mlx, get_player_img_b(*mlx), next_y, next_x);
 	put_img_b(mlx, get_empty_img_b(*mlx, pos_y, pos_x), pos_y, pos_x);
+	if (mlx->map->map_arr[next_y][next_x] == CHR_ENEMY)
+		mlx->is_game_over = true;
 	mlx->map->map_arr[next_y][next_x] = CHR_PLAYER;
 	mlx->map->map_arr[pos_y][pos_x] = CHR_EMPTY;
 	mlx->player->pos_x = next_x;
 	mlx->player->pos_y = next_y;
-	if (mlx->map->map_arr[next_y][next_x] == CHR_ENEMY)
-		mlx->is_game_over = true;
 }
 
 void	player_move_and_check_fin(t_mlx_vars *mlx, int dy, int dx)

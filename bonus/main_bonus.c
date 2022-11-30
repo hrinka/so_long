@@ -37,7 +37,7 @@ static void	set_enem_param(t_player *player, int i, int j, int k)
 	player->enemy[k].pos_x = j;
 	player->enemy[k].ny = j;
 	player->enemy[k].nx = i;
-	player->enemy[k].flame = 0;
+	player->enemy[k].anime_flame = 0;
 	player->enemy[k].is_enemy_facing_r = true;
 }
 

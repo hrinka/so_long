@@ -22,10 +22,12 @@
 # include "./../../lib/libftprintf/ft_printf.h"
 # include "./../../lib/gnl/get_next_line.h"
 
-# define CNT_PLAYER_IMG	5
-# define CNT_ITEM_IMG	3
-# define CNT_EMPTY_IMG	4
-# define CNT_ENEMY_IMG	7
+// map image
+# define CNT_PLAYER_FLM	5
+# define CNT_ITEM		3
+# define CNT_EMPTY		4
+# define CNT_ENEMY_FLM	7
+
 # define IMG_PLAYER_R1	"./bonus/img/player/cow_r1.xpm"
 # define IMG_PLAYER_R2	"./bonus/img/player/cow_r2.xpm"
 # define IMG_PLAYER_R3	"./bonus/img/player/cow_r3.xpm"
@@ -60,6 +62,7 @@
 # define IMG_ENEMY_L6	"./bonus/img/enemy/slime_l6.xpm"
 # define IMG_ENEMY_L7	"./bonus/img/enemy/slime_l7.xpm"
 
+// key event
 # define EVENT_KEY_PRESS	2
 # define EVENT_DESTROY		33
 
@@ -69,6 +72,7 @@
 # define KEY_RIGHT	0xff53
 # define KEY_DOWN	0xff54
 
+// for map file
 # define CHR_WALL	'1'
 # define CHR_EMPTY	'0'
 # define CHR_ITEM	'C'
@@ -76,24 +80,26 @@
 # define CHR_GOAL	'E'
 # define CHR_ENEMY	'X'
 
-# define PASS		1
-# define FAIL		0
-
 # define MAP_MIN	2
 # define MAP_MAX	66
 # define IMAGE_SIZE 30
 # define Y_OFFSET	20
 
 # define SPACES		"\t\n\v\f\r "
-# define EXTENSION	".ber"
+
+# define FILE_EXTENSION	".ber"
+
+// for func
+# define PASS	1
+# define FAIL	0
 
 typedef struct s_enemy
 {
 	int		pos_x;
 	int		pos_y;
-	int 	nx;
-	int 	ny;
-	int		flame;
+	int		nx;
+	int		ny;
+	int		anime_flame;
 	bool	is_enemy_facing_r;
 }			t_enemy;
 
@@ -125,7 +131,7 @@ typedef struct s_map_param
 	size_t	start_y;
 }			t_map_param;
 
-typedef struct s_img //TODO: 配列化, mandatory 簡略化
+typedef struct s_img
 {
 	void	*goal;
 	void	*wall;
@@ -160,6 +166,13 @@ typedef struct s_queue
 	struct s_queue	*next;
 }					t_queue;
 
+typedef struct s_bfs
+{
+	int	x;
+	int	y;
+	int	cnt;
+}		t_bfs;
+
 // read and create map
 int		read_and_valid_map_b(char *path, t_map_param *map);
 
@@ -167,7 +180,7 @@ int		read_and_valid_map_b(char *path, t_map_param *map);
 int		valid_map_b(t_map_param *map);
 
 // bfs
-void	bfs_b(int **bfs_grid, t_map_param map, int sy, int sx);
+void	bfs_b(int **bfs_grid, t_map_param map, int start_y, int start_x);
 
 // create grid for bfs
 int		**create_bfs_grid_b(char **map_arr, size_t y, size_t x, bool for_enemy);

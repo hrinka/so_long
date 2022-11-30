@@ -54,7 +54,7 @@
 # define IMAGE_SIZE 30
 
 # define SPACES		"\t\n\v\f\r "
-# define EXTENSION	".ber"
+# define FILE_EXTENSION	".ber"
 
 typedef struct s_player
 {

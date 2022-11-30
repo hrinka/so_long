@@ -54,7 +54,7 @@ char	*valid_map_path_name(char *argv)
 	char			*path;
 	char			*filename;
 	size_t			len;
-	const size_t	ber_len = ft_strlen_ns(EXTENSION);
+	const size_t	ber_len = ft_strlen_ns(FILE_EXTENSION);
 
 	path = ft_strtrim(argv, SPACES);
 	if (!path)
@@ -70,7 +70,7 @@ char	*valid_map_path_name(char *argv)
 		free(path);
 		return (NULL);
 	}
-	if (ft_strncmp(&filename[len - ber_len], EXTENSION, ber_len) != 0)
+	if (ft_strncmp(&filename[len - ber_len], FILE_EXTENSION, ber_len) != 0)
 	{
 		free(path);
 		return (NULL);
@@ -89,8 +89,8 @@ void	print_map(t_map_param map, char *str)
 	{
 		j = 0;
 		while (j < map.size_x)
-			printf("%c ", map.map_arr[i][j++]);
-		printf("\n");
+			ft_printf("%c ", map.map_arr[i][j++]);
+		ft_printf("\n");
 		i++;
 	}
 	ft_printf("\n");
@@ -107,8 +107,8 @@ void	print_bfs(int **grid, t_map_param map, char *str)
 	{
 		j = 0;
 		while (j < map.size_x)
-			printf("%d ", grid[i][j++]);
-		printf("\n");
+			ft_printf("%d ", grid[i][j++]);
+		ft_printf("\n");
 		i++;
 	}
 	ft_printf("\n\n");
