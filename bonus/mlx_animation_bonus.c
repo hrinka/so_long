@@ -47,47 +47,56 @@ static int	enemy_animation_b(t_mlx_vars *mlx)
 	enemy_no = 0;
 	while (enemy_no < mlx->map->cnt_enemy)
 	{
+		if (enemy_no % 2 == mlx->enemy_anime_no)
+		{
+			y = mlx->player->enemy[enemy_no].pos_y;
+			x = mlx->player->enemy[enemy_no].pos_x;
+			flame = mlx->player->enemy[enemy_no].flame % CNT_ENEMY_IMG;
+			is_right = mlx->player->enemy[enemy_no].is_enemy_facing_r;
+			put_img_b(mlx, get_enemy_anime_img_b(*mlx, flame, is_right), y, x);
+			mlx->player->enemy[enemy_no].flame++;
+			mlx->player->enemy[enemy_no].flame %= CNT_EMPTY_IMG;
+		}
 		enemy_no++;
-		if (enemy_no % 2 != mlx->enemy_anime_no)
-			continue ;
-		y = mlx->player->enemy[enemy_no].pos_y;
-		x = mlx->player->enemy[enemy_no].pos_x;
-		flame = mlx->player->enemy[enemy_no].flame % CNT_ENEMY_IMG;
-		is_right = mlx->player->enemy[enemy_no].is_enemy_facing_r;
-		put_img_b(mlx, get_enemy_anime_img_b(*mlx, flame, is_right), y, x);
-		mlx->player->enemy[enemy_no].flame++;
-		mlx->player->enemy[enemy_no].flame %= CNT_EMPTY_IMG;
 	}
 	return (0);
 }
 
 int	animation_b(t_mlx_vars *mlx)
 {
-	const int	player_anime_flame = 15000;
-	const int	enemy_anime_flame = 4000;
-	const int	enemy_move_flame = 1000000;
+	const size_t	player_anime_fps = 15000;
+	const size_t	enemy_anime_fps = 4000;
+	const size_t	enemy_move_fps = 100000;
+	static size_t	print;
+
 
 	mlx->player_anime_flame++;
 	mlx->enemy_anime_flame++;
 	mlx->enemy_move_flame++;
-	if (mlx->player_anime_flame == player_anime_flame)
+	print++;
+	if (mlx->player_anime_flame == player_anime_fps)
 	{
 		player_animation_b(mlx);
 		mlx->player_flame++;
 		mlx->player_flame %= CNT_PLAYER_IMG;
 		mlx->player_anime_flame = 0;
 	}
-	if (mlx->enemy_anime_flame == enemy_anime_flame)
+	if (mlx->enemy_anime_flame == enemy_anime_fps)
 	{
 		enemy_animation_b(mlx);
 		mlx->enemy_anime_flame = 0;
 		mlx->enemy_anime_no = (mlx->enemy_anime_no + 1) % 2;
 	}
-	if (mlx->enemy_anime_flame == enemy_move_flame)
+	if (mlx->enemy_move_flame == enemy_move_fps)
 	{
-		enemy_move_and_check_fin(mlx, *mlx->map);
+		print_map_b(*mlx->map, "animation");
+		printf("move flame:%zu, move_no:%d\n", enemy_move_fps, mlx->enemy_move_no);
+		enemy_move_and_check_fin(mlx, mlx->map);
 		mlx->enemy_move_flame = 0;
 		mlx->enemy_move_no = (mlx->enemy_move_no + 1) % 2;
 	}
+//	printf("print:%zu\n", print);
+//	if (print % 100000 == 0)
+//		print_map_b(*mlx->map, "animation");
 	return (0);
 }

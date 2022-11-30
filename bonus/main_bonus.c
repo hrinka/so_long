@@ -35,6 +35,8 @@ static void	set_enem_param(t_player *player, int i, int j, int k)
 {
 	player->enemy[k].pos_y = i;
 	player->enemy[k].pos_x = j;
+	player->enemy[k].ny = j;
+	player->enemy[k].nx = i;
 	player->enemy[k].flame = 0;
 	player->enemy[k].is_enemy_facing_r = true;
 }
@@ -116,6 +118,7 @@ int	main(int argc, char *argv[])
 	if (draw_game_screen_b(&mlx) == FAIL)
 		error_exit_b("Can't find img_ptr.", &mlx);
 	ft_printf("[GAME START] There are %d items !!\n", map.cnt_item);
+	print_map_b(*mlx.map, "main");
 	mlx_hooks_b(&mlx);
 	mlx_loop(mlx.mlx);
 	destroy_mlx_and_map_b(&mlx);

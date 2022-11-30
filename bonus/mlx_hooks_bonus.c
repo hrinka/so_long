@@ -32,7 +32,7 @@ void	mlx_hooks_b(t_mlx_vars *mlx)
 {
 	const int	mask_key_press = 1L << 0;
 	const int	mask_button_press = 1L << 17;
-
+	print_map_b(*mlx->map, "keyhook");
 	mlx_hook(mlx->win, EVENT_KEY_PRESS, mask_key_press, key_hook_b, mlx);
 	mlx_hook(mlx->win, EVENT_DESTROY, mask_button_press, close_window_b, mlx);
 	mlx_expose_hook(mlx->win, draw_game_screen_b, mlx);

@@ -83,6 +83,8 @@ static void	move_player_and_redraw_b(t_mlx_vars *mlx)
 	mlx->map->map_arr[pos_y][pos_x] = CHR_EMPTY;
 	mlx->player->pos_x = next_x;
 	mlx->player->pos_y = next_y;
+	if (mlx->map->map_arr[next_y][next_x] == CHR_ENEMY)
+		mlx->is_game_over = true;
 }
 
 void	player_move_and_check_fin(t_mlx_vars *mlx, int dy, int dx)
@@ -109,6 +111,6 @@ void	player_move_and_check_fin(t_mlx_vars *mlx, int dy, int dx)
 	move_player_and_redraw_b(mlx);
 	draw_step_counter(mlx);
 	print_step_to_stdout_b(mlx);
-	if (mlx->is_game_end)
+	if (mlx->is_game_end || mlx->is_game_over)
 		close_window_b(mlx);
 }

@@ -19,9 +19,12 @@ void	*get_player_img_b(t_mlx_vars mlx)
 	return (mlx.img->players[0 + CNT_PLAYER_IMG]);
 }
 
-void	*get_enemy_img_b(t_mlx_vars mlx)
+void	*get_enemy_img_b(t_mlx_vars mlx, size_t flame, bool right)
 {
-	return (mlx.img->enemies[0]);
+	flame %= CNT_ENEMY_IMG;
+	if (right)
+		return (mlx.img->enemies[flame]);
+	return (mlx.img->enemies[flame + CNT_ENEMY_IMG]);
 }
 
 void	*get_empty_img_b(t_mlx_vars mlx, size_t y, size_t x)
@@ -53,6 +56,6 @@ void	*get_img_ptr_b(t_mlx_vars *mlx, size_t y, size_t x)
 	if (mlx->map->map_arr[y][x] == CHR_GOAL)
 		return (mlx->img->goal);
 	if (mlx->map->map_arr[y][x] == CHR_ENEMY)
-		return (get_enemy_img_b(*mlx));
+		return (get_enemy_img_b(*mlx, true, 0));
 	return (NULL);
 }

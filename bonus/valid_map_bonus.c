@@ -18,7 +18,7 @@ static int	check_elems_b(t_map_param map, int **bfs_grid, int i, int j)
 	int			path_to_goal;
 	const int	d[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
-	if (map.map_arr[i][j] == CHR_ITEM && bfs_grid[i][j] != 1)
+	if (map.map_arr[i][j] == CHR_ITEM && bfs_grid[i][j] == 0)
 		return (FAIL);
 	path_to_goal = 0;
 	if (map.map_arr[i][j] == CHR_GOAL)
@@ -28,7 +28,7 @@ static int	check_elems_b(t_map_param map, int **bfs_grid, int i, int j)
 		{
 			if ((0 < i + d[k][0]) && (i + d[k][0] < map.size_y - 1) && \
 					(0 < j + d[k][1]) && (j + d[k][1] < map.size_x - 1) && \
-					bfs_grid[i + d[k][0]][j + d[k][1]] != -1)
+					bfs_grid[i + d[k][0]][j + d[k][1]] > 0)
 				path_to_goal++;
 			k++;
 		}
@@ -67,7 +67,7 @@ static int	valid_path_b(t_map_param map)
 	(int) map.size_y, (int) map.size_x, false);
 	if (!bfs_grid)
 		return (FAIL);
-	bfs_b(bfs_grid, map);
+	bfs_b(bfs_grid, map, (int)map.start_y, (int)map.start_x);
 	path_valid_result = check_path_b(map, bfs_grid);
 	free_grid_b(bfs_grid, map.size_y);
 	return (path_valid_result);

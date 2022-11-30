@@ -91,6 +91,8 @@ typedef struct s_enemy
 {
 	int		pos_x;
 	int		pos_y;
+	int 	nx;
+	int 	ny;
 	int		flame;
 	bool	is_enemy_facing_r;
 }			t_enemy;
@@ -165,7 +167,7 @@ int		read_and_valid_map_b(char *path, t_map_param *map);
 int		valid_map_b(t_map_param *map);
 
 // bfs
-void	bfs_b(int **bfs_grid, t_map_param map);
+void	bfs_b(int **bfs_grid, t_map_param map, int sy, int sx);
 
 // create grid for bfs
 int		**create_bfs_grid_b(char **map_arr, size_t y, size_t x, bool for_enemy);
@@ -180,24 +182,25 @@ void	free_alloc_img_b(t_img *img);
 
 // get img
 void	*get_player_img_b(t_mlx_vars mlx);
+void	*get_enemy_img_b(t_mlx_vars mlx, size_t flame, bool right);
 void	*get_empty_img_b(t_mlx_vars mlx, size_t y, size_t x);
 void	*get_item_img_b(t_mlx_vars mlx, size_t y, size_t x);
 void	*get_img_ptr_b(t_mlx_vars *mlx, size_t y, size_t x);
 int		null_check_for_map_img_b(t_img *img);
 
-// create game screen
-int		draw_game_screen_b(t_mlx_vars *mlx);
+// player move
 void	player_move_and_check_fin(t_mlx_vars *mlx, int dy, int dx);
+int		draw_game_screen_b(t_mlx_vars *mlx);
 int		check_to_can_move_next_pos_b(t_mlx_vars *mlx, int dy, int dx);
+
+// enemy move
+int		enemy_move_and_check_fin(t_mlx_vars *mlx, t_map_param *map);
 
 // mlx keyhooks
 void	mlx_hooks_b(t_mlx_vars *mlx);
 
 // mlx animation
 int		animation_b(t_mlx_vars *mlx);
-
-// enemy move
-int		enemy_move_and_check_fin(t_mlx_vars *mlx, t_map_param map);
 
 // mlx utils
 void	*xpm_to_img_ptr_b(t_mlx_vars mlx, char *filepath);
@@ -211,6 +214,7 @@ int		free_map_arr_b(t_map_param *map, int ret_val);
 int		error_exit_b(char *msg, t_mlx_vars *mlx);
 char	*valid_map_path_name_b(char *argv);
 char	*convert_u_to_base(unsigned long u, int base, int capitals);
-void	print_bfs_b(int **grid, int y, int x, char *str);
+void	print_bfs_b(int **grid, t_map_param map, char *str);
 void	print_map_b(t_map_param map, char *str);
+
 #endif

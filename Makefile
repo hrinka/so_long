@@ -70,7 +70,7 @@ BONUS_SRCS		= main_bonus.c \
 				  valid_map_bonus.c \
 				  bfs_bonus.c \
 				  create_grid_for_bfs_bonus.c \
-				  create_game_screen_bonus.c \
+				  player_move_bonus.c \
 				  sl_utils_bonus.c \
 				  mlx_utils_bonus.c \
 				  mlx_hooks_bonus.c \
@@ -79,7 +79,7 @@ BONUS_SRCS		= main_bonus.c \
 				  init_map_img_bonus.c \
 				  mlx_img_utils_bonus.c \
 				  init_map_img_bonus.c \
-				  enemy_move.c \
+				  enemy_move_bonus.c \
 
 BONUS_OBJ_DIR	= ./bonus/objs
 BONUS_OBJS		= $(addprefix $(BONUS_OBJ_DIR)/, $(BONUS_SRCS:%.c=%.o))
