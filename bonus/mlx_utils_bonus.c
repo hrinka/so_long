@@ -45,6 +45,7 @@ static int	destroy_img_ptr(t_mlx_vars *mlx)
 	mlx_destroy_image(mlx->mlx, mlx->img->wall);
 	mlx_destroy_image(mlx->mlx, mlx->img->item1);
 	mlx_destroy_image(mlx->mlx, mlx->img->item2);
+	mlx_destroy_image(mlx->mlx, mlx->img->item3);
 	mlx_destroy_image(mlx->mlx, mlx->img->empty1);
 	mlx_destroy_image(mlx->mlx, mlx->img->empty2);
 	mlx_destroy_image(mlx->mlx, mlx->img->empty3);

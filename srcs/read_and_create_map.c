@@ -97,24 +97,26 @@ static void	init_map_param(t_map_param *map)
 	map->start_y = 0;
 }
 
-int	read_and_valid_map(char *path, t_map_param *map)
+void	read_and_valid_map(char *path, t_map_param *map)
 {
 	init_map_param(map);
 	if (read_mapfile_and_get_param(path, map) == FAIL)
-		return (FAIL);
+		error_exit("[Fail] Fail to read file.");
 	if (map->cnt_start != 1 || map->cnt_exit != 1)
-		return (FAIL);
-	if (map->cnt_item == 0 || map->cnt_others > 1)
-		return (FAIL);
+		error_exit("[Invalid map] Map must have 1 P and E.");
+	if (map->cnt_item == 0)
+		error_exit("[Invalid map] Map must contain at least 1 C.");
+	if (map->cnt_others >= 1)
+		error_exit("[Invalid map] Map has to be constructed by 0, 1, C, E, P.");
 	if (errno != 0 || create_map_arr(path, map) == FAIL)
 	{
 		free_map_arr(map, EXIT_FAILURE);
-		error_exit("Fail to create map arr.");
+		error_exit("[Fail] Fail to create map arr.");
 	}
 	if (errno != 0 || valid_map(map) == FAIL)
 	{
 		free_map_arr(map, EXIT_FAILURE);
-		error_exit("Invalid map.");
+		error_exit(\
+		"[Invalid map] Map must be rectangular, closed by 1, have valid path.");
 	}
-	return (PASS);
 }

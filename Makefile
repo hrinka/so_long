@@ -10,12 +10,16 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC		= cc
-CFLAGS	= -Wall -Wextra -Werror
-#CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -fsanitize=undefined
+CC				= cc
+CFLAGS			= -Wall -Wextra -Werror
+
+ifdef WITH_TEST
+	CFLAGS		+= -g -fsanitize=address -fsanitize=undefined
+endif
+
 
 # MONDATORY
-NAME	= so_long
+NAME			= so_long
 
 INCLUDE_DIR		= ./includes
 HEADERS			= so_long.h
@@ -48,7 +52,6 @@ SRCS			= main.c \
 				  mlx_utils.c \
 				  mlx_keyhooks.c \
 				  get_map_img.c \
-
 
 # BONUS
 BONUS_NAME		= so_long_bonus
@@ -143,8 +146,15 @@ bonus_fclean:	bonus_clean
 	@make fclean -C $(LIBFTPRINTF_DIR)
 	@make fclean -C $(LIBGNL_DIR)
 
+test:
+	make all WITH_TEST=1
+
+test_bonus:
+	make bonus WITH_TEST=1
+
 norm:
 	@norminette --version
-	norminette $(SRC_DIR) $(INCLUDE_DIR) $(BONUS_SRC_DIR) $(BONUS_INCLUDE_DIR)
+	norminette $(SRC_DIR) $(INCLUDE_DIR) $(BONUS_SRC_DIR)
 
-.PHONY:		all clean fclean re bonus norm
+
+.PHONY:		all clean fclean re bonus bonus_clean bonus_fclean norm test

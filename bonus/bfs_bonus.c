@@ -30,7 +30,7 @@ void	print_map(t_map_param map, char *str)
 	printf("\n\n");
 }
 
-void	print_grid(int **grid, int y, int x, char *str)
+void	print_bfs(int **grid, int y, int x, char *str)
 {
 	size_t	i;
 	size_t	j;

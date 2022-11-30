@@ -58,17 +58,18 @@ static int	check_path(t_map_param map, int **visited)
 	return (PASS);
 }
 
-static void	valid_path(t_map_param map)
+static int	valid_path(t_map_param map)
 {
 	int		**visited;
+	int		path_valid_result;
 
 	visited = create_visited(map.map_arr, (int)map.size_y, (int)map.size_x);
 	if (!visited)
-		error_exit("Fail to malloc in valid_path.");
+		return (FAIL);
 	bfs(visited, map);
-	if (check_path(map, visited) == FAIL)
-		error_exit("No valid path in this map.");
+	path_valid_result = check_path(map, visited);
 	free_grid(visited, map.size_y);
+	return (path_valid_result);
 }
 
 int	valid_map(t_map_param *map)
@@ -95,6 +96,7 @@ int	valid_map(t_map_param *map)
 			return (FAIL);
 		y++;
 	}
-	valid_path(*map);
+	if (valid_path(*map) == FAIL)
+		return (FAIL);
 	return (PASS);
 }

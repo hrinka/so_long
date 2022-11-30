@@ -34,6 +34,7 @@ static void	init_map_img(t_mlx_vars mlx, t_img *img)
 	img->wall = xpm_to_img_ptr(mlx, IMG_WALL);
 	img->item1 = xpm_to_img_ptr(mlx, IMG_ITEM_1);
 	img->item2 = xpm_to_img_ptr(mlx, IMG_ITEM_2);
+	img->item3 = xpm_to_img_ptr(mlx, IMG_ITEM_3);
 	img->empty1 = xpm_to_img_ptr(mlx, IMG_EMPTY_1);
 	img->empty2 = xpm_to_img_ptr(mlx, IMG_EMPTY_2);
 	img->empty3 = xpm_to_img_ptr(mlx, IMG_EMPTY_3);
@@ -83,7 +84,7 @@ int	main(int argc, char *argv[])
 	errno = 0;
 	if (argc != 2)
 		return (error_exit("[Invalid Arg] Cmd>$./so_long ./assets/map/<file>"));
-	filepath = ft_strtrim(argv[1], IS_SPACE);
+	filepath = ft_strtrim(argv[1], SPACES);
 	if (!filepath)
 		return (error_exit("Fail to get file path"));
 	ft_printf("Read file: %s\n", filepath);

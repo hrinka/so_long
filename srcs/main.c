@@ -11,27 +11,22 @@
 /* ************************************************************************** */
 
 #include "./../includes/so_long.h"
-/*
+
 __attribute__((destructor))
 static void	destructor(void)
 {
 	system("leaks -q so_long");
 }
-*/
-static void	init_map_img(t_mlx_vars mlx, t_img *img)
+
+static int	init_map_img(t_mlx_vars mlx, t_img *img)
 {
-	img->player_right = xpm_to_img_ptr(mlx, "./assets/img/cow_r1.xpm");
-	img->player_left = xpm_to_img_ptr(mlx, "./assets/img/cow_l1.xpm");
-	img->goal = xpm_to_img_ptr(mlx, "./assets/img/goal.xpm");
-	img->wall = xpm_to_img_ptr(mlx, "./assets/img/wall.xpm");
-	img->item1 = xpm_to_img_ptr(mlx, "./assets/img/item1.xpm");
-	img->item2 = xpm_to_img_ptr(mlx, "./assets/img/item2.xpm");
-	img->empty1 = xpm_to_img_ptr(mlx, "./assets/img/grass1.xpm");
-	img->empty2 = xpm_to_img_ptr(mlx, "./assets/img/grass2.xpm");
-	img->empty3 = xpm_to_img_ptr(mlx, "./assets/img/grass3.xpm");
-	img->empty4 = xpm_to_img_ptr(mlx, "./assets/img/grass4.xpm");
-	if (null_check_for_map_img(img) == FAIL)
-		error_exit("Img_ptr is NULL.");
+	img->player_right = xpm_to_img_ptr(mlx, IMG_PLAYER_R);
+	img->player_left = xpm_to_img_ptr(mlx, IMG_PLAYER_L);
+	img->goal = xpm_to_img_ptr(mlx, IMG_GOAL);
+	img->wall = xpm_to_img_ptr(mlx, IMG_WALL);
+	img->item = xpm_to_img_ptr(mlx, IMG_ITEM);
+	img->empty = xpm_to_img_ptr(mlx, IMG_EMPTY);
+	return (null_check_for_map_img(img));
 }
 
 static void	init_player(t_player *player, t_map_param map)
@@ -53,11 +48,16 @@ static void	init_mlx_ptr(t_mlx_vars *mlx, t_map_param *m, t_img *i, t_player *p)
 	const int	size_y = (int)m->size_y * IMAGE_SIZE;
 
 	mlx->mlx = mlx_init();
+	if (!mlx->mlx)
+		error_exit("Fail to init minilibx.");
 	mlx->win = mlx_new_window(mlx->mlx, size_x, size_y, "./so_long");
+	if (!mlx->win)
+		error_exit("Fail to make window.");
 	mlx->map = m;
 	mlx->img = i;
+	if (init_map_img(*mlx, i) == FAIL)
+		error_exit("Fail to get map img.");
 	mlx->player = p;
-	init_map_img(*mlx, i);
 	init_player(p, *m);
 	mlx->is_game_end = false;
 }
@@ -72,16 +72,15 @@ int	main(int argc, char *argv[])
 
 	errno = 0;
 	if (argc != 2)
-		return (error_exit("[Invalid Arg] Cmd>$./so_long ./assets/map/<file>"));
-	filepath = ft_strtrim(argv[1], IS_SPACE);
+		error_exit("[Invalid Arg] Cmd>$./so_long ./assets/map/<file>");
+	filepath = valid_map_path_name(argv[1]);
 	if (!filepath)
-		return (error_exit("Fail to get file path"));
+		error_exit("[Invalid File] only read *.ber");
 	ft_printf("Read file: %s\n", filepath);
-	if (read_and_valid_map(filepath, &map) == FAIL)
-		return (error_exit("Invalid Map"));
+	read_and_valid_map(filepath, &map);
 	init_mlx_ptr(&mlx, &map, &img, &player);
 	draw_game_screen(&mlx);
-	ft_printf("[GAME START] There are %d items\n", map.cnt_item);
+	ft_printf("[GAME START] There are %d items !!\n", map.cnt_item);
 	mlx_key_hooks(&mlx);
 	mlx_loop(mlx.mlx);
 	mlx_destroys(&mlx);

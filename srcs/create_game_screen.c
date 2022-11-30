@@ -65,7 +65,7 @@ static void	move_player_and_redraw(t_mlx_vars *mlx)
 	else if (pos_x > next_x)
 		mlx->player->is_facing_right = false;
 	put_img(mlx, get_player_img(*mlx), next_y, next_x);
-	put_img(mlx, get_empty_img(*mlx, pos_y, pos_x), pos_y, pos_x);
+	put_img(mlx, mlx->img->empty, pos_y, pos_x);
 	mlx->map->map_arr[next_y][next_x] = CHR_PLAYER;
 	mlx->map->map_arr[pos_y][pos_x] = CHR_EMPTY;
 	mlx->player->pos_x = next_x;

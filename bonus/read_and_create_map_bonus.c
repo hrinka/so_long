@@ -116,5 +116,4 @@ int	read_and_valid_map(char *path, t_map_param *map)
 		free_map_arr(map, EXIT_FAILURE);
 		error_exit("Invalid map.");
 	}
-	return (PASS);
 }

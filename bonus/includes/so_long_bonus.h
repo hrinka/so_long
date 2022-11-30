@@ -37,24 +37,25 @@
 # define CHR_PLAYER	'P'
 # define CHR_GOAL	'E'
 
-# define IMG_PLAYER_R1 "./assets/img/cow_r1.xpm"
-# define IMG_PLAYER_R2 "./assets/img/cow_r2.xpm"
-# define IMG_PLAYER_R3 "./assets/img/cow_r3.xpm"
-# define IMG_PLAYER_R4 "./assets/img/cow_r4.xpm"
-# define IMG_PLAYER_R5 "./assets/img/cow_r5.xpm"
-# define IMG_PLAYER_L1 "./assets/img/cow_l1.xpm"
-# define IMG_PLAYER_L2 "./assets/img/cow_l2.xpm"
-# define IMG_PLAYER_L3 "./assets/img/cow_l3.xpm"
-# define IMG_PLAYER_L4 "./assets/img/cow_l4.xpm"
-# define IMG_PLAYER_L5 "./assets/img/cow_l5.xpm"
+# define IMG_PLAYER_R1 "./player/img/cow_r1.xpm"
+# define IMG_PLAYER_R2 "./player/img/cow_r2.xpm"
+# define IMG_PLAYER_R3 "./player/img/cow_r3.xpm"
+# define IMG_PLAYER_R4 "./player/img/cow_r4.xpm"
+# define IMG_PLAYER_R5 "./player/img/cow_r5.xpm"
+# define IMG_PLAYER_L1 "./player/img/cow_l1.xpm"
+# define IMG_PLAYER_L2 "./player/img/cow_l2.xpm"
+# define IMG_PLAYER_L3 "./player/img/cow_l3.xpm"
+# define IMG_PLAYER_L4 "./player/img/cow_l4.xpm"
+# define IMG_PLAYER_L5 "./player/img/cow_l5.xpm"
 # define IMG_GOAL		"./assets/img/goal.xpm"
 # define IMG_WALL		"./assets/img/wall.xpm"
-# define IMG_ITEM_1		"./assets/img/item1.xpm"
-# define IMG_ITEM_2		"./assets/img/item2.xpm"
-# define IMG_EMPTY_1	"./assets/img/grass1.xpm"
-# define IMG_EMPTY_2	"./assets/img/grass2.xpm"
-# define IMG_EMPTY_3	"./assets/img/grass3.xpm"
-# define IMG_EMPTY_4	"./assets/img/grass4.xpm"
+# define IMG_ITEM_1		"./item/img/item1.xpm"
+# define IMG_ITEM_2		"./item/img/item2.xpm"
+# define IMG_ITEM_3		"./item/img/item3.xpm"
+# define IMG_EMPTY_1	"./empty/img/grass1.xpm"
+# define IMG_EMPTY_2	"./empty/img/grass2.xpm"
+# define IMG_EMPTY_3	"./empty/img/grass3.xpm"
+# define IMG_EMPTY_4	"./tmpey/img/grass4.xpm"
 
 # define PASS	1
 # define FAIL	0
@@ -64,7 +65,7 @@
 
 # define IMAGE_SIZE 30
 
-# define IS_SPACE "\t\n\v\f\r "
+# define SPACES "\t\n\v\f\r "
 
 typedef struct s_player
 {
@@ -92,7 +93,7 @@ typedef struct s_map_param
 	size_t	start_y;
 }			t_map_param;
 
-typedef struct s_img
+typedef struct s_img //TODO: 配列化, mandatory 簡略化
 {
 	void	*player_right1;
 	void	*player_right2;
@@ -112,8 +113,21 @@ typedef struct s_img
 	void	*empty4;
 	void	*item1;
 	void	*item2;
-	int		no_player_animetion;
-	int		no_ememy_animation;
+	void	*item3;
+	void	*enemy_right1;
+	void	*enemy_right2;
+	void	*enemy_right3;
+	void	*enemy_right4;
+	void	*enemy_right5;
+	void	*enemy_right6;
+	void	*enemy_right7;
+	void	*enemy_left1;
+	void	*enemy_left2;
+	void	*enemy_left3;
+	void	*enemy_left4;
+	void	*enemy_left5;
+	void	*enemy_left6;
+	void	*enemy_left7;
 }			t_img;
 
 typedef struct s_mlx_vars
@@ -143,7 +157,7 @@ int		valid_map(t_map_param *map);
 
 // bfs
 void	bfs(int **visited, t_map_param map);
-//void	print_grid(int **grid, int y, int x, char *str);
+//void	print_bfs(int **grid, int y, int x, char *str);
 //void	print_map(t_map_param map, char *str);
 
 // create grid for bfs

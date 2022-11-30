@@ -20,6 +20,8 @@ SRCS		= ft_strlen.c \
               	ft_strlen_ns.c \
 				ft_strlcpy.c \
               	ft_strchr.c \
+				ft_strrchr.c \
+				ft_strncmp.c \
               	ft_substr.c \
               	ft_strtrim.c \
               	ft_bzero.c \
