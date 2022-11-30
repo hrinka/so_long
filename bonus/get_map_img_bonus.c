@@ -12,14 +12,14 @@
 
 #include "./includes/so_long_bonus.h"
 
-void	*get_player_img(t_mlx_vars mlx)
+void	*get_player_img_b(t_mlx_vars mlx)
 {
 	if (mlx.player->is_facing_right)
 		return (mlx.img->player_right1);
 	return (mlx.img->player_left1);
 }
 
-void	*get_empty_img(t_mlx_vars mlx, size_t y, size_t x)
+void	*get_empty_img_b(t_mlx_vars mlx, size_t y, size_t x)
 {
 	if ((y + x) % 2 == 0)
 		return (mlx.img->empty1);
@@ -30,29 +30,29 @@ void	*get_empty_img(t_mlx_vars mlx, size_t y, size_t x)
 	return (mlx.img->empty2);
 }
 
-void	*get_item_img(t_mlx_vars mlx, size_t y, size_t x)
+void	*get_item_img_b(t_mlx_vars mlx, size_t y, size_t x)
 {
 	if ((y + x) % 2 == 0)
 		return (mlx.img->item1);
 	return (mlx.img->item2);
 }
 
-void	*get_img_ptr(t_mlx_vars *mlx, size_t y, size_t x)
+void	*get_img_ptr_b(t_mlx_vars *mlx, size_t y, size_t x)
 {
 	if (mlx->map->map_arr[y][x] == CHR_WALL)
 		return (mlx->img->wall);
 	if (mlx->map->map_arr[y][x] == CHR_EMPTY)
-		return (get_empty_img(*mlx, y, x));
+		return (get_empty_img_b(*mlx, y, x));
 	if (mlx->map->map_arr[y][x] == CHR_ITEM)
-		return (get_item_img(*mlx, y, x));
+		return (get_item_img_b(*mlx, y, x));
 	if (mlx->map->map_arr[y][x] == CHR_PLAYER)
-		return (get_player_img(*mlx));
+		return (get_player_img_b(*mlx));
 	if (mlx->map->map_arr[y][x] == CHR_GOAL)
 		return (mlx->img->goal);
-	error_exit("Can't find img_ptr.");
+	return (NULL);
 }
 
-int	null_check_for_map_img(t_img *img)
+int	null_check_for_map_img_b(t_img *img)
 {
 	if (!img->player_right1 || !img->player_left1)
 		return (FAIL);

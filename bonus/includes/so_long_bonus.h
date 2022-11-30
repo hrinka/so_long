@@ -22,14 +22,34 @@
 # include "./../../lib/libftprintf/ft_printf.h"
 # include "./../../lib/gnl/get_next_line.h"
 
+# define IMG_PLAYER_R1	"./bonus/img/player/cow_r1.xpm"
+# define IMG_PLAYER_R2	"./bonus/img/player/cow_r2.xpm"
+# define IMG_PLAYER_R3	"./bonus/img/player/cow_r3.xpm"
+# define IMG_PLAYER_R4	"./bonus/img/player/cow_r4.xpm"
+# define IMG_PLAYER_R5	"./bonus/img/player/cow_r5.xpm"
+# define IMG_PLAYER_L1	"./bonus/img/player/cow_l1.xpm"
+# define IMG_PLAYER_L2	"./bonus/img/player/cow_l2.xpm"
+# define IMG_PLAYER_L3	"./bonus/img/player/cow_l3.xpm"
+# define IMG_PLAYER_L4	"./bonus/img/player/cow_l4.xpm"
+# define IMG_PLAYER_L5	"./bonus/img/player/cow_l5.xpm"
+# define IMG_GOAL		"./bonus/img/goal.xpm"
+# define IMG_WALL		"./bonus/img/wall.xpm"
+# define IMG_ITEM_1		"./bonus/img/item/item1.xpm"
+# define IMG_ITEM_2		"./bonus/img/item/item2.xpm"
+# define IMG_ITEM_3		"./bonus/img/item/item3.xpm"
+# define IMG_EMPTY_1	"./bonus/img/empty/grass1.xpm"
+# define IMG_EMPTY_2	"./bonus/img/empty/grass2.xpm"
+# define IMG_EMPTY_3	"./bonus/img/empty/grass3.xpm"
+# define IMG_EMPTY_4	"./bonus/img/empty/grass4.xpm"
+
+# define EVENT_KEY_PRESS	2
+# define EVENT_DESTROY		33
+
 # define KEY_ESC	0xff1b
 # define KEY_LEFT	0xff51
 # define KEY_UP		0xff52
 # define KEY_RIGHT	0xff53
 # define KEY_DOWN	0xff54
-
-# define EVENT_KEY_PRESS	2
-# define EVENT_DESTROY		33
 
 # define CHR_WALL	'1'
 # define CHR_EMPTY	'0'
@@ -37,35 +57,16 @@
 # define CHR_PLAYER	'P'
 # define CHR_GOAL	'E'
 
-# define IMG_PLAYER_R1 "./player/img/cow_r1.xpm"
-# define IMG_PLAYER_R2 "./player/img/cow_r2.xpm"
-# define IMG_PLAYER_R3 "./player/img/cow_r3.xpm"
-# define IMG_PLAYER_R4 "./player/img/cow_r4.xpm"
-# define IMG_PLAYER_R5 "./player/img/cow_r5.xpm"
-# define IMG_PLAYER_L1 "./player/img/cow_l1.xpm"
-# define IMG_PLAYER_L2 "./player/img/cow_l2.xpm"
-# define IMG_PLAYER_L3 "./player/img/cow_l3.xpm"
-# define IMG_PLAYER_L4 "./player/img/cow_l4.xpm"
-# define IMG_PLAYER_L5 "./player/img/cow_l5.xpm"
-# define IMG_GOAL		"./assets/img/goal.xpm"
-# define IMG_WALL		"./assets/img/wall.xpm"
-# define IMG_ITEM_1		"./item/img/item1.xpm"
-# define IMG_ITEM_2		"./item/img/item2.xpm"
-# define IMG_ITEM_3		"./item/img/item3.xpm"
-# define IMG_EMPTY_1	"./empty/img/grass1.xpm"
-# define IMG_EMPTY_2	"./empty/img/grass2.xpm"
-# define IMG_EMPTY_3	"./empty/img/grass3.xpm"
-# define IMG_EMPTY_4	"./tmpey/img/grass4.xpm"
+# define PASS		1
+# define FAIL		0
 
-# define PASS	1
-# define FAIL	0
-
-# define MAP_MIN 2
-# define MAP_MAX 66
+# define MAP_MIN	2
+# define MAP_MAX	66
 
 # define IMAGE_SIZE 30
 
-# define SPACES "\t\n\v\f\r "
+# define SPACES		"\t\n\v\f\r "
+# define EXTENSION	".ber"
 
 typedef struct s_player
 {
@@ -150,47 +151,48 @@ typedef struct s_queue
 }					t_queue;
 
 // read and create map
-int		read_and_valid_map(char *path, t_map_param *map);
+int		read_and_valid_map_b(char *path, t_map_param *map);
 
 // map valid
-int		valid_map(t_map_param *map);
+int		valid_map_b(t_map_param *map);
 
 // bfs
-void	bfs(int **visited, t_map_param map);
-//void	print_bfs(int **grid, int y, int x, char *str);
-//void	print_map(t_map_param map, char *str);
+void	bfs_b(int **visited, t_map_param map);
+//void	print_bfs_b(int **grid, int y, int x, char *str);
+//void	print_map_b(t_map_param map, char *str);
 
 // create grid for bfs
-int		**create_visited(char **map_arr, size_t y, size_t x);
-void	free_grid(int **grid, size_t y);
+int		**create_visited_b(char **map_arr, size_t y, size_t x);
+void	free_grid_b(int **grid, size_t y);
 
 // get img
-void	*get_player_img(t_mlx_vars mlx);
-void	*get_empty_img(t_mlx_vars mlx, size_t y, size_t x);
-void	*get_item_img(t_mlx_vars mlx, size_t y, size_t x);
-void	*get_img_ptr(t_mlx_vars *mlx, size_t y, size_t x);
-int		null_check_for_map_img(t_img *img);
+void	*get_player_img_b(t_mlx_vars mlx);
+void	*get_empty_img_b(t_mlx_vars mlx, size_t y, size_t x);
+void	*get_item_img_b(t_mlx_vars mlx, size_t y, size_t x);
+void	*get_img_ptr_b(t_mlx_vars *mlx, size_t y, size_t x);
+int		null_check_for_map_img_b(t_img *img);
 
 // create game screen
-int		draw_game_screen(t_mlx_vars *mlx);
-void	move_and_judge_finish(t_mlx_vars *mlx, int dy, int dx);
-int		check_to_can_move_next_pos(t_mlx_vars *mlx, int dy, int dx);
+int		draw_game_screen_b(t_mlx_vars *mlx);
+void	move_and_judge_finish_b(t_mlx_vars *mlx, int dy, int dx);
+int		check_to_can_move_next_pos_b(t_mlx_vars *mlx, int dy, int dx);
 
 // mlx keyhooks
-void	mlx_hooks(t_mlx_vars *mlx);
+void	mlx_hooks_b(t_mlx_vars *mlx);
 
 // mlx animation
-int		run_animation(t_mlx_vars *mlx);
+int		run_animation_b(t_mlx_vars *mlx);
 
 // mlx utils
-void	*xpm_to_img_ptr(t_mlx_vars mlx, char *filepath);
-void	put_img(t_mlx_vars *mlx, void *img, size_t y, size_t x);
-int		close_window(t_mlx_vars *mlx);
-int		mlx_destroys(t_mlx_vars *mlx);
+void	*xpm_to_img_ptr_b(t_mlx_vars mlx, char *filepath);
+void	put_img_b(t_mlx_vars *mlx, void *img, size_t y, size_t x);
+int		close_window_b(t_mlx_vars *mlx);
+int		destroy_mlx_and_map_b(t_mlx_vars *mlx);
 
 // sl utils
-void	print_step_to_stdout(t_mlx_vars *mlx);
-int		free_map_arr(t_map_param *map, int ret_val);
-int		error_exit(char *msg);
+void	print_step_to_stdout_b(t_mlx_vars *mlx);
+int		free_map_arr_b(t_map_param *map, int ret_val);
+int		error_exit_b(char *msg, t_mlx_vars *mlx);
+char	*valid_map_path_name_b(char *argv);
 
 #endif

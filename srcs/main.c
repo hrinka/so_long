@@ -26,7 +26,9 @@ static int	init_map_img(t_mlx_vars mlx, t_img *img)
 	img->wall = xpm_to_img_ptr(mlx, IMG_WALL);
 	img->item = xpm_to_img_ptr(mlx, IMG_ITEM);
 	img->empty = xpm_to_img_ptr(mlx, IMG_EMPTY);
-	return (null_check_for_map_img(img));
+	if (null_check_for_map_img(img) == FAIL)
+		return (FAIL);
+	return (PASS);
 }
 
 static void	init_player(t_player *player, t_map_param map)
@@ -49,14 +51,14 @@ static void	init_mlx_ptr(t_mlx_vars *mlx, t_map_param *m, t_img *i, t_player *p)
 
 	mlx->mlx = mlx_init();
 	if (!mlx->mlx)
-		error_exit("Fail to init minilibx.");
+		error_exit("[Fail] Fail to init minilibx.", NULL);
 	mlx->win = mlx_new_window(mlx->mlx, size_x, size_y, "./so_long");
 	if (!mlx->win)
-		error_exit("Fail to make window.");
+		error_exit("[Fail] Fail to generate window.", NULL);
 	mlx->map = m;
 	mlx->img = i;
 	if (init_map_img(*mlx, i) == FAIL)
-		error_exit("Fail to get map img.");
+		error_exit("[Fail] Fail to get map img.", NULL);
 	mlx->player = p;
 	init_player(p, *m);
 	mlx->is_game_end = false;
@@ -72,18 +74,19 @@ int	main(int argc, char *argv[])
 
 	errno = 0;
 	if (argc != 2)
-		error_exit("[Invalid Arg] Cmd>$./so_long ./assets/map/<file>");
+		error_exit("[Invalid Arg] Cmd>$./so_long ./assets/map/<file>", NULL);
 	filepath = valid_map_path_name(argv[1]);
 	if (!filepath)
-		error_exit("[Invalid File] only read *.ber");
+		error_exit("[Invalid File] only read *.ber", NULL);
 	ft_printf("Read file: %s\n", filepath);
 	read_and_valid_map(filepath, &map);
 	init_mlx_ptr(&mlx, &map, &img, &player);
-	draw_game_screen(&mlx);
+	if (draw_game_screen(&mlx) == FAIL)
+		error_exit("Can't find img_ptr.", &mlx);
 	ft_printf("[GAME START] There are %d items !!\n", map.cnt_item);
 	mlx_key_hooks(&mlx);
 	mlx_loop(mlx.mlx);
-	mlx_destroys(&mlx);
+	destroy_mlx_and_map(&mlx);
 	free(filepath);
 	return (0);
 }

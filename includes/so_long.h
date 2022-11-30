@@ -22,21 +22,6 @@
 # include "./../lib/libftprintf/ft_printf.h"
 # include "./../lib/gnl/get_next_line.h"
 
-# define KEY_ESC	0xff1b
-# define KEY_LEFT	0xff51
-# define KEY_UP		0xff52
-# define KEY_RIGHT	0xff53
-# define KEY_DOWN	0xff54
-
-# define EVENT_KEY_PRESS	2
-# define EVENT_DESTROY		33
-
-# define CHR_WALL	'1'
-# define CHR_EMPTY	'0'
-# define CHR_ITEM	'C'
-# define CHR_PLAYER	'P'
-# define CHR_GOAL	'E'
-
 # define IMG_PLAYER_R	"./assets/img/cow_r1.xpm"
 # define IMG_PLAYER_L	"./assets/img/cow_l1.xpm"
 # define IMG_GOAL		"./assets/img/goal.xpm"
@@ -44,8 +29,24 @@
 # define IMG_ITEM		"./assets/img/item3.xpm"
 # define IMG_EMPTY		"./assets/img/grass4.xpm"
 
+# define EVENT_KEY_PRESS	2
+# define EVENT_DESTROY		33
+
+# define KEY_ESC	0xff1b
+# define KEY_LEFT	0xff51
+# define KEY_UP		0xff52
+# define KEY_RIGHT	0xff53
+# define KEY_DOWN	0xff54
+
+# define CHR_WALL	'1'
+# define CHR_EMPTY	'0'
+# define CHR_ITEM	'C'
+# define CHR_PLAYER	'P'
+# define CHR_GOAL	'E'
+
 # define PASS		1
 # define FAIL		0
+# define FINISH		2
 
 # define MAP_MIN	2
 # define MAP_MAX	66
@@ -53,7 +54,7 @@
 # define IMAGE_SIZE 30
 
 # define SPACES		"\t\n\v\f\r "
-# define EXTENTION	".ber"
+# define EXTENSION	".ber"
 
 typedef struct s_player
 {
@@ -138,13 +139,13 @@ void	mlx_key_hooks(t_mlx_vars *mlx);
 void	*xpm_to_img_ptr(t_mlx_vars mlx, char *filepath);
 void	put_img(t_mlx_vars *mlx, void *img, size_t y, size_t x);
 int		close_window(t_mlx_vars *mlx);
-int		mlx_destroys(t_mlx_vars *mlx);
+int		destroy_mlx_and_map(t_mlx_vars *mlx);
 char	*valid_map_path_name(char *argv);
 
 // sl utils
 void	print_step_to_stdout(t_mlx_vars *mlx);
 int		free_map_arr(t_map_param *map, int ret_val);
-int		error_exit(char *msg);
+int		error_exit(char *msg, t_mlx_vars *mlx);
 //void	print_map(t_map_param map, char *str);
 //void	print_bfs(int **grid, t_map_param map, char *str);
 

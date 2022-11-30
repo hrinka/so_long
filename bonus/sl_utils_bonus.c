@@ -12,15 +12,17 @@
 
 #include "./includes/so_long_bonus.h"
 
-int	error_exit(char *msg)
+int	error_exit_b(char *msg, t_mlx_vars *mlx)
 {
 	ft_printf("Error\n%s\n", msg);
 	if (errno != 0)
 		ft_printf(" ** strerror : %s", strerror(errno));
+	if (mlx)
+		destroy_mlx_and_map_b(mlx);
 	exit(EXIT_FAILURE);
 }
 
-int	free_map_arr(t_map_param *map, int ret_val)
+int	free_map_arr_b(t_map_param *map, int ret_val)
 {
 	size_t	y;
 
@@ -32,7 +34,7 @@ int	free_map_arr(t_map_param *map, int ret_val)
 	return (ret_val);
 }
 
-void	print_step_to_stdout(t_mlx_vars *mlx)
+void	print_step_to_stdout_b(t_mlx_vars *mlx)
 {
 	const int	player_step = (int)mlx->player->cnt_step;
 	const int	player_item = (int)mlx->player->cnt_item;
@@ -45,4 +47,33 @@ void	print_step_to_stdout(t_mlx_vars *mlx)
 	}
 	else
 		ft_printf(" Step:%d\n", player_step);
+}
+
+char	*valid_map_path_name_b(char *argv)
+{
+	char			*path;
+	char			*filename;
+	size_t			len;
+	const size_t	ber_len = ft_strlen_ns(EXTENSION);
+
+	path = ft_strtrim(argv, SPACES);
+	if (!path)
+		return (NULL);
+	filename = ft_strrchr(path, '/');
+	if (filename)
+		filename++;
+	else
+		filename = path;
+	len = ft_strlen_ns(filename);
+	if (len <= ber_len)
+	{
+		free(path);
+		return (NULL);
+	}
+	if (ft_strncmp(&filename[len - ber_len], EXTENSION, ber_len) != 0)
+	{
+		free(path);
+		return (NULL);
+	}
+	return (path);
 }

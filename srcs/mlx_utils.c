@@ -40,11 +40,14 @@ static int	destroy_img_ptr(t_mlx_vars *mlx)
 	return (0);
 }
 
-int	mlx_destroys(t_mlx_vars *mlx)
+int	destroy_mlx_and_map(t_mlx_vars *mlx)
 {
-	destroy_img_ptr(mlx);
-	mlx_destroy_window(mlx->mlx, mlx->win);
-	mlx_destroy_display(mlx->mlx);
+	if (mlx)
+		destroy_img_ptr(mlx);
+	if (mlx->win)
+		mlx_destroy_window(mlx->mlx, mlx->win);
+	if (mlx->mlx)
+		mlx_destroy_display(mlx->mlx);
 	free_map_arr(mlx->map, 0);
 	free(mlx->mlx);
 	return (0);

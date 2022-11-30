@@ -157,4 +157,4 @@ norm:
 	norminette $(SRC_DIR) $(INCLUDE_DIR) $(BONUS_SRC_DIR)
 
 
-.PHONY:		all clean fclean re bonus bonus_clean bonus_fclean norm test
+.PHONY:		all clean fclean re bonus bonus_clean bonus_fclean norm test test_bonus

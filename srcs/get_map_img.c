@@ -31,7 +31,7 @@ void	*get_img_ptr(t_mlx_vars *mlx, size_t y, size_t x)
 		return (get_player_img(*mlx));
 	if (mlx->map->map_arr[y][x] == CHR_GOAL)
 		return (mlx->img->goal);
-	error_exit("Can't find img_ptr.");
+	return (NULL);
 }
 
 int	null_check_for_map_img(t_img *img)

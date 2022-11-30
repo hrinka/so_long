@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/so_long.h"
+#include "./includes/so_long_bonus.h"
 
-void	free_grid(int **grid, size_t y)
+void	free_grid_b(int **grid, size_t y)
 {
 	size_t	i;
 
@@ -22,7 +22,7 @@ void	free_grid(int **grid, size_t y)
 	free(grid);
 }
 
-static int	**create_grid(size_t y, size_t x)
+static int	**create_grid_b(size_t y, size_t x)
 {
 	int		**grid;
 	size_t	i;
@@ -36,7 +36,7 @@ static int	**create_grid(size_t y, size_t x)
 		grid[i] = (int *)ft_calloc(x, sizeof(int));
 		if (!grid[i])
 		{
-			free_grid(grid, y);
+			free_grid_b(grid, y);
 			return (NULL);
 		}
 		i++;
@@ -44,13 +44,13 @@ static int	**create_grid(size_t y, size_t x)
 	return (grid);
 }
 
-int	**create_visited(char **map_arr, size_t y, size_t x)
+int	**create_visited_b(char **map_arr, size_t y, size_t x)
 {
 	int		**visited;
 	size_t	i;
 	size_t	j;
 
-	visited = create_grid(y, x);
+	visited = create_grid_b(y, x);
 	if (!visited)
 		return (NULL);
 	i = 0;

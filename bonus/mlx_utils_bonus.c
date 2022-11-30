@@ -12,7 +12,7 @@
 
 #include "./includes/so_long_bonus.h"
 
-void	*xpm_to_img_ptr(t_mlx_vars mlx, char *filepath)
+void	*xpm_to_img_ptr_b(t_mlx_vars mlx, char *filepath)
 {
 	int		width;
 	int		height;
@@ -23,13 +23,13 @@ void	*xpm_to_img_ptr(t_mlx_vars mlx, char *filepath)
 	return (ret_img_ptr);
 }
 
-void	put_img(t_mlx_vars *mlx, void *img_ptr, size_t y, size_t x)
+void	put_img_b(t_mlx_vars *mlx, void *img_ptr, size_t y, size_t x)
 {
 	mlx_put_image_to_window(mlx->mlx, mlx->win, \
 	img_ptr, (int)x * IMAGE_SIZE, (int)y * IMAGE_SIZE);
 }
 
-static int	destroy_img_ptr(t_mlx_vars *mlx)
+static int	destroy_img_ptr_b(t_mlx_vars *mlx)
 {
 	mlx_destroy_image(mlx->mlx, mlx->img->player_right1);
 	mlx_destroy_image(mlx->mlx, mlx->img->player_right2);
@@ -53,17 +53,20 @@ static int	destroy_img_ptr(t_mlx_vars *mlx)
 	return (0);
 }
 
-int	mlx_destroys(t_mlx_vars *mlx)
+int	destroy_mlx_and_map_b(t_mlx_vars *mlx)
 {
-	destroy_img_ptr(mlx);
-	mlx_destroy_window(mlx->mlx, mlx->win);
-	mlx_destroy_display(mlx->mlx);
-	free_map_arr(mlx->map, 0);
+	if (mlx)
+		destroy_img_ptr_b(mlx);
+	if (mlx->win)
+		mlx_destroy_window(mlx->mlx, mlx->win);
+	if (mlx->mlx)
+		mlx_destroy_display(mlx->mlx);
+	free_map_arr_b(mlx->map, 0);
 	free(mlx->mlx);
 	return (0);
 }
 
-int	close_window(t_mlx_vars *mlx)
+int	close_window_b(t_mlx_vars *mlx)
 {
 	if (mlx->is_game_end)
 		ft_printf("### GAME CLEAR!!! :D ###\n");

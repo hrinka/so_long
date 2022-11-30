@@ -12,7 +12,7 @@
 
 #include "./includes/so_long_bonus.h"
 
-static int	create_map_arr(char *path, t_map_param *map)
+static int	create_map_arr_b(char *path, t_map_param *map)
 {
 	int		fd;
 	char	*line;
@@ -37,7 +37,7 @@ static int	create_map_arr(char *path, t_map_param *map)
 	return (PASS);
 }
 
-static void	count_line_elems(const char *line, t_map_param *map)
+static void	count_line_elems_b(const char *line, t_map_param *map)
 {
 	size_t	i;
 
@@ -61,7 +61,7 @@ static void	count_line_elems(const char *line, t_map_param *map)
 		map->size_x = i;
 }
 
-static int	read_mapfile_and_get_param(const char *path, t_map_param *map)
+static int	read_mapfile_and_get_param_b(const char *path, t_map_param *map)
 {
 	const int	fd = open(path, O_RDONLY);
 	char		*line;
@@ -71,7 +71,7 @@ static int	read_mapfile_and_get_param(const char *path, t_map_param *map)
 		line = get_next_line(fd, false);
 		if (!line)
 			break ;
-		count_line_elems(line, map);
+		count_line_elems_b(line, map);
 		if (map->start_y == 0 && map->cnt_start)
 			map->start_y = map->size_y;
 		map->size_y++;
@@ -84,7 +84,7 @@ static int	read_mapfile_and_get_param(const char *path, t_map_param *map)
 	return (FAIL);
 }
 
-static void	init_map_param(t_map_param *map)
+static void	init_map_param_b(t_map_param *map)
 {
 	map->map_arr = NULL;
 	map->cnt_item = 0;
@@ -97,23 +97,29 @@ static void	init_map_param(t_map_param *map)
 	map->start_y = 0;
 }
 
-int	read_and_valid_map(char *path, t_map_param *map)
+int	read_and_valid_map_b(char *path, t_map_param *map)
 {
-	init_map_param(map);
-	if (read_mapfile_and_get_param(path, map) == FAIL)
-		return (FAIL);
+	init_map_param_b(map);
+	if (read_mapfile_and_get_param_b(path, map) == FAIL)
+		error_exit_b("[Fail] Fail to read file.", NULL);
 	if (map->cnt_start != 1 || map->cnt_exit != 1)
-		return (FAIL);
-	if (map->cnt_item == 0 || map->cnt_others > 1)
-		return (FAIL);
-	if (errno != 0 || create_map_arr(path, map) == FAIL)
+		error_exit_b("[Invalid map] Map must have 1 'P' and 'E'.", NULL);
+	if (map->cnt_item == 0)
+		error_exit_b("[Invalid map] Map must contain at least 1 'C'.", NULL);
+	if (map->cnt_others >= 1)
+		error_exit_b(\
+		"[Invalid map] Map has to be constructed by '0', '1', 'C', 'E', 'P'.", \
+		NULL);
+	if (errno != 0 || create_map_arr_b(path, map) == FAIL)
 	{
-		free_map_arr(map, EXIT_FAILURE);
-		error_exit("Fail to create map arr.");
+		free_map_arr_b(map, EXIT_FAILURE);
+		error_exit_b("[Fail] Fail to create map arr.", NULL);
 	}
-	if (errno != 0 || valid_map(map) == FAIL)
+	if (errno != 0 || valid_map_b(map) == FAIL)
 	{
-		free_map_arr(map, EXIT_FAILURE);
-		error_exit("Invalid map.");
+		free_map_arr_b(map, EXIT_FAILURE);
+		error_exit_b(\
+		"[Invalid map] Must be rectangular, closed by '1', have valid path.", \
+		NULL);
 	}
 }

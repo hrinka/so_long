@@ -12,7 +12,7 @@
 
 #include "./includes/so_long_bonus.h"
 
-static void	*get_player_animation_img(t_mlx_vars mlx, size_t move_cnt)
+static void	*get_player_animation_img_b(t_mlx_vars mlx, size_t move_cnt)
 {
 	if (mlx.player->is_facing_right)
 	{
@@ -37,7 +37,7 @@ static void	*get_player_animation_img(t_mlx_vars mlx, size_t move_cnt)
 	return (mlx.img->player_left5);
 }
 
-int	run_animation(t_mlx_vars *mlx)
+int	run_animation_b(t_mlx_vars *mlx)
 {
 	const size_t	y = mlx->player->pos_y;
 	const size_t	x = mlx->player->pos_x;
@@ -45,7 +45,8 @@ int	run_animation(t_mlx_vars *mlx)
 	mlx->animation_cnt++;
 	if (mlx->animation_cnt == 15000)
 	{
-		put_img(mlx, get_player_animation_img(*mlx, mlx->player_flame), y, x);
+		put_img_b(mlx, get_player_animation_img_b(\
+		*mlx, mlx->player_flame), y, x);
 		mlx->animation_cnt = 0;
 		mlx->player_flame++;
 	}

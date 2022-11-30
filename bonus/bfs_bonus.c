@@ -10,44 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/so_long.h"
-/*
-void	print_map(t_map_param map, char *str)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	printf("%s\n", str);
-	while (i < map.size_y)
-	{
-		j = 0;
-		while (j < map.size_x)
-			printf("%c ", map.map_arr[i][j++]);
-		printf("\n");
-		i++;
-	}
-	printf("\n\n");
-}
-
-void	print_bfs(int **grid, int y, int x, char *str)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	printf("%s\n", str);
-	while (i < y)
-	{
-		j = 0;
-		while (j < x)
-			printf("%d ", grid[i][j++]);
-		printf("\n");
-		i++;
-	}
-	printf("\n\n");
-}
-*/
+#include "./includes/so_long_bonus.h"
 /*
 static size_t que_cnt(t_queue *que)
 {
@@ -62,7 +25,7 @@ static size_t que_cnt(t_queue *que)
 	return (i);
 }
 */
-static void	que_free(t_queue **que)
+static void	que_free_b(t_queue **que)
 {
 	t_queue	*next;
 
@@ -76,7 +39,7 @@ static void	que_free(t_queue **que)
 	}
 }
 
-static t_queue	*que_last(t_queue *que)
+static t_queue	*que_last_b(t_queue *que)
 {
 	if (!que)
 		return (NULL);
@@ -85,7 +48,7 @@ static t_queue	*que_last(t_queue *que)
 	return (que);
 }
 
-static void	que_append(t_queue **que, int new_y, int new_x)
+static void	que_append_b(t_queue **que, int new_y, int new_x)
 {
 	t_queue	*new_node;
 	t_queue	*last;
@@ -93,8 +56,8 @@ static void	que_append(t_queue **que, int new_y, int new_x)
 	new_node = (t_queue *)malloc(sizeof(t_queue));
 	if (!new_node)
 	{
-		que_free(que);
-		error_exit("Fail to malloc in bfs.");
+		que_free_b(que);
+		error_exit_b("Fail to malloc in bfs.", NULL);
 	}
 	new_node->y = new_y;
 	new_node->x = new_x;
@@ -103,12 +66,12 @@ static void	que_append(t_queue **que, int new_y, int new_x)
 		*que = new_node;
 	else
 	{
-		last = que_last(*que);
+		last = que_last_b(*que);
 		last->next = new_node;
 	}
 }
 
-static void	*que_pop(t_queue **que, int *y, int *x)
+static void	*que_pop_b(t_queue **que, int *y, int *x)
 {
 	t_queue	*next;
 
@@ -121,7 +84,7 @@ static void	*que_pop(t_queue **que, int *y, int *x)
 	*que = next;
 }
 
-void	bfs(int **visited, t_map_param map)
+void	bfs_b(int **visited, t_map_param map)
 {
 	t_queue		*que;
 	int			i;
@@ -130,10 +93,10 @@ void	bfs(int **visited, t_map_param map)
 	const int	d[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
 	que = NULL;
-	que_append(&que, (int)map.start_y, (int)map.start_x);
+	que_append_b(&que, (int)map.start_y, (int)map.start_x);
 	while (que)
 	{
-		que_pop(&que, &pop_y, &pop_x);
+		que_pop_b(&que, &pop_y, &pop_x);
 		visited[pop_y][pop_x] = 1;
 		i = 0;
 		while (i < 4)
@@ -142,7 +105,7 @@ void	bfs(int **visited, t_map_param map)
 			(0 < pop_x + d[i][1]) && (pop_x + d[i][1] < map.size_x - 1) && \
 			visited[pop_y + d[i][0]][pop_x + d[i][1]] == 0)
 			{
-				que_append(&que, pop_y + d[i][0], pop_x + d[i][1]);
+				que_append_b(&que, pop_y + d[i][0], pop_x + d[i][1]);
 				visited[pop_y + d[i][0]][pop_x + d[i][1]] = 1;
 			}
 			i++;
