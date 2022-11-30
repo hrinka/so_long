@@ -79,6 +79,7 @@ BONUS_SRCS		= main_bonus.c \
 				  init_map_img_bonus.c \
 				  mlx_img_utils_bonus.c \
 				  init_map_img_bonus.c \
+				  enemy_move.c \
 
 BONUS_OBJ_DIR	= ./bonus/objs
 BONUS_OBJS		= $(addprefix $(BONUS_OBJ_DIR)/, $(BONUS_SRCS:%.c=%.o))

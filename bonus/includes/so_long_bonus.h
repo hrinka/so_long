@@ -92,6 +92,7 @@ typedef struct s_enemy
 	int		pos_x;
 	int		pos_y;
 	int		flame;
+	bool	is_enemy_facing_r;
 }			t_enemy;
 
 typedef struct s_player
@@ -104,9 +105,7 @@ typedef struct s_player
 	size_t	cnt_item;
 	bool	can_exit;
 	bool	is_player_facing_r;
-	bool	is_enemy_facing_r;
 	bool	flg_get_item;
-	bool	is_game_over;
 	t_enemy	*enemy;
 }			t_player;
 
@@ -142,16 +141,20 @@ typedef struct s_mlx_vars
 	t_map_param	*map;
 	t_img		*img;
 	bool		is_game_end;
-	size_t		player_animation_cnt;
-	size_t		enemy_animation_cnt;
-	int			enemy_move_no;
+	bool		is_game_over;
+	size_t		player_anime_flame;
+	size_t		enemy_anime_flame;
+	size_t		enemy_move_flame;
 	int			player_flame;
+	int			enemy_anime_no;
+	int			enemy_move_no;
 }				t_mlx_vars;
 
 typedef struct s_queue
 {
 	int				x;
 	int				y;
+	int				cnt;
 	struct s_queue	*next;
 }					t_queue;
 
@@ -162,10 +165,10 @@ int		read_and_valid_map_b(char *path, t_map_param *map);
 int		valid_map_b(t_map_param *map);
 
 // bfs
-void	bfs_b(int **visited, t_map_param map);
+void	bfs_b(int **bfs_grid, t_map_param map);
 
 // create grid for bfs
-int		**create_visited_b(char **map_arr, size_t y, size_t x);
+int		**create_bfs_grid_b(char **map_arr, size_t y, size_t x, bool for_enemy);
 void	free_grid_b(int **grid, size_t y);
 
 // init map img
@@ -184,16 +187,17 @@ int		null_check_for_map_img_b(t_img *img);
 
 // create game screen
 int		draw_game_screen_b(t_mlx_vars *mlx);
-void	move_and_judge_finish_b(t_mlx_vars *mlx, int dy, int dx);
+void	player_move_and_check_fin(t_mlx_vars *mlx, int dy, int dx);
 int		check_to_can_move_next_pos_b(t_mlx_vars *mlx, int dy, int dx);
 
 // mlx keyhooks
 void	mlx_hooks_b(t_mlx_vars *mlx);
 
 // mlx animation
-int		player_animation_b(t_mlx_vars *mlx);
-int		enemy_animation_b(t_mlx_vars *mlx);
 int		animation_b(t_mlx_vars *mlx);
+
+// enemy move
+int		enemy_move_and_check_fin(t_mlx_vars *mlx, t_map_param map);
 
 // mlx utils
 void	*xpm_to_img_ptr_b(t_mlx_vars mlx, char *filepath);

@@ -28,11 +28,18 @@ static void	init_t_player_b(t_player *player, t_map_param map)
 	player->cnt_item = 0;
 	player->can_exit = false;
 	player->is_player_facing_r = true;
-	player->is_enemy_facing_r = true;
 	player->flg_get_item = false;
 }
 
-int	get_enemy_coordinate(t_player *player, t_map_param *map)
+static void	set_enem_param(t_player *player, int i, int j, int k)
+{
+	player->enemy[k].pos_y = i;
+	player->enemy[k].pos_x = j;
+	player->enemy[k].flame = 0;
+	player->enemy[k].is_enemy_facing_r = true;
+}
+
+static int	get_enemy_coordinate(t_player *player, t_map_param *map)
 {
 	int	i;
 	int	j;
@@ -50,10 +57,7 @@ int	get_enemy_coordinate(t_player *player, t_map_param *map)
 		{
 			if (map->map_arr[i][j] == CHR_ENEMY)
 			{
-				player->enemy[k].pos_y = i;
-				player->enemy[k].pos_x = j;
-				player->enemy[k].flame = 0;
-				printf("get no:%d, (y, x)=(%d, %d)\n", k, i, j);
+				set_enem_param(player, i, j, k);
 				k++;
 			}
 			j++;
@@ -81,9 +85,12 @@ static void	init_mlx_ptr_b(t_mlx_vars *x, t_map_param *m, t_img *i, t_player *p)
 		error_exit_b("[Fail] Fail to get map img.", NULL);
 	init_t_player_b(p, *m);
 	x->is_game_end = false;
-	x->player_animation_cnt = 0;
-	x->enemy_animation_cnt = 0;
+	x->player_anime_flame = 0;
+	x->enemy_anime_flame = 0;
 	x->player_flame = 0;
+	x->enemy_move_flame = 0;
+	x->enemy_move_flame = 0;
+	x->enemy_anime_no = 0;
 	x->enemy_move_no = 0;
 	if (get_enemy_coordinate(p, m) == FAIL)
 		error_exit_b("[Fail] Fail to get enemy's info.", NULL);

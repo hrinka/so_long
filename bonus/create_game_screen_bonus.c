@@ -85,7 +85,7 @@ static void	move_player_and_redraw_b(t_mlx_vars *mlx)
 	mlx->player->pos_y = next_y;
 }
 
-void	move_and_judge_finish_b(t_mlx_vars *mlx, int dy, int dx)
+void	player_move_and_check_fin(t_mlx_vars *mlx, int dy, int dx)
 {
 	char	next_pos;
 

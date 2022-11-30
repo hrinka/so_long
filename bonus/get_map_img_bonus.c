@@ -21,9 +21,7 @@ void	*get_player_img_b(t_mlx_vars mlx)
 
 void	*get_enemy_img_b(t_mlx_vars mlx)
 {
-	if (mlx.player->is_enemy_facing_r)
-		return (mlx.img->enemies[0]);
-	return (mlx.img->enemies[0 + CNT_ENEMY_IMG]);
+	return (mlx.img->enemies[0]);
 }
 
 void	*get_empty_img_b(t_mlx_vars mlx, size_t y, size_t x)

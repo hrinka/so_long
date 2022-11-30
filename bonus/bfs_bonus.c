@@ -48,7 +48,7 @@ static t_queue	*que_last_b(t_queue *que)
 	return (que);
 }
 
-static void	que_append_b(t_queue **que, int new_y, int new_x)
+static void	que_append_b(t_queue **que, int new_y, int new_x, int new_cnt)
 {
 	t_queue	*new_node;
 	t_queue	*last;
@@ -61,6 +61,7 @@ static void	que_append_b(t_queue **que, int new_y, int new_x)
 	}
 	new_node->y = new_y;
 	new_node->x = new_x;
+	new_node->cnt = new_cnt;
 	new_node->next = NULL;
 	if (*que == NULL)
 		*que = new_node;
@@ -71,42 +72,44 @@ static void	que_append_b(t_queue **que, int new_y, int new_x)
 	}
 }
 
-static void	*que_pop_b(t_queue **que, int *y, int *x)
+static void	que_pop_b(t_queue **que, int *y, int *x, int *cnt)
 {
 	t_queue	*next;
 
 	if (!que || !*que)
-		return (NULL);
+		return ;
 	*y = (*que)->y;
 	*x = (*que)->x;
+	*cnt = (*que)->cnt;
 	next = (*que)->next;
 	free(*que);
 	*que = next;
 }
 
-void	bfs_b(int **visited, t_map_param map)
+void	bfs_b(int **bfs_grid, t_map_param map)
 {
 	t_queue		*que;
 	int			i;
 	int			pop_x;
 	int			pop_y;
+	int			pop_cnt;
 	const int	d[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
 	que = NULL;
-	que_append_b(&que, (int)map.start_y, (int)map.start_x);
+	que_append_b(&que, (int)map.start_y, (int)map.start_x, 0);
 	while (que)
 	{
-		que_pop_b(&que, &pop_y, &pop_x);
-		visited[pop_y][pop_x] = 1;
+		que_pop_b(&que, &pop_y, &pop_x, &pop_cnt);
+		bfs_grid[pop_y][pop_x] = 1;
 		i = 0;
 		while (i < 4)
 		{
 			if ((0 < pop_y + d[i][0]) && (pop_y + d[i][0] < map.size_y - 1) && \
 			(0 < pop_x + d[i][1]) && (pop_x + d[i][1] < map.size_x - 1) && \
-			visited[pop_y + d[i][0]][pop_x + d[i][1]] == 0)
+			bfs_grid[pop_y + d[i][0]][pop_x + d[i][1]] == 0)
 			{
-				que_append_b(&que, pop_y + d[i][0], pop_x + d[i][1]);
-				visited[pop_y + d[i][0]][pop_x + d[i][1]] = 1;
+				que_append_b(&que, pop_y + d[i][0], pop_x + d[i][1], pop_cnt + 1);
+				bfs_grid[pop_y + d[i][0]][pop_x + d[i][1]] = pop_cnt + 1;
 			}
 			i++;
 		}

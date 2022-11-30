@@ -12,13 +12,13 @@
 
 #include "./includes/so_long_bonus.h"
 
-static int	check_elems_b(t_map_param map, int **visited, int i, int j)
+static int	check_elems_b(t_map_param map, int **bfs_grid, int i, int j)
 {
 	int			k;
 	int			path_to_goal;
 	const int	d[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
-	if (map.map_arr[i][j] == CHR_ITEM && visited[i][j] != 1)
+	if (map.map_arr[i][j] == CHR_ITEM && bfs_grid[i][j] != 1)
 		return (FAIL);
 	path_to_goal = 0;
 	if (map.map_arr[i][j] == CHR_GOAL)
@@ -28,7 +28,7 @@ static int	check_elems_b(t_map_param map, int **visited, int i, int j)
 		{
 			if ((0 < i + d[k][0]) && (i + d[k][0] < map.size_y - 1) && \
 					(0 < j + d[k][1]) && (j + d[k][1] < map.size_x - 1) && \
-					visited[i + d[k][0]][j + d[k][1]] == 1)
+					bfs_grid[i + d[k][0]][j + d[k][1]] != -1)
 				path_to_goal++;
 			k++;
 		}
@@ -60,15 +60,16 @@ static int	check_path_b(t_map_param map, int **visited)
 
 static int	valid_path_b(t_map_param map)
 {
-	int		**visited;
+	int		**bfs_grid;
 	int		path_valid_result;
 
-	visited = create_visited_b(map.map_arr, (int)map.size_y, (int)map.size_x);
-	if (!visited)
+	bfs_grid = create_bfs_grid_b(map.map_arr, \
+	(int) map.size_y, (int) map.size_x, false);
+	if (!bfs_grid)
 		return (FAIL);
-	bfs_b(visited, map);
-	path_valid_result = check_path_b(map, visited);
-	free_grid_b(visited, map.size_y);
+	bfs_b(bfs_grid, map);
+	path_valid_result = check_path_b(map, bfs_grid);
+	free_grid_b(bfs_grid, map.size_y);
 	return (path_valid_result);
 }
 
