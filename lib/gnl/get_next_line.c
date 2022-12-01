@@ -86,7 +86,9 @@ char	*get_next_line(int fd, bool is_include_nl)
 	static char	*save_buf;
 
 	errno = 0;
-	if (fd < 0 || _SC_OPEN_MAX < fd || BUFFER_SIZE <= 0 || INT_MAX < BUFFER_SIZE)
+	if (fd < 0 || _SC_OPEN_MAX < fd)
+		return (NULL);
+	if (BUFFER_SIZE <= 0 || INT_MAX < BUFFER_SIZE)
 		return (NULL);
 	if (cnt_chr_in_str('\n', save_buf) == 0)
 	{

@@ -23,7 +23,7 @@ size_t	ft_strlen_gnl(const char *str)
 		len++;
 	return (len);
 }
-#include <stdio.h>
+
 size_t	cnt_chr_in_str(const char c, const char *str)
 {
 	size_t	i;
