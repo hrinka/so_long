@@ -80,7 +80,6 @@ int	main(int argc, char *argv[])
 		error_exit("[Invalid File] only read *.ber", NULL);
 	ft_printf("Read file: %s\n", filepath);
 	read_and_valid_map(filepath, &map);
-	free(filepath);
 	init_mlx_ptr(&mlx, &map, &img, &player);
 	if (draw_game_screen(&mlx) == FAIL)
 		error_exit("Can't find img_ptr.", &mlx);

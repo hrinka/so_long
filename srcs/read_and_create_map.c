@@ -61,7 +61,7 @@ static void	count_line_elems(const char *line, t_map_param *map)
 		map->size_x = i;
 }
 
-static int	read_mapfile_and_get_param(const char *path, t_map_param *map)
+static int	read_mapfile_and_get_param(char *path, t_map_param *map)
 {
 	const int	fd = open(path, O_RDONLY);
 	char		*line;
@@ -81,6 +81,7 @@ static int	read_mapfile_and_get_param(const char *path, t_map_param *map)
 	close(fd);
 	if (errno == 0)
 		return (PASS);
+	free(path);
 	return (FAIL);
 }
 
@@ -113,13 +114,11 @@ void	read_and_valid_map(char *path, t_map_param *map)
 	if (errno != 0 || create_map_arr(path, map) == FAIL)
 	{
 		free_map_arr(map, EXIT_FAILURE);
-		free(path);
 		error_exit("[Fail] Fail to create map arr.", NULL);
 	}
 	if (errno != 0 || valid_map(map) == FAIL)
 	{
 		free_map_arr(map, EXIT_FAILURE);
-		free(path);
 		error_exit(\
 		"[Invalid map] Must be rectangular, closed by '1', have valid path.", \
 		NULL);
