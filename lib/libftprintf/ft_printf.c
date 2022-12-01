@@ -38,7 +38,7 @@ static ssize_t	pass_to_printfunc(const char c, t_printf_info info, va_list *p)
 	if (c == 's')
 		return (print_s(va_arg(*p, char *), info));
 	if (c == 'p')
-		return (print_hex(va_arg(*p, uintptr_t), &info, false));
+		return (print_hex(va_arg(*p, unsigned int), &info, false));
 	if (c == 'd' || c == 'i')
 		return (print_signed(va_arg(*p, int), &info));
 	if (c == 'u')
