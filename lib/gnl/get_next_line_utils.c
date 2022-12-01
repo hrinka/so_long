@@ -42,7 +42,7 @@ size_t	cnt_chr_in_str(const char c, const char *str)
 	return (cnt);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+size_t	ft_strlcpy_gnl(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 	size_t	j;
@@ -91,8 +91,8 @@ char	*strjoin_and_free_dst(char *dst, char *src)
 	joined_str = (char *)malloc(sizeof(char) * (dstlen + srclen + 1));
 	if (!joined_str)
 		return (ft_free(&dst, NULL));
-	ft_strlcpy(joined_str, dst, dstlen + 1);
-	ft_strlcpy(&joined_str[dstlen], src, srclen + 1);
+	ft_strlcpy_gnl(joined_str, dst, dstlen + 1);
+	ft_strlcpy_gnl(&joined_str[dstlen], src, srclen + 1);
 	ft_free(&dst, NULL);
 	return (joined_str);
 }

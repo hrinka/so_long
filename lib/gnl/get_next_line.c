@@ -27,7 +27,7 @@ static char	*create_newline_frm_save(char *save, bool is_include_nl)
 	new_line = (char *)malloc(sizeof(char) * (i + 1));
 	if (!new_line)
 		return (NULL);
-	ft_strlcpy(new_line, save, i + 1);
+	ft_strlcpy_gnl(new_line, save, i + 1);
 	return (new_line);
 }
 
