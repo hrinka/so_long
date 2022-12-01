@@ -11,13 +11,13 @@
 /* ************************************************************************** */
 
 #include "./../includes/so_long.h"
-
+/*
 __attribute__((destructor))
 static void	destructor(void)
 {
 	system("leaks -q so_long");
 }
-
+*/
 static int	init_map_img(t_mlx_vars mlx, t_img *img)
 {
 	img->player_right = xpm_to_img_ptr(mlx, IMG_PLAYER_R);
@@ -58,7 +58,7 @@ static void	init_mlx_ptr(t_mlx_vars *mlx, t_map_param *m, t_img *i, t_player *p)
 	mlx->map = m;
 	mlx->img = i;
 	if (init_map_img(*mlx, i) == FAIL)
-		error_exit("[Fail] Fail to get map img.", NULL);
+		error_exit("[Fail] Fail to get map img.", mlx);
 	mlx->player = p;
 	init_player(p, *m);
 	mlx->is_game_end = false;

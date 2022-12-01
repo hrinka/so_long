@@ -31,15 +31,15 @@ void	put_img_b(t_mlx_vars *mlx, void *img_ptr, size_t y, size_t x)
 
 int	destroy_mlx_and_map_b(t_mlx_vars *mlx)
 {
-	if (mlx)
-		destroy_img_ptr_b(mlx);
+	if (!mlx)
+		return (1);
 	if (mlx->win)
 		mlx_destroy_window(mlx->mlx, mlx->win);
 	if (mlx->mlx)
 		mlx_destroy_display(mlx->mlx);
+	destroy_img_ptr_b(mlx);
 	free_map_arr_b(mlx->map, 0);
-	free_alloc_img_b(mlx->img);
-	free(mlx->player->enemy);
+	free_alloc_img_arr_b(mlx->img);
 	free(mlx->mlx);
 	return (0);
 }
@@ -51,5 +51,7 @@ int	print_std_msg_and_loop_end_b(t_mlx_vars *mlx)
 	if (mlx->is_game_over)
 		ft_printf("### GAME OVER :X ###\n");
 	mlx_loop_end(mlx->mlx);
+	destroy_mlx_and_map_b(mlx);
+	exit(EXIT_SUCCESS);
 	return (0);
 }

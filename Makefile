@@ -81,6 +81,7 @@ BONUS_SRCS		= main_bonus.c \
 				  exit_processing_bonus.c \
 				  draw_top_screen_info_bonus.c \
 				  mlx_init_bonus.c \
+				  mlx_destroy_bonus.c \
 
 
 BONUS_OBJ_DIR	= ./bonus/objs

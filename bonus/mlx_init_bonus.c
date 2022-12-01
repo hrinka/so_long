@@ -91,7 +91,7 @@ void	init_mlx_ptr_b(t_mlx_vars *x, t_map_param *m, t_img *i, t_player *p)
 	x->img = i;
 	x->player = p;
 	init_mlx_ptr_params_b(x);
-	if (init_map_img_b(*x, i) == FAIL)
+	if (init_map_img_b(x, i) == FAIL)
 		error_exit_b("[Fail] Fail to get map img.", NULL);
 	init_t_player_b(p, *m);
 	if (get_enemy_coordinate(p, m) == FAIL)

@@ -31,12 +31,21 @@ void	put_img(t_mlx_vars *mlx, void *img_ptr, size_t y, size_t x)
 
 static int	destroy_img_ptr(t_mlx_vars *mlx)
 {
-	mlx_destroy_image(mlx->mlx, mlx->img->player_right);
-	mlx_destroy_image(mlx->mlx, mlx->img->player_left);
-	mlx_destroy_image(mlx->mlx, mlx->img->goal);
-	mlx_destroy_image(mlx->mlx, mlx->img->wall);
-	mlx_destroy_image(mlx->mlx, mlx->img->item);
-	mlx_destroy_image(mlx->mlx, mlx->img->empty);
+	if (mlx->mlx)
+	{
+		if (mlx->img->player_right)
+			mlx_destroy_image(mlx->mlx, mlx->img->player_right);
+		if (mlx->img->player_left)
+			mlx_destroy_image(mlx->mlx, mlx->img->player_left);
+		if (mlx->img->goal)
+			mlx_destroy_image(mlx->mlx, mlx->img->goal);
+		if (mlx->img->wall)
+			mlx_destroy_image(mlx->mlx, mlx->img->wall);
+		if (mlx->img->item)
+			mlx_destroy_image(mlx->mlx, mlx->img->item);
+		if (mlx->img->empty)
+			mlx_destroy_image(mlx->mlx, mlx->img->empty);
+	}
 	return (0);
 }
 

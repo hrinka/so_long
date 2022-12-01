@@ -54,11 +54,12 @@ static int	enemy_animation_b(t_mlx_vars *mlx)
 		{
 			y = mlx->player->enemy[enemy_no].pos_y;
 			x = mlx->player->enemy[enemy_no].pos_x;
-			flame = mlx->player->enemy[enemy_no].anime_flame % CNT_ENEMY_FLM;
+			flame = \
+			(mlx->player->enemy[enemy_no].anime_flame + 1) % CNT_ENEMY_FLM;
 			is_right = mlx->player->enemy[enemy_no].is_enemy_facing_r;
 			put_img_b(mlx, get_enemy_anime_img_b(*mlx, flame, is_right), y, x);
 			mlx->player->enemy[enemy_no].anime_flame++;
-			mlx->player->enemy[enemy_no].anime_flame %= CNT_EMPTY;
+			mlx->player->enemy[enemy_no].anime_flame %= CNT_ENEMY_FLM;
 		}
 		enemy_no++;
 	}

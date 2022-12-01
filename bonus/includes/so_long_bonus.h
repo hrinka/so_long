@@ -103,8 +103,8 @@
 
 // for animation flame
 # define FPS_PLAYER_ANIMATION	15000
-# define FPS_ENEMY_ANIMATION	4000
-# define FPS_ENEMY_MOVE			50000
+# define FPS_ENEMY_ANIMATION	3000
+# define FPS_ENEMY_MOVE			40000
 # define FPS_END_MSG			200000
 
 // for func
@@ -208,7 +208,7 @@ int		**create_bfs_grid_b(char **map_arr, size_t y, size_t x, bool for_enemy);
 void	init_mlx_ptr_b(t_mlx_vars *x, t_map_param *m, t_img *i, t_player *p);
 
 // init map img
-int		init_map_img_b(t_mlx_vars mlx, t_img *img);
+int		init_map_img_b(t_mlx_vars *mlx, t_img *img);
 
 // get img
 void	*get_player_img_b(t_mlx_vars mlx);
@@ -241,6 +241,9 @@ void	put_img_b(t_mlx_vars *mlx, void *img, size_t y, size_t x);
 int		print_std_msg_and_loop_end_b(t_mlx_vars *mlx);
 int		destroy_mlx_and_map_b(t_mlx_vars *mlx);
 
+// mlx destroy
+void	destroy_img_ptr_b(t_mlx_vars *mlx);
+
 // sl utils
 void	print_step_to_stdout_b(t_mlx_vars *mlx);
 char	*valid_map_path_name_b(char *argv);
@@ -252,7 +255,6 @@ void	print_map_b(t_map_param map, char *str);
 void	free_grid_b(int **grid, size_t y);
 int		free_map_arr_b(t_map_param *map, int ret_val);
 int		error_exit_b(char *msg, t_mlx_vars *mlx);
-void	destroy_img_ptr_b(t_mlx_vars *mlx);
-void	free_alloc_img_b(t_img *img);
+void	free_alloc_img_arr_b(t_img *img);
 
 #endif
