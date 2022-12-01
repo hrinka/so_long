@@ -63,7 +63,7 @@ static void	count_line_elems_b(const char *line, t_map_param *map)
 		map->size_x = i;
 }
 
-static int	read_mapfile_and_get_param_b(const char *path, t_map_param *map)
+static int	read_mapfile_and_get_param_b(char *path, t_map_param *map)
 {
 	const int	fd = open(path, O_RDONLY);
 	char		*line;
@@ -81,6 +81,7 @@ static int	read_mapfile_and_get_param_b(const char *path, t_map_param *map)
 	}
 	free(line);
 	close(fd);
+	free(path);
 	if (errno == 0)
 		return (PASS);
 	return (FAIL);

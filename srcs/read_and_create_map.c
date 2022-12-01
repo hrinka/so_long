@@ -79,9 +79,9 @@ static int	read_mapfile_and_get_param(char *path, t_map_param *map)
 	}
 	free(line);
 	close(fd);
+	free(path);
 	if (errno == 0)
 		return (PASS);
-	free(path);
 	return (FAIL);
 }
 
