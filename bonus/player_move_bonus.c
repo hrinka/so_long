@@ -89,7 +89,7 @@ void	player_move_and_check_fin(t_mlx_vars *mlx, int dy, int dx)
 	mlx->player->next_x = (int)mlx->player->pos_x + dx;
 	next_pos = mlx->map->map_arr[mlx->player->next_y][mlx->player->next_x];
 	if (mlx->player->cnt_step >= INT_MAX)
-		error_exit_b("Step counter reach the upper limit.", mlx);
+		err_exit_b("Step counter reach the upper limit.", mlx);
 	if (next_pos == CHR_GOAL && mlx->player->can_exit)
 		mlx->is_game_end = true;
 	if (next_pos == CHR_ENEMY)

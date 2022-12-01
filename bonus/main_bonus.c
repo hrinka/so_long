@@ -28,17 +28,18 @@ int	main(int argc, char *argv[])
 
 	errno = 0;
 	if (argc != 2)
-		error_exit_b("[Invalid Arg] Cmd>$./so_long ./bonus/map/<file>", NULL);
+		err_exit_b("[Invalid Arg] Cmd>$./so_long ./bonus/map/<file>", NULL);
 	filepath = valid_map_path_name_b(argv[1]);
 	if (!filepath)
-		error_exit_b("[Invalid File] only read *.ber", NULL);
+		err_exit_b("[Invalid File] only read *.ber", NULL);
 	ft_printf("Read file: %s\n", filepath);
 	read_and_valid_map_b(filepath, &map);
 	init_mlx_ptr_b(&mlx, &map, &img, &player);
 	if (draw_game_screen_b(&mlx) == FAIL)
-		error_exit_b("Can't find img_ptr.", &mlx);
+		err_exit_b("Can't find img_ptr.", &mlx);
 	ft_printf("[GAME START] There are %d items !!\n", map.cnt_item);
 	mlx_hooks_b(&mlx);
 	mlx_loop(mlx.mlx);
+	destroy_mlx_and_map_b(&mlx);
 	return (0);
 }

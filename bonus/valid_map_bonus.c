@@ -70,6 +70,7 @@ static int	valid_path_b(t_map_param map)
 	bfs_b(bfs_grid, map, (int)map.start_y, (int)map.start_x);
 	path_valid_result = check_path_b(map, bfs_grid);
 	free_grid_b(bfs_grid, map.size_y);
+	printf("valid:%d\n", path_valid_result);
 	return (path_valid_result);
 }
 

@@ -34,6 +34,7 @@ static int	create_map_arr(char *path, t_map_param *map)
 	map->map_arr[row] = NULL;
 	free(line);
 	close(fd);
+	free(path);
 	return (PASS);
 }
 
@@ -79,7 +80,6 @@ static int	read_mapfile_and_get_param(char *path, t_map_param *map)
 	}
 	free(line);
 	close(fd);
-	free(path);
 	if (errno == 0)
 		return (PASS);
 	return (FAIL);
@@ -102,24 +102,26 @@ void	read_and_valid_map(char *path, t_map_param *map)
 {
 	init_map_param(map);
 	if (read_mapfile_and_get_param(path, map) == FAIL)
-		error_exit("[Fail] Fail to read file.", NULL);
+	{
+		free(path);
+		err_exit("[Fail] Fail to read file.", NULL);
+	}
 	if (map->cnt_start != 1 || map->cnt_exit != 1)
-		error_exit("[Invalid map] Map must have 1 'P' and 'E'.", NULL);
+		err_exit("[Invalid map] Must have 1 'P' and 'E'.", NULL);
 	if (map->cnt_item == 0)
-		error_exit("[Invalid map] Map must contain at least 1 'C'.", NULL);
+		err_exit("[Invalid map] Must contain at least 1 'C'.", NULL);
 	if (map->cnt_others >= 1)
-		error_exit(\
-		"[Invalid map] Map has to be constructed by '0', '1', 'C', 'E', 'P'.", \
-		NULL);
+		err_exit(\
+		"[Invalid] Has to be constructed by '0', '1', 'C', 'E', 'P'.", NULL);
 	if (errno != 0 || create_map_arr(path, map) == FAIL)
 	{
 		free_map_arr(map, EXIT_FAILURE);
-		error_exit("[Fail] Fail to create map arr.", NULL);
+		err_exit("[Fail] Fail to create map arr.", NULL);
 	}
 	if (errno != 0 || valid_map(map) == FAIL)
 	{
 		free_map_arr(map, EXIT_FAILURE);
-		error_exit(\
+		err_exit(\
 		"[Invalid map] Must be rectangular, closed by '1', have valid path.", \
 		NULL);
 	}

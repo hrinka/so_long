@@ -57,7 +57,7 @@ static void	que_append_b(t_queue **que, int new_y, int new_x, int new_cnt)
 	if (!new_node)
 	{
 		que_free_b(que);
-		error_exit_b("Fail to malloc in bfs.", NULL);
+		err_exit_b("Fail to malloc in bfs.", NULL);
 	}
 	new_node->y = new_y;
 	new_node->x = new_x;

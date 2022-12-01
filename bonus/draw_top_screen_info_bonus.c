@@ -36,7 +36,7 @@ static int	draw_step_counter(t_mlx_vars *mlx)
 
 	step_cnt_str = convert_u_to_base(mlx->player->cnt_step, 10, 0);
 	if (!step_cnt_str)
-		error_exit_b(\
+		err_exit_b(\
 		"[Fail] Fail to malloc for reading step_cnt_str count.", mlx);
 	mlx_string_put(\
 	mlx->mlx, mlx->win, X_TOP_MSG, Y_TOP_MSG, C_TOP_MSG, "Step");

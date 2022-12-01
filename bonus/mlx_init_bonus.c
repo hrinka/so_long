@@ -83,17 +83,17 @@ void	init_mlx_ptr_b(t_mlx_vars *x, t_map_param *m, t_img *i, t_player *p)
 
 	x->mlx = mlx_init();
 	if (!x->mlx)
-		error_exit_b("[Fail] Fail to init minilibx.", NULL);
+		err_exit_b("[Fail] Fail to init minilibx.", NULL);
 	x->win = mlx_new_window(x->mlx, size_x, size_y, "./so_long");
 	if (!x->win)
-		error_exit_b("[Fail] Fail to generate window.", NULL);
+		err_exit_b("[Fail] Fail to generate window.", NULL);
 	x->map = m;
 	x->img = i;
 	x->player = p;
 	init_mlx_ptr_params_b(x);
 	if (init_map_img_b(x, i) == FAIL)
-		error_exit_b("[Fail] Fail to get map img.", NULL);
+		err_exit_b("[Fail] Fail to get map img.", NULL);
 	init_t_player_b(p, *m);
 	if (get_enemy_coordinate(p, m) == FAIL)
-		error_exit_b("[Fail] Fail to get enemy's info.", NULL);
+		err_exit_b("[Fail] Fail to get enemy's info.", NULL);
 }

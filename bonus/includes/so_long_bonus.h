@@ -254,7 +254,7 @@ void	print_map_b(t_map_param map, char *str);
 // exit
 void	free_grid_b(int **grid, size_t y);
 int		free_map_arr_b(t_map_param *map, int ret_val);
-int		error_exit_b(char *msg, t_mlx_vars *mlx);
+int		err_exit_b(char *msg, t_mlx_vars *mlx);
 void	free_alloc_img_arr_b(t_img *img);
 
 #endif

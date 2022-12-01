@@ -145,7 +145,7 @@ char	*valid_map_path_name(char *argv);
 // sl utils
 void	print_step_to_stdout(t_mlx_vars *mlx);
 int		free_map_arr(t_map_param *map, int ret_val);
-int		error_exit(char *msg, t_mlx_vars *mlx);
+int		err_exit(char *msg, t_mlx_vars *mlx);
 //void	print_map(t_map_param map, char *str);
 //void	print_bfs(int **grid, t_map_param map, char *str);
 
