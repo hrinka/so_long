@@ -83,7 +83,7 @@ char	*convert_u_to_base(unsigned long u, int base, int capitals)
 	}
 	return (ret_str);
 }
-
+/*
 void	print_map_b(t_map_param map, char *str)
 {
 	size_t	i;
@@ -119,3 +119,4 @@ void	print_bfs_b(int **grid, t_map_param map, char *str)
 	}
 	ft_printf("\n\n");
 }
+*/

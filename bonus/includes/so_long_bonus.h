@@ -248,8 +248,8 @@ void	destroy_img_ptr_b(t_mlx_vars *mlx);
 void	print_step_to_stdout_b(t_mlx_vars *mlx);
 char	*valid_map_path_name_b(char *argv);
 char	*convert_u_to_base(unsigned long u, int base, int capitals);
-void	print_bfs_b(int **grid, t_map_param map, char *str);
-void	print_map_b(t_map_param map, char *str);
+//void	print_bfs_b(int **grid, t_map_param map, char *str);
+//void	print_map_b(t_map_param map, char *str);
 
 // exit
 void	free_grid_b(int **grid, size_t y);

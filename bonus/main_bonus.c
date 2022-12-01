@@ -40,6 +40,5 @@ int	main(int argc, char *argv[])
 	ft_printf("[GAME START] There are %d items !!\n", map.cnt_item);
 	mlx_hooks_b(&mlx);
 	mlx_loop(mlx.mlx);
-	destroy_mlx_and_map_b(&mlx);
 	return (0);
 }

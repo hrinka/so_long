@@ -51,5 +51,5 @@ int	print_std_msg_and_loop_end_b(t_mlx_vars *mlx)
 	if (mlx->is_game_over)
 		ft_printf("### GAME OVER :X ###\n");
 	mlx_loop_end(mlx->mlx);
-	return (0);
+	exit(EXIT_SUCCESS);
 }

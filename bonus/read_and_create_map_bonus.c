@@ -122,7 +122,10 @@ int	read_and_valid_map_b(char *path, t_map_param *map)
 		err_exit_b("[Fail] Fail to create map arr.", NULL);
 	}
 	if (errno != 0 || valid_map_b(map) == FAIL)
+	{
+		free_map_arr_b(map, EXIT_FAILURE);
 		err_exit_b(\
 		"[Invalid map] Must be rectangle, closed by '1', have valid path.", \
 		NULL);
+	}
 }
