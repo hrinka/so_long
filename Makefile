@@ -17,7 +17,6 @@ ifdef WITH_TEST
 	CFLAGS		+= -g -fsanitize=address -fsanitize=undefined
 endif
 
-
 # MONDATORY
 NAME			= so_long
 
@@ -77,9 +76,12 @@ BONUS_SRCS		= main_bonus.c \
 				  mlx_animation_bonus.c \
 				  get_map_img_bonus.c \
 				  init_map_img_bonus.c \
-				  mlx_img_utils_bonus.c \
 				  init_map_img_bonus.c \
 				  enemy_move_bonus.c \
+				  exit_processing_bonus.c \
+				  draw_top_screen_info_bonus.c \
+				  mlx_init_bonus.c \
+
 
 BONUS_OBJ_DIR	= ./bonus/objs
 BONUS_OBJS		= $(addprefix $(BONUS_OBJ_DIR)/, $(BONUS_SRCS:%.c=%.o))

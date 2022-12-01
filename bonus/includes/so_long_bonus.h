@@ -72,6 +72,18 @@
 # define KEY_RIGHT	0xff53
 # define KEY_DOWN	0xff54
 
+# define SIZE_TOP_STR	15
+# define X_TOP_MSG		5
+# define Y_TOP_MSG		10
+# define X_TOP_STEP		10
+# define Y_TOP_STEP		25
+# define X_TOP_END_MSG	5
+# define Y_TOP_END_MSG	15
+# define C_TOP_MSG		0xFFFFFF
+# define C_TOP_STEP		0xFFFFFF
+# define C_TOP_END_MSG	0xFFFF00
+# define C_TOP_CLEAR	0x000000
+
 // for map file
 # define CHR_WALL	'1'
 # define CHR_EMPTY	'0'
@@ -83,11 +95,17 @@
 # define MAP_MIN	2
 # define MAP_MAX	66
 # define IMAGE_SIZE 30
-# define Y_OFFSET	20
+# define Y_OFFSET	30
 
 # define SPACES		"\t\n\v\f\r "
 
 # define FILE_EXTENSION	".ber"
+
+// for animation flame
+# define FPS_PLAYER_ANIMATION	15000
+# define FPS_ENEMY_ANIMATION	4000
+# define FPS_ENEMY_MOVE			50000
+# define FPS_END_MSG			200000
 
 // for func
 # define PASS	1
@@ -150,6 +168,7 @@ typedef struct s_mlx_vars
 	t_img		*img;
 	bool		is_game_end;
 	bool		is_game_over;
+	bool		is_print_end;
 	size_t		player_anime_flame;
 	size_t		enemy_anime_flame;
 	size_t		enemy_move_flame;
@@ -184,14 +203,12 @@ void	bfs_b(int **bfs_grid, t_map_param map, int start_y, int start_x);
 
 // create grid for bfs
 int		**create_bfs_grid_b(char **map_arr, size_t y, size_t x, bool for_enemy);
-void	free_grid_b(int **grid, size_t y);
+
+// init mlx
+void	init_mlx_ptr_b(t_mlx_vars *x, t_map_param *m, t_img *i, t_player *p);
 
 // init map img
 int		init_map_img_b(t_mlx_vars mlx, t_img *img);
-
-// mlx img utils
-void	destroy_img_ptr_b(t_mlx_vars *mlx);
-void	free_alloc_img_b(t_img *img);
 
 // get img
 void	*get_player_img_b(t_mlx_vars mlx);
@@ -215,19 +232,27 @@ void	mlx_hooks_b(t_mlx_vars *mlx);
 // mlx animation
 int		animation_b(t_mlx_vars *mlx);
 
+// draw top screen info
+int		draw_top_screen_info(t_mlx_vars *mlx);
+
 // mlx utils
 void	*xpm_to_img_ptr_b(t_mlx_vars mlx, char *filepath);
 void	put_img_b(t_mlx_vars *mlx, void *img, size_t y, size_t x);
-int		close_window_b(t_mlx_vars *mlx);
+int		print_std_msg_and_loop_end_b(t_mlx_vars *mlx);
 int		destroy_mlx_and_map_b(t_mlx_vars *mlx);
 
 // sl utils
 void	print_step_to_stdout_b(t_mlx_vars *mlx);
-int		free_map_arr_b(t_map_param *map, int ret_val);
-int		error_exit_b(char *msg, t_mlx_vars *mlx);
 char	*valid_map_path_name_b(char *argv);
 char	*convert_u_to_base(unsigned long u, int base, int capitals);
 void	print_bfs_b(int **grid, t_map_param map, char *str);
 void	print_map_b(t_map_param map, char *str);
+
+// exit
+void	free_grid_b(int **grid, size_t y);
+int		free_map_arr_b(t_map_param *map, int ret_val);
+int		error_exit_b(char *msg, t_mlx_vars *mlx);
+void	destroy_img_ptr_b(t_mlx_vars *mlx);
+void	free_alloc_img_b(t_img *img);
 
 #endif

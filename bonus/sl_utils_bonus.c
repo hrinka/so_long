@@ -12,28 +12,6 @@
 
 #include "./includes/so_long_bonus.h"
 
-int	error_exit_b(char *msg, t_mlx_vars *mlx)
-{
-	ft_printf("Error\n%s\n", msg);
-	if (errno != 0)
-		ft_printf(" ** strerror : %s", strerror(errno));
-	if (mlx)
-		destroy_mlx_and_map_b(mlx);
-	exit(EXIT_FAILURE);
-}
-
-int	free_map_arr_b(t_map_param *map, int ret_val)
-{
-	size_t	y;
-
-	y = 0;
-	if (map->map_arr)
-		while (y < map->size_y)
-			free(map->map_arr[y++]);
-	free(map->map_arr);
-	return (ret_val);
-}
-
 void	print_step_to_stdout_b(t_mlx_vars *mlx)
 {
 	const int	player_step = (int)mlx->player->cnt_step;

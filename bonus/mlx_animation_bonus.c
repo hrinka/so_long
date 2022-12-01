@@ -33,6 +33,9 @@ static int	player_animation_b(t_mlx_vars *mlx)
 
 	put_img_b(mlx, \
 	get_player_anime_img_b(*mlx, mlx->player_flame % CNT_PLAYER_FLM), y, x);
+	mlx->player_flame++;
+	mlx->player_flame %= CNT_PLAYER_FLM;
+	mlx->player_anime_flame = 0;
 	return (0);
 }
 
@@ -59,49 +62,32 @@ static int	enemy_animation_b(t_mlx_vars *mlx)
 		}
 		enemy_no++;
 	}
+	mlx->enemy_anime_flame = 0;
+	mlx->enemy_anime_no = (mlx->enemy_anime_no + 1) % 2;
 	return (0);
 }
 
 int	animation_b(t_mlx_vars *mlx)
 {
-	const size_t	player_anime_fps = 15000;
-	const size_t	enemy_anime_fps = 4000;
-	const size_t	enemy_move_fps = 100000;
-	static size_t	attack_check = 1000;
-
-
 	mlx->player_anime_flame++;
 	mlx->enemy_anime_flame++;
 	mlx->enemy_move_flame++;
-	if (mlx->player_anime_flame % attack_check == 0)
+	if (!mlx->is_game_over && !mlx->is_game_end)
 	{
-
-		if (mlx->is_game_over)
-			close_window_b(mlx);
+		if (mlx->player_anime_flame == FPS_PLAYER_ANIMATION)
+			player_animation_b(mlx);
+		if (mlx->enemy_anime_flame == FPS_ENEMY_ANIMATION)
+			enemy_animation_b(mlx);
+		if (mlx->enemy_move_flame == FPS_ENEMY_MOVE)
+			enemy_move_and_check_fin(mlx, mlx->map);
+		return (0);
 	}
-	if (mlx->player_anime_flame == player_anime_fps)
+	if (!mlx->is_print_end)
 	{
-		player_animation_b(mlx);
-		mlx->player_flame++;
-		mlx->player_flame %= CNT_PLAYER_FLM;
-		mlx->player_anime_flame = 0;
+		draw_top_screen_info(mlx);
+		mlx->is_print_end = true;
 	}
-	if (mlx->enemy_anime_flame == enemy_anime_fps)
-	{
-		enemy_animation_b(mlx);
-		mlx->enemy_anime_flame = 0;
-		mlx->enemy_anime_no = (mlx->enemy_anime_no + 1) % 2;
-	}
-	if (mlx->enemy_move_flame == enemy_move_fps)
-	{
-		print_map_b(*mlx->map, "animation");
-		printf("move anime_flame:%zu, move_no:%d\n", enemy_move_fps, mlx->enemy_move_no);
-		enemy_move_and_check_fin(mlx, mlx->map);
-		mlx->enemy_move_flame = 0;
-		mlx->enemy_move_no = (mlx->enemy_move_no + 1) % 2;
-	}
-//	printf("print:%zu\n", print);
-//	if (print % 100000 == 0)
-//		print_map_b(*mlx->map, "animation");
+	if (mlx->player_anime_flame == FPS_END_MSG)
+		print_std_msg_and_loop_end_b(mlx);
 	return (0);
 }

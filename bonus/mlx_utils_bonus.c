@@ -44,7 +44,7 @@ int	destroy_mlx_and_map_b(t_mlx_vars *mlx)
 	return (0);
 }
 
-int	close_window_b(t_mlx_vars *mlx)
+int	print_std_msg_and_loop_end_b(t_mlx_vars *mlx)
 {
 	if (mlx->is_game_end)
 		ft_printf("### GAME CLEAR :D ###\n");

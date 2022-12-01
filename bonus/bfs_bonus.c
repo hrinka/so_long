@@ -85,38 +85,7 @@ static void	que_pop_b(t_queue **que, int *y, int *x, int *cnt)
 	free(*que);
 	*que = next;
 }
-/*
-void	bfs_b(int **bfs_grid, t_map_param map, int start_y, int start_x)
-{
-	t_queue		*que;
-	int			i;
-	int			pop_x;
-	int			pop_y;
-	int			pop_cnt;
-	const int	d[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
-	que = NULL;
-	que_append_b(&que, start_y, start_x, 1);
-	while (que)
-	{
-		que_pop_b(&que, &pop_y, &pop_x, &pop_cnt);
-		bfs_grid[pop_y][pop_x] = pop_cnt;
-		i = 0;
-		while (i < 4)
-		{
-			if ((0 < pop_y + d[i][0]) && (pop_y + d[i][0] < map.size_y - 1) && \
-			(0 < pop_x + d[i][1]) && (pop_x + d[i][1] < map.size_x - 1) && \
-			bfs_grid[pop_y + d[i][0]][pop_x + d[i][1]] == 0)
-			{
-				que_append_b(\
-				&que, pop_y + d[i][0], pop_x + d[i][1], pop_cnt + 1);
-				bfs_grid[pop_y + d[i][0]][pop_x + d[i][1]] = pop_cnt + 1;
-			}
-			i++;
-		}
-	}
-}
-*/
 void	bfs_b(int **bfs_grid, t_map_param map, int start_y, int start_x)
 {
 	t_queue		*que;
@@ -130,7 +99,6 @@ void	bfs_b(int **bfs_grid, t_map_param map, int start_y, int start_x)
 	{
 		que_pop_b(&que, &pop.y, &pop.x, &pop.cnt);
 		bfs_grid[pop.y][pop.x] = pop.cnt;
-
 		i = 0;
 		while (i < 4)
 		{

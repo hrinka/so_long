@@ -12,16 +12,6 @@
 
 #include "./includes/so_long_bonus.h"
 
-void	free_grid_b(int **grid, size_t y)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < y)
-		free(grid[i++]);
-	free(grid);
-}
-
 static int	**create_grid_b(size_t y, size_t x)
 {
 	int		**grid;
