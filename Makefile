@@ -113,14 +113,14 @@ $(OBJ_DIR)/%.o: %.c
 	$(CC) $(INCLUDE) -c $< -o $@
 
 clean:
-	rm -rf $(OBJ_DIR)
+	rm -rf $(OBJ_DIR) $(BONUS_OBJ_DIR)
 	@make clean -C $(LIBFT_DIR)
 	@make clean -C $(LIBFTPRINTF_DIR)
 	@make clean -C $(LIBGNL_DIR)
 	@make clean -C $(MLX_DIR)
 
 fclean:		clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(BONUS_NAME)
 	@make fclean -C $(LIBFT_DIR)
 	@make fclean -C $(LIBFTPRINTF_DIR)
 	@make fclean -C $(LIBGNL_DIR)
@@ -139,21 +139,6 @@ $(BONUS_NAME):	$(BONUS_OBJS)
 $(BONUS_OBJ_DIR)/%.o: %.c
 	@mkdir -p $$(dirname $@)
 	$(CC) $(BONUS_INCLUDE) -c $< -o $@
-
-bonus_clean:
-	rm -rf $(BONUS_OBJ_DIR)
-	@make clean -C $(LIBFT_DIR)
-	@make clean -C $(LIBFTPRINTF_DIR)
-	@make clean -C $(LIBGNL_DIR)
-	@make clean -C $(MLX_DIR)
-
-bonus_fclean:	bonus_clean
-	rm -f $(BONUS_NAME)
-	@make fclean -C $(LIBFT_DIR)
-	@make fclean -C $(LIBFTPRINTF_DIR)
-	@make fclean -C $(LIBGNL_DIR)
-
-bonus_re:		bonus_fclean bonus
 
 test:
 	make all WITH_TEST=1

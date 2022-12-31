@@ -19,7 +19,7 @@ static int	create_map_arr(char *path, t_map_param *map)
 	size_t	row;
 
 	map->map_arr = (char **)malloc(sizeof(char *) * (map->size_x + 1));
-	if (!map->map_arr)
+	if (!map->map_arr) // TODO: free
 		return (FAIL);
 	fd = open(path, O_RDONLY);
 	row = 0;
@@ -113,7 +113,7 @@ void	read_and_valid_map(char *path, t_map_param *map)
 	if (map->cnt_others >= 1)
 		err_exit(\
 		"[Invalid] Has to be constructed by '0', '1', 'C', 'E', 'P'.", NULL);
-	if (errno != 0 || create_map_arr(path, map) == FAIL)
+	if (errno != 0 || create_map_arr(path, map) == FAIL) // TODO: free
 	{
 		free_map_arr(map, EXIT_FAILURE);
 		err_exit("[Fail] Fail to create map arr.", NULL);
