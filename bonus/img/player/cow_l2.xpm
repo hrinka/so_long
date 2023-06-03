@@ -24,7 +24,7 @@ static char *result[] = {
 "1 c #5F4F5C",
 "2 c #634F5A",
 "3 c #60505D",
-"4 c #61525E",
+"4 c #e7ff66",
 "5 c #65525D",
 "6 c #6E5863",
 "7 c #6F5C62",
@@ -44,7 +44,7 @@ static char *result[] = {
 "s c #AC9A84",
 "d c #AE9D86",
 "f c #B0A088",
-"g c #C0D470",
+"g c #002E7D",
 /* pixels */
 "gggggggggggggggggggggggggggggggg",
 "gggggggggggggggggggggggggggggggg",

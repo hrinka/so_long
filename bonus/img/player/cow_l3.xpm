@@ -2,7 +2,7 @@
 static char *_abe104014714b1df28c90367b8069488UkSa6CifclqpqQw[] = {
 /* columns rows colors chars-per-pixel */
 "30 30 37 1 ",
-"  c #C0D470",
+"  c #002E7D",
 ". c #50384C",
 "X c #513A4D",
 "o c #513A4E",
@@ -25,7 +25,7 @@ static char *_abe104014714b1df28c90367b8069488UkSa6CifclqpqQw[] = {
 "2 c #5E4E5B",
 "3 c #5F4F5C",
 "4 c #60505D",
-"5 c #61525E",
+"5 c #e7ff66",
 "6 c #63525E",
 "7 c #6A505E",
 "8 c #6C555C",
