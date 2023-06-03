@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 19:10:20 by takira            #+#    #+#             */
-/*   Updated: 2022/11/26 19:10:21 by takira           ###   ########.fr       */
+/*   Updated: 2023/06/03 21:36:27 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
 # include "./../lib/libftprintf/ft_printf.h"
 # include "./../lib/gnl/get_next_line.h"
 
-# define IMG_PLAYER_R	"./assets/img/cow_r1.xpm"
-# define IMG_PLAYER_L	"./assets/img/cow_l1.xpm"
+# define IMG_PLAYER_R	"./assets/img/player32_r.xpm"
+# define IMG_PLAYER_L	"./assets/img/player32_l.xpm"
 # define IMG_GOAL		"./assets/img/goal.xpm"
 # define IMG_WALL		"./assets/img/wall.xpm"
-# define IMG_ITEM		"./assets/img/item3.xpm"
-# define IMG_EMPTY		"./assets/img/grass4.xpm"
+# define IMG_ITEM		"./assets/img/item.xpm"
+# define IMG_EMPTY		"./assets/img/field.xpm"
 
 # define EVENT_KEY_PRESS	2
 # define EVENT_DESTROY		33
@@ -51,7 +51,7 @@
 # define MAP_MIN	2
 # define MAP_MAX	66
 
-# define IMAGE_SIZE 30
+# define IMAGE_SIZE 32
 
 # define SPACES		"\t\n\v\f\r "
 # define FILE_EXTENSION	".ber"
