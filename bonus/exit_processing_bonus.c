@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit_processing_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 08:51:28 by takira            #+#    #+#             */
-/*   Updated: 2022/12/01 08:51:29 by takira           ###   ########.fr       */
+/*   Created: 2023/06/15 01:01:58 by hrinka            #+#    #+#             */
+/*   Updated: 2023/06/15 01:01:59 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "./includes/so_long_bonus.h"
 

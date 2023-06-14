@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sl_utils_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 17:26:14 by takira            #+#    #+#             */
-/*   Updated: 2022/11/29 17:26:14 by takira           ###   ########.fr       */
+/*   Created: 2023/06/15 01:03:03 by hrinka            #+#    #+#             */
+/*   Updated: 2023/06/15 01:03:04 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "./includes/so_long_bonus.h"
 

@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 13:25:08 by takira            #+#    #+#             */
-/*   Updated: 2022/11/28 13:25:09 by takira           ###   ########.fr       */
+/*   Created: 2023/06/15 01:00:48 by hrinka            #+#    #+#             */
+/*   Updated: 2023/06/15 01:00:49 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "./../includes/so_long.h"
 

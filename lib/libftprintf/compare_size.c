@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   compare_size.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 17:59:32 by takira            #+#    #+#             */
-/*   Updated: 2022/10/28 17:59:33 by takira           ###   ########.fr       */
+/*   Created: 2023/06/15 01:06:37 by hrinka            #+#    #+#             */
+/*   Updated: 2023/06/15 01:06:38 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "ft_printf.h"
 

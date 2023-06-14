@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sl_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/27 13:04:19 by takira            #+#    #+#             */
-/*   Updated: 2022/11/27 13:04:20 by takira           ###   ########.fr       */
+/*   Created: 2023/06/15 01:00:59 by hrinka            #+#    #+#             */
+/*   Updated: 2023/06/15 01:01:00 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "./../includes/so_long.h"
 

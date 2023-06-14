@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 11:52:12 by takira            #+#    #+#             */
-/*   Updated: 2022/12/01 11:52:13 by takira           ###   ########.fr       */
+/*   Created: 2023/06/15 01:02:34 by hrinka            #+#    #+#             */
+/*   Updated: 2023/06/15 01:02:35 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "./includes/so_long_bonus.h"
 

@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 19:09:48 by takira            #+#    #+#             */
-/*   Updated: 2022/11/19 14:49:06 by takira           ###   ########.fr       */
+/*   Created: 2023/06/15 01:04:32 by hrinka            #+#    #+#             */
+/*   Updated: 2023/06/15 01:04:32 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H

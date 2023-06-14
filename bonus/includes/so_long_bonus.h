@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 17:25:29 by takira            #+#    #+#             */
-/*   Updated: 2023/06/03 22:57:47 by hrinka           ###   ########.fr       */
+/*   Created: 2023/06/15 01:03:40 by hrinka            #+#    #+#             */
+/*   Updated: 2023/06/15 01:03:41 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H

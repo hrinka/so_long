@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_top_screen_info_bonus.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 10:11:23 by takira            #+#    #+#             */
-/*   Updated: 2022/12/01 10:11:24 by takira           ###   ########.fr       */
+/*   Created: 2023/06/15 01:01:40 by hrinka            #+#    #+#             */
+/*   Updated: 2023/06/15 01:01:40 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "./includes/so_long_bonus.h"
 

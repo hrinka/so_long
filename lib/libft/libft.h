@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 10:40:35 by takira            #+#    #+#             */
-/*   Updated: 2022/11/29 07:57:03 by takira           ###   ########.fr       */
+/*   Created: 2023/06/15 01:06:22 by hrinka            #+#    #+#             */
+/*   Updated: 2023/06/15 01:06:23 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #ifndef LIBFT_H
 # define LIBFT_H

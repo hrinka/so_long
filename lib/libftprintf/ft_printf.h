@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 12:03:20 by takira            #+#    #+#             */
-/*   Updated: 2022/11/15 09:33:22 by takira           ###   ########.fr       */
+/*   Created: 2023/06/15 01:07:04 by hrinka            #+#    #+#             */
+/*   Updated: 2023/06/15 01:07:05 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H

@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_destroy_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 12:47:49 by takira            #+#    #+#             */
-/*   Updated: 2022/12/01 12:47:51 by takira           ###   ########.fr       */
+/*   Created: 2023/06/15 01:02:21 by hrinka            #+#    #+#             */
+/*   Updated: 2023/06/15 01:02:22 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "./includes/so_long_bonus.h"
 

@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_put_for_printf.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 10:15:31 by takira            #+#    #+#             */
-/*   Updated: 2022/11/15 10:15:32 by takira           ###   ########.fr       */
+/*   Created: 2023/06/15 01:07:20 by hrinka            #+#    #+#             */
+/*   Updated: 2023/06/15 01:07:20 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "ft_printf.h"
 

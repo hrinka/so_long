@@ -1,14 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ret_u.c                                            :+:      :+:    :+:   */
+/*   print_num.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 16:15:13 by takira            #+#    #+#             */
-/*   Updated: 2022/11/15 09:46:11 by takira           ###   ########.fr       */
+/*   Created: 2023/06/15 01:07:35 by hrinka            #+#    #+#             */
+/*   Updated: 2023/06/15 01:07:35 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 #include "ft_printf.h"
 
 static char	*convert_u2base(unsigned long u, int base, int capitals)

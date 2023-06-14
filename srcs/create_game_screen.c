@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_game_screen.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takira <takira@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/27 08:03:40 by takira            #+#    #+#             */
-/*   Updated: 2022/11/27 08:03:59 by takira           ###   ########.fr       */
+/*   Created: 2023/06/15 01:00:13 by hrinka            #+#    #+#             */
+/*   Updated: 2023/06/15 01:00:14 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "./../includes/so_long.h"
 
