@@ -6,11 +6,9 @@
 /*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 01:00:54 by hrinka            #+#    #+#             */
-/*   Updated: 2023/06/15 01:00:55 by hrinka           ###   ########.fr       */
+/*   Updated: 2023/06/23 15:21:16 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "./../includes/so_long.h"
 
@@ -21,8 +19,11 @@ static int	create_map_arr(char *path, t_map_param *map)
 	size_t	row;
 
 	map->map_arr = (char **)malloc(sizeof(char *) * (map->size_x + 1));
-	if (!map->map_arr) // TODO: free
+	if (!map->map_arr)
+	{
+		free(path);
 		return (FAIL);
+	}
 	fd = open(path, O_RDONLY);
 	row = 0;
 	while (true)
@@ -115,7 +116,7 @@ void	read_and_valid_map(char *path, t_map_param *map)
 	if (map->cnt_others >= 1)
 		err_exit(\
 		"[Invalid] Has to be constructed by '0', '1', 'C', 'E', 'P'.", NULL);
-	if (errno != 0 || create_map_arr(path, map) == FAIL) // TODO: free
+	if (errno != 0 || create_map_arr(path, map) == FAIL)
 	{
 		free_map_arr(map, EXIT_FAILURE);
 		err_exit("[Fail] Fail to create map arr.", NULL);

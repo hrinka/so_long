@@ -6,11 +6,9 @@
 /*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 01:03:40 by hrinka            #+#    #+#             */
-/*   Updated: 2023/06/15 01:03:41 by hrinka           ###   ########.fr       */
+/*   Updated: 2023/06/23 15:23:20 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H
