@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hrinka <hrinka@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 01:07:04 by hrinka            #+#    #+#             */
-/*   Updated: 2023/06/15 01:07:05 by hrinka           ###   ########.fr       */
+/*   Updated: 2023/06/23 15:47:01 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H

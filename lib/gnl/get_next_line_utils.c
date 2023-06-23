@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hrinka <hrinka@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 01:04:22 by hrinka            #+#    #+#             */
-/*   Updated: 2023/06/15 01:04:23 by hrinka           ###   ########.fr       */
+/*   Updated: 2023/06/23 15:45:25 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "get_next_line.h"
 

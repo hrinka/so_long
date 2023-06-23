@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   vaild_info_for_each_fmt.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: hrinka <hrinka@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 01:07:50 by hrinka            #+#    #+#             */
-/*   Updated: 2023/06/15 01:07:51 by hrinka           ###   ########.fr       */
+/*   Updated: 2023/06/23 15:47:20 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "ft_printf.h"
 
