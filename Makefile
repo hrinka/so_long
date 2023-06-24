@@ -1,10 +1,6 @@
 CC				= cc
 CFLAGS			= -Wall -Wextra -Werror
 
-ifdef WITH_TEST
-	CFLAGS		+= -g -fsanitize=address -fsanitize=undefined
-endif
-
 # MONDATORY
 NAME			= so_long
 
@@ -98,7 +94,7 @@ $(NAME):	$(OBJS)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $$(dirname $@)
-	$(CC) $(INCLUDE) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
 	rm -rf $(OBJ_DIR) $(BONUS_OBJ_DIR)
@@ -126,7 +122,7 @@ $(BONUS_NAME):	$(BONUS_OBJS)
 
 $(BONUS_OBJ_DIR)/%.o: %.c
 	@mkdir -p $$(dirname $@)
-	$(CC) $(BONUS_INCLUDE) -c $< -o $@
+	$(CC) $(CFLAGS) $(BONUS_INCLUDE) -c $< -o $@
 
 test:
 	make all WITH_TEST=1

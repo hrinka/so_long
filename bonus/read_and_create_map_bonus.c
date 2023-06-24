@@ -6,7 +6,7 @@
 /*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 01:02:50 by hrinka            #+#    #+#             */
-/*   Updated: 2023/06/23 15:22:50 by hrinka           ###   ########.fr       */
+/*   Updated: 2023/06/24 22:31:45 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,8 @@ int	read_and_valid_map_b(char *path, t_map_param *map)
 	if (errno != 0 || valid_map_b(map) == FAIL)
 	{
 		free_map_arr_b(map, EXIT_FAILURE);
-		err_exit_b(\
-		"[Invalid map] Must be rectangle, closed by '1', have valid path.", \
-		NULL);
+		err_exit_b("[Invalid map] Must be rectangle,\
+		 closed by '1', have valid path.", NULL);
 	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 01:03:40 by hrinka            #+#    #+#             */
-/*   Updated: 2023/06/23 15:23:20 by hrinka           ###   ########.fr       */
+/*   Updated: 2023/06/24 22:36:57 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,10 +141,10 @@ typedef struct s_map_param
 	size_t	cnt_item;
 	size_t	cnt_start;
 	size_t	cnt_exit;
-	size_t	cnt_enemy;
+	ssize_t	cnt_enemy;
 	size_t	cnt_others;
-	size_t	size_x;
-	size_t	size_y;
+	ssize_t	size_x;
+	ssize_t	size_y;
 	size_t	start_x;
 	size_t	start_y;
 }			t_map_param;

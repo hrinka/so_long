@@ -6,17 +6,17 @@
 /*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 01:02:11 by hrinka            #+#    #+#             */
-/*   Updated: 2023/06/23 15:22:31 by hrinka           ###   ########.fr       */
+/*   Updated: 2023/06/24 21:35:00 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/so_long_bonus.h"
 
-__attribute__((destructor))
-static void	destructor(void)
-{
-	system("leaks -q so_long_bonus");
-}
+// __attribute__((destructor))
+// static void	destructor(void)
+// {
+// 	system("leaks -q so_long_bonus");
+// }
 
 int	main(int argc, char *argv[])
 {

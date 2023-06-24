@@ -6,7 +6,7 @@
 /*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 01:00:59 by hrinka            #+#    #+#             */
-/*   Updated: 2023/06/23 15:21:20 by hrinka           ###   ########.fr       */
+/*   Updated: 2023/06/24 21:52:18 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	err_exit(char *msg, t_mlx_vars *mlx)
 
 int	free_map_arr(t_map_param *map, int ret_val)
 {
-	size_t	y;
+	ssize_t	y;
 
 	y = 0;
 	if (map->map_arr)

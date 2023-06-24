@@ -6,7 +6,7 @@
 /*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 01:00:05 by hrinka            #+#    #+#             */
-/*   Updated: 2023/06/23 15:21:31 by hrinka           ###   ########.fr       */
+/*   Updated: 2023/06/24 22:55:07 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ static void	que_append(t_queue **que, int new_y, int new_x)
 	}
 }
 
-static void	*que_pop(t_queue **que, int *y, int *x)
+static void	que_pop(t_queue **que, int *y, int *x)
 {
 	t_queue	*next;
 
-	if (!que || !*que)
-		return (NULL);
+	if (!que || !*que || !y || !x)
+		return ;
 	*y = (*que)->y;
 	*x = (*que)->x;
 	next = (*que)->next;

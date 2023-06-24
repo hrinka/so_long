@@ -6,7 +6,7 @@
 /*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 01:01:40 by hrinka            #+#    #+#             */
-/*   Updated: 2023/06/23 15:22:14 by hrinka           ###   ########.fr       */
+/*   Updated: 2023/06/24 22:55:22 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	clear_msg(t_mlx_vars *mlx)
 		}
 		y++;
 	}
+	return (0);
 }
 
 static int	draw_step_counter(t_mlx_vars *mlx)
@@ -43,6 +44,7 @@ static int	draw_step_counter(t_mlx_vars *mlx)
 	mlx_string_put(\
 	mlx->mlx, mlx->win, X_TOP_STEP, Y_TOP_STEP, C_TOP_STEP, step_cnt_str);
 	free(step_cnt_str);
+	return (0);
 }
 
 static int	draw_end_msg(t_mlx_vars *mlx)
@@ -55,6 +57,7 @@ static int	draw_end_msg(t_mlx_vars *mlx)
 		msg = "GAME OVER :X";
 	mlx_string_put(\
 	mlx->mlx, mlx->win, X_TOP_END_MSG, Y_TOP_END_MSG, C_TOP_END_MSG, msg);
+	return (0);
 }
 
 int	draw_top_screen_info(t_mlx_vars *mlx)
@@ -64,4 +67,5 @@ int	draw_top_screen_info(t_mlx_vars *mlx)
 		draw_step_counter(mlx);
 	else
 		draw_end_msg(mlx);
+	return (0);
 }

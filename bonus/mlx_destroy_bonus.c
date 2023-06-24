@@ -6,7 +6,7 @@
 /*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 01:02:21 by hrinka            #+#    #+#             */
-/*   Updated: 2023/06/23 15:22:37 by hrinka           ###   ########.fr       */
+/*   Updated: 2023/06/24 22:48:52 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	destroy_img_arr(t_mlx_vars *mlx, void **arr, int size)
 {
-	size_t	i;
+	ssize_t	i;
 
 	i = 0;
 	if (!arr)

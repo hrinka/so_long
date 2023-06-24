@@ -6,7 +6,7 @@
 /*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 01:01:05 by hrinka            #+#    #+#             */
-/*   Updated: 2023/06/23 15:21:23 by hrinka           ###   ########.fr       */
+/*   Updated: 2023/06/24 21:40:26 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static int	check_elems(t_map_param map, int **visited, int i, int j)
 
 static int	check_path(t_map_param map, int **visited)
 {
-	int			i;
-	int			j;
+	ssize_t			i;
+	ssize_t			j;
 
 	i = 0;
 	while (i < map.size_y)

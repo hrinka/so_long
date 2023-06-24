@@ -6,7 +6,7 @@
 /*   By: hrinka <hrinka@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 01:03:08 by hrinka            #+#    #+#             */
-/*   Updated: 2023/06/15 01:03:16 by hrinka           ###   ########.fr       */
+/*   Updated: 2023/06/24 22:36:15 by hrinka           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static int	check_elems_b(t_map_param map, int **bfs_grid, int i, int j)
 
 static int	check_path_b(t_map_param map, int **visited)
 {
-	int			i;
-	int			j;
+	ssize_t			i;
+	ssize_t			j;
 
 	i = 0;
 	while (i < map.size_y)
