@@ -15,3 +15,5 @@ The map must be closed, i.e. surrounded by walls
 If any of these checks fail, the game must end with `Error\n` followed by a custom message.
 
 The goal is for the player(s) to collect all the collectibles on the map before going to an exit in the least possible number of steps
+
+![output](https://github.com/user-attachments/assets/a1bc6e52-db97-4470-a0c6-1ad7a1d06073)
